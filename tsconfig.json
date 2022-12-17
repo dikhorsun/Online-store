@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        /* Language and Environment */
+        "target": "es2016",
+        "rootDir": "./",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "module": "esnext",
+        "types": ["node"], /* add jest later for test files  "types": ["jest", "node"],*/
+
+        /* Emit */
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+
+        /* Type Checking */
+        "strict": true,
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+
+        /* Modules */
+        "baseUrl": "./",
+        "paths": {
+            "@src/*": ["./src/*"]
+        }
+    },
+    "exclude": ["node_modules"],
+    "include": ["./src/**/*", "**/*.spec.ts", "__tests__"]
+}
