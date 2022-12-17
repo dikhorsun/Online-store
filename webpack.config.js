@@ -15,6 +15,10 @@ const baseConfig = {
     module: {
         rules: [
             {
+                test: /\.html$/,
+                use: 'html-loader',
+            },
+            {
                 test: /\.(sc|sa|c)ss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
                 exclude: '/node_modules',
