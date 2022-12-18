@@ -1,3 +1,8 @@
 @use '@src/sass/abstracts/constants' as *;
 @use '@src/sass/abstracts/mixins' as *;
 @use '@src/sass/base/typography' as *;
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
