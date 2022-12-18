@@ -5,23 +5,27 @@
 .logo {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-self: flex-end;
 
   .logo__text {
     @include font ($style: normal, $weight: 700, $size: 2.8rem, $height: 3.36rem);
     color: $text-color;
     margin: 0;
-    margin-bottom: 20px;
   }
 
   .logo__link {
     display: block;
+    position: relative;
 
     .logo__image {
       display: block;
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      height: 102px;
       border-radius: 10px;
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      opacity: 0.3;
     }
   }
 }
