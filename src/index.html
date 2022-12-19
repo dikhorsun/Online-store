@@ -21,7 +21,127 @@
       </div>
     </div>
   </header>
-  <main class="main">main</main>
-  <footer class="footer">footer</footer>
+  <main class="main">
+    <div class="wrapper wrapper__main">
+      <section class="tools">
+        <select id="sort-goods" class="tools__sort">
+          <option value="" selected="selected">Sort goods...</option>
+          <option value="priceA">By price: low to high</option>
+          <option value="priceD">By price: high to low</option>
+          <option value="RatingA">By rating: low to high</option>
+          <option value="RatingD">By rating: high to low</option>
+        </select>
+
+        <fieldset class="filter-brand">
+          <legend>Filter goods by brand</legend>
+          <div class="filter-brand__line sumsung">
+            <input type="checkbox" name="" id="sumsung">
+            <label for="sumsung">Sumsung</label>
+          </div>
+
+          <div class="filter-brand__line apple">
+            <input type="checkbox" name="" id="apple">
+            <label for="apple">Apple</label>
+          </div>
+
+          <div class="filter-brand__line oppo">
+            <input type="checkbox" name="" id="oppo">
+            <label for="oppo">OPPO</label>
+          </div>
+
+          <div class="filter-brand__line huawei">
+            <input type="checkbox" name="" id="huawei">
+            <label for="huawei">Huawei</label>
+          </div>
+          <div class="filter-brand__line microsoft">
+            <input type="checkbox" name="" id="microsoft">
+            <label for="microsoft">Microsoft Surface</label>
+          </div>
+
+          <div class="filter-brand__line infinix">
+            <input type="checkbox" name="" id="infinix">
+            <label for="infinix">Infinix</label>
+          </div>
+
+          <div class="filter-brand__line hp">
+            <input type="checkbox" name="" id="hp">
+            <label for="hp">HP Pavilion</label>
+          </div>
+
+          <div class="filter-brand__line dry">
+            <input type="checkbox" name="" id="dry">
+            <label for="dry">Dry Rose</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="filter-category">
+          <legend>Filter goods by category</legend>
+          <div class="filter-category__line smartphones">
+            <input type="checkbox" name="" id="smartphones">
+            <label for="smartphones">smartphones</label>
+          </div>
+
+          <div class="filter-category__line laptops">
+            <input type="checkbox" name="" id="laptops">
+            <label for="laptops">laptops</label>
+          </div>
+
+          <div class="filter-category__line groceries">
+            <input type="checkbox" name="" id="groceries">
+            <label for="groceries">groceries</label>
+          </div>
+
+          <div class="filter-category__line other">
+            <input type="checkbox" name="" id="other">
+            <label for="other">other</label>
+          </div>
+          <div class="filter-category__line other">
+            <input type="checkbox" name="" id="other">
+            <label for="other">other</label>
+          </div>
+
+          <div class="filter-category__line other">
+            <input type="checkbox" name="" id="other">
+            <label for="other">other</label>
+          </div>
+
+          <div class="filter-category__line other">
+            <input type="checkbox" name="" id="other">
+            <label for="other">other</label>
+          </div>
+
+          <div class="filter-category__line other">
+            <input type="checkbox" name="" id="other">
+            <label for="other">other</label>
+          </div>
+        </fieldset>
+
+        <div slider id="slider-distance">
+          <div class="input-parts-container">
+            <div inverse-left class="inverse-left" style="width:70%;"></div>
+            <div inverse-right class="inverse-right" style="width:70%;"></div>
+            <div range class="range" style="left:0%;right:0%;"></div>
+            <span thumb class="thumb-left" style="left:0%;"></span>
+            <span thumb class="thumb-right" style="left:100%;"></span>
+            <div sign class="sign-left" style="left:0%;">
+              <span class="left-thumb-screen" id="value">0</span>
+            </div>
+            <div sign class="sign-right" style="left:100%;">
+              <span class="right-thumb-screen" id="value">100</span>
+            </div>
+          </div>
+          <input type="range" class="input-left" value="0" max="100" min="0" step="1" />
+
+          <input type="range" class="input-right" value="100" max="100" min="0" step="1" />
+        </div>
+      </section>
+
+      <section class="goods"></section>
+    </div>
+
+  </main>
+  <footer class="footer"><div class="wrapper">
+    footer
+  </div></footer>
 </body>
 </html>
