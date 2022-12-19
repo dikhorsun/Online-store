@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online-store</title>
-</head>
-<body>
-  <header class="header">header</header>
-  <main class="main">main</main>
-  <footer class="footer">footer</footer>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Online-store</title>
+    </head>
+    <body>
+        <header class="header">header</header>
+        <main class="main">
+            <button class="btn btn_buy-now">Buy now</button>
+
+            <template id="popupItemTemp">
+                <div class="popup-content">
+                    <form class="popup-form">
+                        <div class="person-details">
+                            <h2>CONTACT INFO</h2>
+                            <div class="person-name form-item">
+                                <input type="text" placeholder="Name and Surname" />
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="phone-number form-item">
+                                <input type="text" placeholder="Phone" />
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="adress form-item">
+                                <input type="text" placeholder="Address" />
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="email form-item">
+                                <input type="text" placeholder="Email" />
+                                <div class="error-message"></div>
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <h2>CREDIT CARD</h2>
+                            <div class="card-data">
+                                <div class="number">
+                                    <img alt="" src="assets/icons/visa.png" /><input
+                                        type="text"
+                                        placeholder="0000 0000 0000 0000"
+                                    />
+                                </div>
+                                <div class="other-data">
+                                    <div class="date-data">
+                                        Valid Thru:
+                                        <input type="text" placeholder="Month/year" />
+                                    </div>
+                                    <div class="cvv-data">
+                                        CVV code:
+                                        <input type="text" placeholder="CVV" />
+                                    </div>
+                                </div>
+                                <div class="cardowner">
+                                    <input type="text" placeholder="Cardowner" />
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn_confirm" type="submit">CONFIRM</button>
+                    </form>
+                </div>
+            </template>
+        </main>
+        <footer class="footer">footer</footer>
+    </body>
 </html>
