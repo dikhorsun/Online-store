@@ -116,6 +116,7 @@
           </div>
         </fieldset>
 
+        <div class="filter-price__title">Filter goods by price</div>
         <div slider class="filter-price">
           <div class="filter-price__visible-parts-container">
             <div class="filter-price__inverse-left" style="width:70%;"></div>
@@ -132,6 +133,25 @@
           </div>
           <input type="range" class="input-price-left" value="0" max="100" min="0" step="1" />
           <input type="range" class="input-price-right" value="100" max="100" min="0" step="1" />
+        </div>
+
+        <div class="filter-stock__title">Filter goods by stock</div>
+        <div slider class="filter-stock">
+          <div class="filter-stock__visible-parts-container">
+            <div class="filter-stock__inverse-left" style="width:70%;"></div>
+            <div class="filter-stock__inverse-right" style="width:70%;"></div>
+            <div class="filter-stock__range" style="left:0%;right:0%;"></div>
+            <span class="filter-stock__thumb-left" style="left:0%;"></span>
+            <span class="filter-stock__thumb-right" style="left:100%;"></span>
+            <div class="filter-stock__sign-left" style="left:0%;">
+              <span class="filter-stock__left-thumb-screen" id="value">0</span>
+            </div>
+            <div class="filter-stock__sign-right" style="left:100%;">
+              <span class="filter-stock__right-thumb-screen" id="value">100</span>
+            </div>
+          </div>
+          <input type="range" class="input-stock-left" value="0" max="100" min="0" step="1" />
+          <input type="range" class="input-stock-right" value="100" max="100" min="0" step="1" />
         </div>
       </section>
 
