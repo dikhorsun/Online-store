@@ -2,114 +2,124 @@
 @use '@src/sass/abstracts/mixins' as *;
 @use '@src/sass/base/typography' as *;
 
-[slider] {
+.filter-price {
   width: 300px;
   position: relative;
   height: 5px;
   margin: 45px 0 10px 0;
 }
 
-[slider]>div {
+.filter-price__visible-parts-container {
   position: absolute;
   left: 13px;
   right: 15px;
   height: 5px;
 }
 
-[slider]>div>[inverse-left] {
+.filter-price__inverse-left {
   position: absolute;
   left: 0;
   height: 5px;
   border-radius: 10px;
-  background-color: #CCC;
+  background-color: $filter-price-out;
   margin: 0 7px;
 }
 
-[slider]>div>[inverse-right] {
+.filter-price__inverse-right {
   position: absolute;
   right: 0;
   height: 5px;
   border-radius: 10px;
-  background-color: #CCC;
+  background-color: $filter-price-out;
   margin: 0 7px;
 }
 
 
-[slider]>div>[range] {
+.filter-price__range {
   position: absolute;
   left: 0;
   height: 5px;
   border-radius: 14px;
-  background-color: #d02128;
+  background-color: $filter-price-in;
 }
 
-[slider]>div>[thumb] {
+.filter-price__thumb-left,
+.filter-price__thumb-right {
   position: absolute;
   top: -7px;
   z-index: 2;
   height: 20px;
   width: 20px;
-  text-align: left;
   margin-left: -11px;
-  cursor: pointer;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-  background-color: #FFF;
+  text-align: left;
+  box-shadow: 0 3px 8px $filter-price-shadow;
+  background-color: $text-color;
   border-radius: 50%;
   outline: none;
+  cursor: pointer;
 }
 
-[slider]>input[type=range] {
+.input-price-left,
+.input-price-right {
   position: absolute;
-  pointer-events: none;
-  -webkit-appearance: none;
-  z-index: 3;
-  height: 14px;
   top: -2px;
   width: 100%;
+  height: 14px;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+  z-index: 3;
   opacity: 0;
 }
 
-div[slider]>input[type=range]:focus::-webkit-slider-runnable-track {
+.input-price-left:focus::-webkit-slider-runnable-track,
+.input-price-right:focus::-webkit-slider-runnable-track {
   background: transparent;
   border: transparent;
 }
 
-div[slider]>input[type=range]:focus {
+.input-price-left:focus,
+.input-price-right:focus {
   outline: none;
 }
 
-div[slider]>input[type=range]::-webkit-slider-thumb {
+.input-price-left::-webkit-slider-thumb,
+.input-price-right::-webkit-slider-thumb {
   pointer-events: all;
   width: 28px;
   height: 28px;
   border-radius: 0px;
   border: 0 none;
-  background: red;
+  background: $filter-price-in;
   -webkit-appearance: none;
 }
 
-div[slider]>input[type=range]::-ms-fill-lower {
+.input-price-left::-ms-fill-lower,
+.input-price-right::-ms-fill-lower {
   background: transparent;
   border: 0 none;
 }
 
-div[slider]>input[type=range]::-ms-fill-upper {
+.input-price-left::-ms-fill-upper,
+.input-price-right::-ms-fill-upper {
   background: transparent;
   border: 0 none;
 }
 
-div[slider]>input[type=range]::-ms-tooltip {
+.input-price-left::-ms-tooltip,
+.input-price-right::-ms-tooltip {
   display: none;
 }
 
-[slider]>div>[sign] {
+.filter-price__sign-left,
+.filter-price__sign-right {
   opacity: 0;
   position: absolute;
   margin-left: -11px;
   top: -39px;
   z-index: 3;
-  background-color: #d02128;
-  color: #fff;
+  background-color: $filter-price-in;
+  color: $text-color;
   width: 28px;
   height: 28px;
   border-radius: 28px;
@@ -120,25 +130,30 @@ div[slider]>input[type=range]::-ms-tooltip {
   text-align: center;
 }
 
-[slider]>div>[sign]:after {
+.filter-price__sign-left:after,
+.filter-price__sign-right:after {
   position: absolute;
   content: '';
   left: 0;
-  border-radius: 16px;
   top: 19px;
+  border-radius: 16px;
   border-left: 14px solid transparent;
   border-right: 14px solid transparent;
   border-top-width: 16px;
   border-top-style: solid;
-  border-top-color: #d02128;
+  border-top-color: $filter-price-in;
 }
 
-[slider]>div>[sign]>span {
+.filter-price__left-thumb-screen,
+.filter-price__right-thumb-screen {
   font-size: 12px;
   font-weight: 700;
   line-height: 28px;
 }
 
-[slider]:hover>div>[sign] {
-  opacity: 1;
+.filter-price:hover {
+  .filter-price__sign-left,
+  .filter-price__sign-right {
+    opacity: 1;
+  }
 }

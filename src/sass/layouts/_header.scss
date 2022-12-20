@@ -4,7 +4,7 @@
 
 .header {
   background: $backgr-red;
-  background: radial-gradient(circle, $backgr-red 0%, $background-dark 100%);
+  background: radial-gradient(circle, $backgr-red 0%, $text-dark-color 100%);
 
   .header__wrapper {
     padding: 30px 20px 10px 20px;

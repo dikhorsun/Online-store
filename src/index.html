@@ -116,23 +116,22 @@
           </div>
         </fieldset>
 
-        <div slider id="slider-distance">
-          <div class="input-parts-container">
-            <div inverse-left class="inverse-left" style="width:70%;"></div>
-            <div inverse-right class="inverse-right" style="width:70%;"></div>
-            <div range class="range" style="left:0%;right:0%;"></div>
-            <span thumb class="thumb-left" style="left:0%;"></span>
-            <span thumb class="thumb-right" style="left:100%;"></span>
-            <div sign class="sign-left" style="left:0%;">
-              <span class="left-thumb-screen" id="value">0</span>
+        <div slider class="filter-price">
+          <div class="filter-price__visible-parts-container">
+            <div class="filter-price__inverse-left" style="width:70%;"></div>
+            <div class="filter-price__inverse-right" style="width:70%;"></div>
+            <div class="filter-price__range" style="left:0%;right:0%;"></div>
+            <span class="filter-price__thumb-left" style="left:0%;"></span>
+            <span class="filter-price__thumb-right" style="left:100%;"></span>
+            <div class="filter-price__sign-left" style="left:0%;">
+              <span class="filter-price__left-thumb-screen" id="value">0</span>
             </div>
-            <div sign class="sign-right" style="left:100%;">
-              <span class="right-thumb-screen" id="value">100</span>
+            <div class="filter-price__sign-right" style="left:100%;">
+              <span class="filter-price__right-thumb-screen" id="value">100</span>
             </div>
           </div>
-          <input type="range" class="input-left" value="0" max="100" min="0" step="1" />
-
-          <input type="range" class="input-right" value="100" max="100" min="0" step="1" />
+          <input type="range" class="input-price-left" value="0" max="100" min="0" step="1" />
+          <input type="range" class="input-price-right" value="100" max="100" min="0" step="1" />
         </div>
       </section>
 
