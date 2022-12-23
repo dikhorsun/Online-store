@@ -1,9 +1,7 @@
-import getPopup from '../popup/popup';
+import { getPopupForm } from '../popup/popup';
 
-function App(){
-  getPopup()
+function App() {
+    getPopupForm();
 }
-
-
 
 export default App;

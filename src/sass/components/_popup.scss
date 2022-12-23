@@ -61,10 +61,11 @@
   background-color: #ffffff;
   z-index: 99;
   position: fixed;
-  min-height: 400px;
+  // min-height: 100px;
   color: #000000;
   box-sizing: border-box;
   font-size: calc(.2rem + 1vw);
+  text-align: center;
 }
 
 .person-details {
@@ -179,11 +180,17 @@
   font-size: 50%;
 }
 
-.other-data input {
+.other-data {
   font-weight: 700;
   font-size: 130%;
 }
 
+.cvv-data [type="number"]{ 
+  -moz-appearance: textfield;
+}
+.cvv-data [type="number"]::-webkit-inner-spin-button { 
+  display: none;
+}
 .other-data input {
   width: 60%;
   height: 1rem;
@@ -206,6 +213,12 @@
   cursor: pointer;
   display: block;
   margin: 5% auto;
+}
+
+.error-message {
+  color: red;
+  display: block;
+  padding: 0 0.5rem;
 }
 
 

@@ -17,19 +17,19 @@
                         <div class="person-details">
                             <h2>CONTACT INFO</h2>
                             <div class="person-name form-item">
-                                <input type="text" placeholder="Name and Surname" />
+                                <input type="text" placeholder="Name and Surname" name="username" />
                                 <div class="error-message"></div>
                             </div>
                             <div class="phone-number form-item">
-                                <input type="text" placeholder="Phone" />
+                                <input type="text" placeholder="Phone" name="phone" />
                                 <div class="error-message"></div>
                             </div>
                             <div class="adress form-item">
-                                <input type="text" placeholder="Address" />
+                                <input type="text" placeholder="Address" name="address" />
                                 <div class="error-message"></div>
                             </div>
                             <div class="email form-item">
-                                <input type="text" placeholder="Email" />
+                                <input type="text" placeholder="Email" name="email" />
                                 <div class="error-message"></div>
                             </div>
                         </div>
@@ -37,23 +37,25 @@
                             <h2>CREDIT CARD</h2>
                             <div class="card-data">
                                 <div class="number">
-                                    <img alt="" src="assets/icons/visa.png" /><input
+                                    <img alt="" src="assets/icons/card.png" /><input
                                         type="text"
+                                        maxlength="19"
                                         placeholder="0000 0000 0000 0000"
+                                        name="credit-card"
                                     />
+                                    <div class="error-message"></div>
                                 </div>
                                 <div class="other-data">
                                     <div class="date-data">
                                         Valid Thru:
-                                        <input type="text" placeholder="Month/year" />
+                                        <input type="text" placeholder="Month/year" name="date" />
+                                        <div class="error-message"></div>
                                     </div>
                                     <div class="cvv-data">
                                         CVV code:
-                                        <input type="text" placeholder="CVV" />
+                                        <input type="number" placeholder="CVV" name="cvv" />
+                                        <div class="error-message"></div>
                                     </div>
-                                </div>
-                                <div class="cardowner">
-                                    <input type="text" placeholder="Cardowner" />
                                 </div>
                             </div>
                         </div>
