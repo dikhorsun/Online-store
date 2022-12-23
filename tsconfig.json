@@ -6,7 +6,9 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "module": "esnext",
-        "types": ["node"], /* add jest later for test files  "types": ["jest", "node"],*/
+
+        // "types": ["node"], выдало ошибку, пока закомментил
+        /* add jest later for test files  "types": ["jest", "node"],*/
 
         /* Emit */
         "sourceMap": true,

@@ -6,7 +6,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
     mode: 'development',
-    entry: path.resolve(__dirname, './src/index.ts'),
+    entry: path.resolve(__dirname, './src/index'),
     output: {
         filename: 'index.[contenthash].js',
         path: path.resolve(__dirname, '../dist'),
