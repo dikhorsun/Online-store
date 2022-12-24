@@ -9,7 +9,7 @@ const baseConfig = {
     entry: path.resolve(__dirname, './src/index.ts'),
     output: {
         filename: 'index.[contenthash].js',
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: 'assets/images/[name][ext]',
     },
     module: {
@@ -49,6 +49,10 @@ const baseConfig = {
                 {
                     from: path.resolve(__dirname, 'src', 'assets', 'images'),
                     to: 'assets/images',
+                },
+                {
+                    from: './src/json-data/goods.json',
+                    to: 'json-data',
                 },
             ],
         }),
