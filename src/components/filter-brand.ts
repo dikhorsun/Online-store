@@ -35,7 +35,7 @@ filterBrandInput.forEach((input: HTMLInputElement): void => {
             brandsCheckedArr.splice(indexOfRemovedBrand, 1);
             cardsContainer.innerHTML = '';
             if (brandsCheckedArr.length === 0) {
-                const allGoods = await renderAllGods();
+                await renderAllGods();
             } else {
                 const filteredJsonGoods = await filterGoodsByBrand();
                 if (filteredJsonGoods) {
@@ -75,13 +75,14 @@ async function filterGoodsByBrand(): Promise<Product[] | undefined> {
         console.log(error);
     }
 }
+renderAllGods();
 
 function generateCard(product: Product) {
     const card = document.createElement('div');
     card.classList.add('card-item');
     const cardImage = document.createElement('div');
     cardImage.classList.add('card-item__image');
-    cardImage.style.background = `url('../assets/images/goods/${product.id}/thumbnail.jpg') center center / cover`;
+    cardImage.style.background = `url('${product.thumbnail}') center center / cover`;
     card.append(cardImage);
 
     const cardTitle = document.createElement('p');
