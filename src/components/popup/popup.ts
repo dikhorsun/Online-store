@@ -70,40 +70,40 @@ function getPopupForm() {
         function createMaskCardNumber(even: Event) {
             const evenTarget = even.target as HTMLInputElement;
 
-            if ((evenTarget.value as String)[0] == '3') {
+            if ((evenTarget.value as string)[0] == '3') {
                 cardImg.src = './assets/images/american.png';
-            } else if ((evenTarget.value as String)[0] == '4') {
+            } else if ((evenTarget.value as string)[0] == '4') {
                 cardImg.src = './assets/images/visa.png';
-            } else if ((evenTarget.value as String)[0] == '5') {
+            } else if ((evenTarget.value as string)[0] == '5') {
                 cardImg.src = './assets/images/mastercard.png';
             } else {
                 cardImg.src = './assets/images/card.png';
             }
             const vcc = evenTarget.value.replace(/\D/g, '');
             evenTarget.value = '';
-            for (var i = 0; i < vcc.length; i++) {
+            for (let i = 0; i < vcc.length; i++) {
                 evenTarget.value += (i % 4 == 0 && i != 0 ? ' ' : '') + vcc[i];
             }
-            if (evenTarget.value.length > 19) evenTarget.value = (evenTarget.value as String).slice(0, 19);
+            if (evenTarget.value.length > 19) evenTarget.value = (evenTarget.value as string).slice(0, 19);
         }
 
         function createMaskDateCard(even: Event) {
             const evenTarget = even.target as HTMLInputElement;
             const vcc = evenTarget.value.replace(/\D/g, '');
             evenTarget.value = '';
-            for (var i = 0; i < vcc.length; i++) {
+            for (let i = 0; i < vcc.length; i++) {
                 evenTarget.value += (i % 2 == 0 && i != 0 ? '/' : '') + vcc[i];
             }
-            if (evenTarget.value.length > 5) evenTarget.value = (evenTarget.value as String).slice(0, 5);
+            if (evenTarget.value.length > 5) evenTarget.value = (evenTarget.value as string).slice(0, 5);
         }
 
         function createMaskCvvData(even: Event) {
             const evenTarget = even.target as HTMLInputElement;
-            if (evenTarget.value.length > 3) evenTarget.value = (evenTarget.value as String).slice(0, 3);
+            if (evenTarget.value.length > 3) evenTarget.value = (evenTarget.value as string).slice(0, 3);
         }
 
         function validateElem(elem: HTMLInputElement) {
-            let nextElem = elem.nextElementSibling as Element;
+            const nextElem = elem.nextElementSibling as Element;
             const regExpName = /^[а-яА-ЯёЁa-zA-Z]{3,}(\s+[а-яА-ЯёЁa-zA-Z]{3,}){1,}$/i;
             // ^[а-яА-ЯёЁa-zA-Z]{3,}\s+[а-яА-ЯёЁa-zA-Z]{3,}$
             const regExpPhone = /^[+][0-9]{9,}$/;
@@ -169,7 +169,7 @@ function getPopupForm() {
             even.preventDefault();
             const form = document.querySelector('form') as HTMLFormElement;
             inputs.forEach((elem: HTMLInputElement) => {
-                let nextElem = elem.nextElementSibling as Element;
+                const nextElem = elem.nextElementSibling as Element;
                 if (nextElem.textContent !== '') {
                     isSubmit = false;
                     return;
@@ -191,7 +191,7 @@ function getPopupForm() {
                 form.reset();
                 popupContent.textContent = 'Order is processed. You will be taken to the main page in 3 seconds.';
                 setTimeout(() => {
-                    let url = window.location.href;
+                    const url = window.location.href;
                     console.log(url);
                     window.location.href = url.replace('cart', '');
                 }, 3000);
