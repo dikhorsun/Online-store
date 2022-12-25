@@ -17,7 +17,6 @@ function getPopupForm() {
         const cardImg = popupForm.querySelector('.number img') as HTMLInputElement;
         const dateCard = popupForm.querySelector('.date-data input') as HTMLInputElement;
         const cvvData = popupForm.querySelector('.cvv-data input') as HTMLInputElement;
-        let isSubmit = false;
 
         const wrapPopup = document.createElement('div');
         wrapPopup.classList.add('popup');
@@ -171,15 +170,12 @@ function getPopupForm() {
             inputs.forEach((elem: HTMLInputElement) => {
                 const nextElem = elem.nextElementSibling as Element;
                 if (nextElem.textContent !== '') {
-                    isSubmit = false;
                     return;
                 }
                 if (elem.value === '') {
-                    isSubmit = false;
                     nextElem.textContent = 'This field is empty';
                 } else {
                     nextElem.textContent = '';
-                    isSubmit = true;
                 }
             });
 
