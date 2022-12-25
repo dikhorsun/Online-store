@@ -1,2 +1,11 @@
+// abstracts
+@use 'abstracts';
+
+// base
+@use 'base';
+
+// components
 @use 'components';
-@import './base/base';
+
+// layouts
+@use 'layouts';

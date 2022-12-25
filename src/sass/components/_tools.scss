@@ -1,0 +1,24 @@
+@use '@src/sass/abstracts/constants' as *;
+@use '@src/sass/abstracts/mixins' as *;
+@use '@src/sass/base/typography' as *;
+
+
+
+.tools__sort {
+  outline: 0;
+  padding: 7px;
+  border-radius: 5px;
+  @include font ($style: normal, $weight: 400, $size: 1.8rem, $height: 2.16rem);
+  color: $text-dark-color;
+}
+
+.filter-brand,
+.filter-category {
+  height: 100px;
+  margin-top: 30px;
+  border-radius: 10px;
+  @include font ($style: normal, $weight: 400, $size: 1.8rem, $height: 2.16rem);
+  overflow: auto;
+  color: $text-color;
+}
+

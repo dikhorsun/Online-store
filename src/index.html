@@ -1,69 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Online-store</title>
-    </head>
-    <body>
-        <header class="header">header</header>
-        <main class="main">
-            <button class="btn btn_buy-now">Buy now</button>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online-store</title>
+</head>
+<body>
+  <header class="header">
+    <div class="wrapper header__wrapper">
+      <div class="header-container">
+        <div class="logo">
+          <h1 class="logo__text">Online-store</h1>
+          <a href="#" class="logo__link"><img src="./assets/images/logo.png" alt="red wings" class="logo__image"></a>
+        </div>
+        <p class="header-container__cost">0$</p>
+        <div class="header-container__cart">
+          <div class="header-container__amount">0</div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="wrapper wrapper__main">
+      <section class="tools">
+        <select id="sort-goods" class="tools__sort">
+          <option value="" selected="selected">Sort goods...</option>
+          <option value="priceA">By price: low to high</option>
+          <option value="priceD">By price: high to low</option>
+          <option value="RatingA">By rating: low to high</option>
+          <option value="RatingD">By rating: high to low</option>
+        </select>
 
-            <template id="popupItemTemp">
-                <div class="popup-content">
-                    <form class="popup-form">
-                        <div class="person-details">
-                            <h2>CONTACT INFO</h2>
-                            <div class="person-name form-item">
-                                <input type="text" placeholder="Name and Surname" name="username" />
-                                <div class="error-message"></div>
-                            </div>
-                            <div class="phone-number form-item">
-                                <input type="text" placeholder="Phone" name="phone" />
-                                <div class="error-message"></div>
-                            </div>
-                            <div class="adress form-item">
-                                <input type="text" placeholder="Address" name="address" />
-                                <div class="error-message"></div>
-                            </div>
-                            <div class="email form-item">
-                                <input type="text" placeholder="Email" name="email" />
-                                <div class="error-message"></div>
-                            </div>
-                        </div>
-                        <div class="card-details">
-                            <h2>CREDIT CARD</h2>
-                            <div class="card-data">
-                                <div class="number">
-                                    <img alt="" src="assets/icons/card.png" /><input
-                                        type="text"
-                                        maxlength="19"
-                                        placeholder="0000 0000 0000 0000"
-                                        name="credit-card"
-                                    />
-                                    <div class="error-message"></div>
-                                </div>
-                                <div class="other-data">
-                                    <div class="date-data">
-                                        Valid Thru:
-                                        <input type="text" placeholder="Month/year" name="date" />
-                                        <div class="error-message"></div>
-                                    </div>
-                                    <div class="cvv-data">
-                                        CVV code:
-                                        <input type="number" placeholder="CVV" name="cvv" />
-                                        <div class="error-message"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn_confirm" type="submit">CONFIRM</button>
-                    </form>
+        <fieldset class="filter-brand">
+          <legend>Filter goods by brand</legend>
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="samsung">
+            <label for="samsung">Samsung</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="apple">
+            <label for="apple">Apple</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="oppo">
+            <label for="oppo">OPPO</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="huawei">
+            <label for="huawei">Huawei</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="microsoft-surface">
+            <label for="microsoft-surface">Microsoft Surface</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="infinix">
+            <label for="infinix">Infinix</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="hp-pavilion">
+            <label for="hp-pavilion">HP Pavilion</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="impression-of-acqua-di-gio">
+            <label for="impression-of-acqua-di-gio">Impression of Acqua Di Gio</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="royal-mirage">
+            <label for="royal-mirage">Royal Mirage</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="fog-scent-xpressio">
+            <label for="fog-scent-xpressio">Fog Scent Xpressio</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="al-munakh">
+            <label for="al-munakh">Al Munakh</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="lord-rehab">
+            <label for="lord-rehab">Lord Al Rehab</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="loreal-paris">
+            <label for="loreal-paris">L'Oreal Paris</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="hemani-tea">
+            <label for="hemani-tea">Hemani Tea</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="dermive">
+            <label for="dermive">Dermive</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="rorec-white-rice">
+            <label for="rorec-white-rice">ROREC White Rice</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="fair-clear">
+            <label for="fair-clear">Fair & Clear</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="saaf-khaas">
+            <label for="saaf-khaas">Saaf & Khaas</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="bake-parlor-big">
+            <label for="bake-parlor-big">Bake Parlor Big</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="baking-food-items">
+            <label for="baking-food-items">Baking Food Items</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="fauji">
+            <label for="fauji">Fauji</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="dry-rose">
+            <label for="dry-rose">Dry Rose</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="boho-decor">
+            <label for="boho-decor">Boho Decor</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="flying-wooden">
+            <label for="flying-wooden">Flying Wooden</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="led-lights">
+            <label for="led-lights">LED Lights</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="luxury-palace">
+            <label for="luxury-palace">Luxury palace</label>
+          </div>
+
+          <div class="filter-brand__line">
+            <input type="checkbox" class="filter-brand__input" id="golden">
+            <label for="golden">Golden</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="filter-category">
+          <legend>Filter goods by category</legend>
+          <div class="filter-category__line">
+            <input type="checkbox" name="" id="smartphones">
+            <label for="smartphones">smartphones</label>
+          </div>
+
+          <div class="filter-category__line">
+            <input type="checkbox" name="" id="laptops">
+            <label for="laptops">laptops</label>
+          </div>
+
+          <div class="filter-category__line">
+            <input type="checkbox" name="" id="groceries">
+            <label for="groceries">groceries</label>
+          </div>
+
+          <div class="filter-category__line">
+            <input type="checkbox" name="" id="fragrances">
+            <label for="fragrances">fragrances</label>
+          </div>
+          <div class="filter-category__line">
+            <input type="checkbox" name="" id="skincare">
+            <label for="skincare">skincare</label>
+          </div>
+
+          <div class="filter-category__line">
+            <input type="checkbox" name="" id="home-decoration">
+            <label for="home-decoration">home-decoration</label>
+          </div>
+
+        </fieldset>
+
+        <div class="filter-price__title">Filter goods by price</div>
+        <div slider class="filter-price">
+          <div class="filter-price__visible-parts-container">
+            <div class="filter-price__inverse-left" style="width:70%;"></div>
+            <div class="filter-price__inverse-right" style="width:70%;"></div>
+            <div class="filter-price__range" style="left:0%;right:0%;"></div>
+            <span class="filter-price__thumb-left" style="left:0%;"></span>
+            <span class="filter-price__thumb-right" style="left:100%;"></span>
+            <div class="filter-price__sign-left" style="left:0%;">
+              <span class="filter-price__left-thumb-screen" id="value">0</span>
+            </div>
+            <div class="filter-price__sign-right" style="left:100%;">
+              <span class="filter-price__right-thumb-screen" id="value">100</span>
+            </div>
+          </div>
+          <input type="range" class="input-price-left" value="0" max="100" min="0" step="1" />
+          <input type="range" class="input-price-right" value="100" max="100" min="0" step="1" />
+        </div>
+
+        <div class="filter-stock__title">Filter goods by stock amount</div>
+        <div slider class="filter-stock">
+          <div class="filter-stock__visible-parts-container">
+            <div class="filter-stock__inverse-left" style="width:70%;"></div>
+            <div class="filter-stock__inverse-right" style="width:70%;"></div>
+            <div class="filter-stock__range" style="left:0%;right:0%;"></div>
+            <span class="filter-stock__thumb-left" style="left:0%;"></span>
+            <span class="filter-stock__thumb-right" style="left:100%;"></span>
+            <div class="filter-stock__sign-left" style="left:0%;">
+              <span class="filter-stock__left-thumb-screen" id="value">0</span>
+            </div>
+            <div class="filter-stock__sign-right" style="left:100%;">
+              <span class="filter-stock__right-thumb-screen" id="value">100</span>
+            </div>
+          </div>
+          <input type="range" class="input-stock-left" value="0" max="100" min="0" step="1" />
+          <input type="range" class="input-stock-right" value="100" max="100" min="0" step="1" />
+        </div>
+
+        <button class="button clear-filters">Reset filters</button>
+        <button class="button copy-settings">Copy settings</button>
+      </section>
+
+      <section class="goods">
+        <div class="regulation-container">
+          <div class="search-container">
+            <input type="search" class="search-field" id="search-field" placeholder="Search goods">
+          </div>
+          <div class="goods-found">
+            <span class="goods-found__amount">0</span>
+            <span class="goods-found__text">goods found</span>
+          </div>
+          <div class="regulation-container__view-mode">
+            <div class="view view-list"></div>
+            <div class="view view-block  view_active"></div>
+          </div>
+        </div>
+
+        <div class="cards-container">
+
+        </div>
+      </section>
+    </div>
+
+  </main>
+  <footer class="footer"><div class="wrapper">
+    <button class="btn btn_buy-now">Buy now</button>
+
+    <template id="popupItemTemp">
+      <div class="popup-content">
+        <form class="popup-form">
+          <div class="person-details">
+            <h2>CONTACT INFO</h2>
+            <div class="person-name form-item">
+              <input type="text" placeholder="Name and Surname" name="username" />
+              <div class="error-message"></div>
+            </div>
+            <div class="phone-number form-item">
+              <input type="text" placeholder="Phone" name="phone" />
+              <div class="error-message"></div>
+            </div>
+            <div class="adress form-item">
+              <input type="text" placeholder="Address" name="address" />
+              <div class="error-message"></div>
+            </div>
+            <div class="email form-item">
+              <input type="text" placeholder="Email" name="email" />
+              <div class="error-message"></div>
+            </div>
+          </div>
+          <div class="card-details">
+            <h2>CREDIT CARD</h2>
+            <div class="card-data">
+              <div class="number">
+                <img alt="" src="assets/icons/card.png" /><input type="text" maxlength="19"
+                  placeholder="0000 0000 0000 0000" name="credit-card" />
+                <div class="error-message"></div>
+              </div>
+              <div class="other-data">
+                <div class="date-data">
+                  Valid Thru:
+                  <input type="text" placeholder="Month/year" name="date" />
+                  <div class="error-message"></div>
                 </div>
-            </template>
-        </main>
-        <footer class="footer">footer</footer>
-    </body>
+                <div class="cvv-data">
+                  CVV code:
+                  <input type="number" placeholder="CVV" name="cvv" />
+                  <div class="error-message"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn_confirm" type="submit">CONFIRM</button>
+        </form>
+      </div>
+    </template>
+  </div></footer>
+</body>
 </html>

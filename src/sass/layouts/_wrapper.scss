@@ -1,0 +1,15 @@
+@use '@src/sass/abstracts/constants' as *;
+@use '@src/sass/abstracts/mixins' as *;
+@use '@src/sass/base/typography' as *;
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wrapper__main {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  margin: 0;
+}

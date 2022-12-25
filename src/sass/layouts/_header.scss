@@ -1,0 +1,42 @@
+@use '@src/sass/abstracts/constants' as *;
+@use '@src/sass/abstracts/mixins' as *;
+@use '@src/sass/base/typography' as *;
+
+.header {
+  background: $backgr-red;
+  background: radial-gradient(circle, $backgr-red 0%, $text-dark-color 100%);
+
+  .header__wrapper {
+    padding: 30px 20px 10px 20px;
+    border-bottom: 1px solid $text-color;
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+}
+
+.header-container__cost {
+  @include font ($style: normal, $weight: 500, $size: 2.4rem, $height: 2.88rem);
+  color: $text-color;
+}
+
+.header-container__cart {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-image: url('../assets/images/cart.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.header-container__amount {
+  position: absolute;
+  top: 0;
+  left: 65%;
+  @include font ($style: normal, $weight: 600, $size: 2.8rem, $height: 3.36rem);
+  color: $backgr-red;
+
+}
