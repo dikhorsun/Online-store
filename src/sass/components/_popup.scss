@@ -215,6 +215,10 @@
   margin: 5% auto;
 }
 
+.header-container div {
+  display: flex;
+  justify-content: space-evenly;
+}
 .error-message {
   color: red;
   display: block;
