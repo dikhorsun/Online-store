@@ -1,0 +1,47 @@
+@use '@src/sass/abstracts/constants' as *;
+@use '@src/sass/abstracts/mixins' as *;
+@use '@src/sass/base/typography' as *;
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 50px 20px 0;
+}
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  border: 1px solid $text-color;
+  border-radius: 20px;
+  cursor: pointer;
+
+  .card-item__image {
+    width: 230px;
+    height: 180px;
+    // background: url('../assets/images/goods/1/thumbnail.jpg') center center / cover;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+  }
+
+  .card-item__title {
+    width: 100%;
+    @include font ($style: normal, $weight: 500, $size: 2.6rem, $height: 3.12rem);
+    display: flex;
+    justify-content: center;
+    color: $text-color;
+    margin: 0;
+    margin-top: 7px;
+  }
+
+  .card-item__price,
+  .card-item__rating,
+  .card-item__stock {
+    @include font ($style: normal, $weight: 400, $size: 1.8rem, $height: 2.64rem);
+    color: $text-color;
+    margin: 0;
+    margin-top: 7px;
+  }
+}

@@ -6,14 +6,18 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
     mode: 'development',
-    entry: path.resolve(__dirname, './src/index.ts'),
+    entry: path.resolve(__dirname, './src/index'),
     output: {
         filename: 'index.[contenthash].js',
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: 'assets/images/[name][ext]',
     },
     module: {
         rules: [
+            {
+                test: /\.html$/,
+                use: 'html-loader',
+            },
             {
                 test: /\.(sc|sa|c)ss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -49,6 +53,10 @@ const baseConfig = {
                 {
                     from: path.resolve(__dirname, 'src', 'assets', 'images'),
                     to: 'assets/images',
+                },
+                {
+                    from: './src/json-data/goods.json',
+                    to: 'json-data',
                 },
             ],
         }),
