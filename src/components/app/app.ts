@@ -1,8 +1,9 @@
 import Page from '../../templates/page';
-import MainPage from '../main/index';
-import ProductDetails from '../product-details/index';
-import Cart from '../cart/index';
 import Header from '../header/index';
+import Cart from '../cart/index';
+import ProductDetails from '../product-details/index';
+import MainPage from '../main/index';
+
 import ErrorPage, { ErrorTypes } from '../error/index';
 
 export const enum PageIds {
@@ -13,8 +14,9 @@ export const enum PageIds {
 
 class App {
     private static container: HTMLElement = document.body;
-    private static defaultPageId: string = 'current-page';
+    private static defaultPageId = 'current-page';
     private header: Header;
+    private main: MainPage;
 
     static renderNewPage(idPage: string) {
         const currentPageHTML = document.querySelector(`#${App.defaultPageId}`);
@@ -49,11 +51,12 @@ class App {
 
     constructor() {
         this.header = new Header('header', 'header');
+        this.main = new MainPage('main');
     }
 
     run() {
-        App.container.append(this.header.render());
         App.renderNewPage('main-page');
+        App.container.append(this.header.render());
         this.enableRouteChange();
     }
 }
