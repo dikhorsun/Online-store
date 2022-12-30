@@ -1,4 +1,4 @@
-async function createInputLabelInContainer(
+function createInputLabelInContainer(
     parent: HTMLElement,
     classContainer: string,
     inputType: string,
@@ -6,7 +6,7 @@ async function createInputLabelInContainer(
     inputId: string,
     inputListener: (this: HTMLInputElement) => void,
     labelTextContent: string
-): Promise<HTMLDivElement> {
+): HTMLDivElement {
     const containerForInput = document.createElement('div');
     containerForInput.classList.add(classContainer);
     const input: HTMLInputElement = document.createElement('input');
@@ -14,7 +14,7 @@ async function createInputLabelInContainer(
         input.type = inputType;
         input.classList.add(inputClass);
         input.id = inputId;
-        await input.addEventListener('change', inputListener);
+        input.addEventListener('change', inputListener); // await
     }
     containerForInput.append(input);
     const label: HTMLLabelElement = document.createElement('label');

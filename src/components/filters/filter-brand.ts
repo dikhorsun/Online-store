@@ -29,7 +29,6 @@ async function inputBrandListener(this: HTMLInputElement) {
         brandsCheckedArr.splice(indexOfRemovedBrand, 1);
         MainPage.cardsContainer.innerHTML = '';
         if (brandsCheckedArr.length === 0) {
-            // await renderAllGods();
             MainPage.sectionTools.innerHTML = '';
             MainPage.regulationContainer.innerHTML = '';
         } else {
