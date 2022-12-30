@@ -32,6 +32,16 @@
   background-size: contain;
 }
 
+.logo__cart-link{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
 .header-container__amount {
   position: absolute;
   top: 0;
