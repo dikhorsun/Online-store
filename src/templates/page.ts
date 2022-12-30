@@ -3,8 +3,8 @@ abstract class Page {
     static TextObject = {};
 
     constructor(id: string) {
-        this.container = document.createElement('div');
-        this.container.id = id;
+        this.container = document.createElement('main');
+        this.container.className = 'main';
     }
 
     protected createHeaderTitle(text: string) {

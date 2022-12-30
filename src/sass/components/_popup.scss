@@ -1,4 +1,7 @@
-/* POPUP with FORM */
+@use '@src/sass/abstracts/constants' as *;
+@use '@src/sass/abstracts/mixins' as *;
+@use '@src/sass/base/typography' as *;
+
 
 .popup {
   position: fixed;
@@ -43,7 +46,7 @@
   display: block;
   padding: 2% 0;
   background: #cdebe2;
-  border: 2px solid #60BFA4;
+  border: 1px solid $text-dark-color;
   border-radius: 0.3rem;
   cursor: pointer;
   width: 30%;
@@ -55,7 +58,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid #60BFA4;
+  border: 1px solid $text-dark-color;
   border-radius: 0.5rem;
   width: 40%;
   background-color: #ffffff;
@@ -90,7 +93,7 @@
 .person-details input {
   background-color: #ffffff;
   width: 100%;
-  border: 1px solid #60BFA4;
+  border: 1px solid $text-dark-color;
   // color: orange;
   border-radius: 0.5rem;
   padding: 0.4rem;
@@ -116,7 +119,7 @@
 }
 
 .card-data {
-  border: 1px solid #60BFA4;
+  border: 1px solid $text-dark-color;
   margin: 0.8rem auto;
   border-radius: 0.5rem;
   background: #eef3fb;
@@ -146,7 +149,7 @@
 
 .number input, .cardowner input, .other-data input {
   background: #ffffff;
-  border: 1px solid #60BFA4;
+  border: 1px solid $text-dark-color;
   border-radius: 0.3rem;
   outline: none;
   text-align: center;
@@ -202,18 +205,51 @@
   padding-top: 1%;
 }
 
+// .btn_confirm {
+//   width: 40%;
+//   font-size: 90%;
+//   padding: 1%;
+//   margin: 5% auto;
+// }
+
 .btn_confirm {
-  color: #000000;
   width: 40%;
-  font-size: 90%;
-  background-color: #ffffff;
-  border: 1px solid #60BFA4;
-  border-radius: 0.5rem;
   padding: 1%;
   cursor: pointer;
   display: block;
   margin: 5% auto;
+  border-radius: 20px;
+  border: 1px solid $text-dark-color;
+  @include font ($style: normal, $weight: 400, $size: 1.2rem, $height: 2.16rem);
+  color: $text-dark-color;
+
+  &:hover {
+    @include font ($style: normal, $weight: 600, $size: 1.2rem, $height: 2.16rem);
+    background-color: $btn-hover-color;
+  }
 }
+
+.popup {
+  .btn_confirm{
+    &:hover {
+      @include font ($style: normal, $weight: 600, $size: 1.2rem, $height: 2.16rem);
+      background-color: #eef3fb;
+    }
+  }
+}
+
+// .btn_confirm {
+//   color: #000000;
+//   width: 40%;
+//   font-size: 90%;
+//   background-color: #ffffff;
+//   border: 1px solid #60BFA4;
+//   border-radius: 0.5rem;
+//   padding: 1%;
+//   cursor: pointer;
+//   display: block;
+//   margin: 5% auto;
+// }
 
 .header-container div {
   display: flex;
