@@ -1,19 +1,18 @@
 import { Product } from '../types/types';
 import createElement from '../helper/createElement';
-import MainPage from '../main';
+import MainPage from '../main/index';
+import { addQueryBrand, removeQueryBrand } from '../main/query-params/query';
 
 const brandsCheckedArr: string[] = [];
-// const filterBrandInput = document.querySelectorAll('.filter-brand__input') as NodeListOf<HTMLInputElement>;
 const cardsContainer = document.querySelector('.cards-container') as HTMLDivElement;
-
-// filterBrandInput.forEach((input: HTMLInputElement): void => {
-//     input.addEventListener('change', inputBrandListener);
-// });
+const brandsInputIdArr: string[] = [];
 
 async function inputBrandListener(this: HTMLInputElement) {
     const inputId = this.id;
     const label = document.querySelector(`label[for=${inputId}]`) as HTMLLabelElement;
     if (this.checked) {
+        brandsInputIdArr.push(inputId);
+        addQueryBrand(brandsInputIdArr);
         const labelTextContent: string = label.textContent || '';
         brandsCheckedArr.push(labelTextContent);
         MainPage.cardsContainer.innerHTML = '';
@@ -25,10 +24,14 @@ async function inputBrandListener(this: HTMLInputElement) {
         }
     } else {
         const indexOfRemovedBrand = brandsCheckedArr.indexOf(`${label?.textContent}`);
+        brandsInputIdArr.splice(indexOfRemovedBrand, 1);
+        removeQueryBrand(brandsInputIdArr);
         brandsCheckedArr.splice(indexOfRemovedBrand, 1);
         MainPage.cardsContainer.innerHTML = '';
         if (brandsCheckedArr.length === 0) {
-            await renderAllGods();
+            // await renderAllGods();
+            MainPage.sectionTools.innerHTML = '';
+            MainPage.regulationContainer.innerHTML = '';
         } else {
             const filteredJsonGoods = await filterGoodsByBrand();
             if (filteredJsonGoods) {
@@ -67,7 +70,6 @@ async function filterGoodsByBrand(): Promise<Product[] | undefined> {
         console.log(error);
     }
 }
-// renderAllGods();
 
 function generateCard(product: Product) {
     const card = document.createElement('div');

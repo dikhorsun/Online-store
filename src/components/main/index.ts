@@ -4,14 +4,7 @@ import createOptions from '../helper/createOption';
 import { brandInputId } from '../../json-data/input-id';
 import { getLabelsBrand, getLabelsCategory } from '../../json-data/label-contents';
 import createInputLabelInContainer from '../helper/createInputLabelInContainer';
-import {
-    // brandsCheckedArr,
-    // cardsContainer,
-    inputBrandListener,
-    // renderAllGods,
-    // filterGoodsByBrand,
-    // generateCard,
-} from '../filters/filter-brand';
+import { inputBrandListener } from '../filters/filter-brand';
 import { Product } from '../types/types';
 
 class MainPage extends Page {

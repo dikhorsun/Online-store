@@ -7,11 +7,11 @@ function addQueryBrand(inputIdArray: string[]): void {
             if (filterParent) {
                 const filter: string = filterParent.className.split('-')[1].split('__')[0]; // brand
                 if (!currentURL.includes(filter)) {
-                    currentURL = `?${filter}=${inputId}`;
+                    currentURL = `main-page?${filter}=${inputId}`;
                     location.hash = currentURL;
                 } else {
                     const currentHash: string = currentURL.split('?')[1];
-                    location.hash = `?${currentHash},${inputId}`;
+                    location.hash = `main-page?${currentHash},${inputId}`;
                 }
             }
         });
@@ -23,9 +23,9 @@ function removeQueryBrand(inputIdArray: string[]): void {
     const hashFilter: string = currentURL.substring(currentURL.indexOf('?'), currentURL.indexOf('=') + 1);
     const currentBrandHashArr: string[] = currentURL.split('=')[1].split(','); // [b, b, b]
     if (currentBrandHashArr.length > 1) {
-        location.hash = `${hashFilter}${inputIdArray.join()}`;
+        location.hash = `main-page${hashFilter}${inputIdArray.join()}`;
     } else {
-        location.hash = '';
+        location.hash = 'main-page';
     }
 }
 
