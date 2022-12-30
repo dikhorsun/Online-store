@@ -11,7 +11,7 @@ import {
     // renderAllGods,
     // filterGoodsByBrand,
     // generateCard,
-} from '../filter-brand';
+} from '../filters/filter-brand';
 import { Product } from '../types/types';
 
 class MainPage extends Page {

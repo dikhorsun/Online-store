@@ -1,6 +1,6 @@
-import { Product } from './types/types';
-import createElement from './helper/createElement';
-import MainPage from './main';
+import { Product } from '../types/types';
+import createElement from '../helper/createElement';
+import MainPage from '../main';
 
 const brandsCheckedArr: string[] = [];
 // const filterBrandInput = document.querySelectorAll('.filter-brand__input') as NodeListOf<HTMLInputElement>;
