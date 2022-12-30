@@ -16,7 +16,6 @@ class App {
     private static container: HTMLElement = document.body;
     private static defaultPageId = 'current-page';
     private header: Header;
-    private main: MainPage;
 
     static renderNewPage(idPage: string) {
         const currentPageHTML = document.querySelector(`#${App.defaultPageId}`);
@@ -44,19 +43,24 @@ class App {
 
     private enableRouteChange() {
         window.addEventListener('hashchange', () => {
-            const hash = window.location.hash.slice(1).split('?')[0];
-            App.renderNewPage(hash);
+            if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
+                const hash = window.location.hash.slice(1).split('?')[0];
+                App.renderNewPage(hash);
+            }
+            if (window.location.hash.slice(1) === 'main-page' && window.location.hash.length === 10) {
+                const hash = 'main-page';
+                App.renderNewPage(hash);
+            }
         });
     }
 
     constructor() {
         this.header = new Header('header', 'header');
-        this.main = new MainPage('main');
     }
 
     run() {
-        App.renderNewPage('main-page');
         App.container.append(this.header.render());
+        App.renderNewPage('main-page');
         this.enableRouteChange();
     }
 }

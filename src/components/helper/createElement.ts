@@ -1,4 +1,9 @@
-function createElement(tag: string, classNames: string, parent: HTMLElement | null, textContent?: string): HTMLElement {
+function createElement(
+    tag: string,
+    classNames: string,
+    parent?: HTMLElement | null,
+    textContent?: string
+): HTMLElement {
     let element = null;
     try {
         element = document.createElement(tag);
