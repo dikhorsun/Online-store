@@ -27,10 +27,15 @@
   color: $text-color;
 }
 
+
+
 .product__nav a {
   font-size: 100%;
   color: $text-color;
-  cursor: pointer;
+  cursor: default;
+    &:first-child {
+    cursor: pointer;
+  }
 }
 
 a {

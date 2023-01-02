@@ -114,6 +114,8 @@ class MainPage extends Page {
         createElement('button', 'button card-item__add-to-cart', card, 'Add to cart');
 
         MainPage.cardsContainer.append(card);
+        // const button = card.querySelector('.button');
+        // console.log(button);
 
         return card;
     }
@@ -127,12 +129,15 @@ class MainPage extends Page {
                 this.generateCard(goodsArray[i]);
             }
             MainPage.cardsContainer.addEventListener('click', (event) => {
-                console.log(event.target);
-                let card = (event.target as HTMLElement).closest('.card-item'); // (1)
-                console.log(card);
-                if (!card) return;
-                window.location.hash = `product-details/${card.id}`;
-                // return event.target;
+                let target = event.target as HTMLElement;
+                let card = target.closest('.card-item');
+                if (target.tagName === 'BUTTON') {
+                    console.log(target.tagName);
+                } else if (!card) {
+                    return;
+                } else {
+                    window.location.hash = `product-details/${card.id}`;
+                }
             });
 
             return goodsArray;

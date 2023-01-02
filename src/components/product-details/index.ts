@@ -31,59 +31,25 @@ class ProductDetails extends Page {
                 <a>${product.title.toUpperCase()}</a>
             </div>
             <div class="goods-detail">
-                <!-- <div class="goods-title">
-                    <h1>perfume Oil</h1>
-                </div> -->
                 <div class="goods-data">
                     <div class="goods-photos">
                         <div class="goods-smallphotos">
-                            <img alt="photo" src="assets/images/goods/11/thumbnail.jpg" />
-                            <img alt="photo" src="assets/images/goods/11/1.jpg" />
-                            <img alt="photo" src="assets/images/goods/11/2.jpg" />
+                            <img alt="photo" src="${product.thumbnail}" />
+                            <img alt="photo" src="${product.background1}" />
+                            <img alt="photo" src="${product.background2}" />
                         </div>
                         <div class="goods-main-photo">
-                            <img alt="" src="assets/images/goods/11/thumbnail.jpg" />
+                            <img alt="main photo" src="${product.thumbnail}" />
                         </div>
                     </div>
                     <div class="goods-about">
-                        <p>
-                            <span>Description: </span>Mega Discount, Impression of Acqua Di Gio by GiorgioArmani
-                            concentrated attar perfume Oil
-                        </p>
-                        <p><span>Category: </span>smartphones</p>
-                        <p><span>Brand: </span>Apple</p>
-                        <p><span>Discount: </span>17.94%</p>
-                        <p><span>Rating: </span>4.44</p>
-                        <p><span>Stock: </span>34</p>
-                        <p><span>Price: </span>€13</p>
-
-                        <!-- <div class="goods-about-element">
-                            <h3>Description:</h3>
-                            <p>
-                                Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar
-                                perfume Oil
-                            </p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Discount Percentage:</h3>
-                            <p>8.4</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Rating:</h3>
-                            <p>4.26</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Stock:</h3>
-                            <p>65</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Brand:</h3>
-                            <p>Impression of Acqua Di Gio</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Category:</h3>
-                            <p>fragrances</p>
-                        </div> -->
+                        <p> <span>${product.description}</p>
+                        <p><span>Category: </span>${product.category}</p>
+                        <p><span>Brand: </span>${product.brand}</p>
+                        <p><span>Discount: </span>${product.discountPercentage}%</p>
+                        <p><span>Rating: </span>${product.rating}</p>
+                        <p><span>Stock: </span>${product.stock}</p>
+                        <p><span>Price: </span>€${product.price}</p>
                     </div>
                     <div class="goods-buy">
                         <div class="goods-buy-btn">
@@ -95,6 +61,14 @@ class ProductDetails extends Page {
             </div>
         </div>`;
             this.container.append(wrapper);
+            const smallphotosContainer: Element | null = this.container.querySelector('.goods-smallphotos');
+            const mainPhoto = this.container.querySelector('.goods-main-photo img');
+            (smallphotosContainer as Element).addEventListener('click', (event) => {
+                let smallphoto = (event.target as HTMLImageElement).closest('.goods-smallphotos');
+                if (!smallphoto) return;
+                console.log(mainPhoto);
+                (mainPhoto as HTMLImageElement).src = (event.target as HTMLImageElement).src;
+            });
             return wrapper;
             // const goodsArray: Array<Product> = dataGoods.products;
             // for (let i = 0; i < goodsArray.length; i += 1) {

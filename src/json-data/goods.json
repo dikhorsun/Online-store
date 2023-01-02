@@ -11,8 +11,8 @@
   "brand": "Apple",
   "category": "smartphones",
   "thumbnail": "assets/images/goods/1/thumbnail.jpg",
-  "background-1": "assets/images/goods/1/1.jpg",
-  "background-2": "assets/images/goods/1/2.jpg"
+  "background1": "assets/images/goods/1/1.jpg",
+  "background2": "assets/images/goods/1/2.jpg"
   },
 
   {
@@ -26,8 +26,8 @@
   "brand": "Apple",
   "category": "smartphones",
   "thumbnail": "assets/images/goods/2/thumbnail.jpg",
-  "background-1": "assets/images/goods/2/1.jpg",
-  "background-2": "assets/images/goods/2/2.jpg"
+  "background1": "assets/images/goods/2/1.jpg",
+  "background2": "assets/images/goods/2/2.jpg"
   },
 
   {
@@ -41,8 +41,8 @@
   "brand": "Samsung",
   "category": "smartphones",
   "thumbnail": "assets/images/goods/3/thumbnail.jpg",
-  "background-1": "assets/images/goods/3/1.jpg",
-  "background-2": "assets/images/goods/3/2.jpg"
+  "background1": "assets/images/goods/3/1.jpg",
+  "background2": "assets/images/goods/3/2.jpg"
   },
   {
   "id": 4,
@@ -55,8 +55,8 @@
   "brand": "OPPO",
   "category": "smartphones",
   "thumbnail": "assets/images/goods/4/thumbnail.jpg",
-  "background-1": "assets/images/goods/4/1.jpg",
-  "background-2": "assets/images/goods/4/2.jpg"
+  "background1": "assets/images/goods/4/1.jpg",
+  "background2": "assets/images/goods/4/2.jpg"
   },
   {
   "id": 5,
@@ -69,8 +69,8 @@
   "brand": "Huawei",
   "category": "smartphones",
   "thumbnail": "assets/images/goods/5/thumbnail.jpg",
-  "background-1": "assets/images/goods/5/1.jpg",
-  "background-2": "assets/images/goods/5/2.jpg"
+  "background1": "assets/images/goods/5/1.jpg",
+  "background2": "assets/images/goods/5/2.jpg"
   },
   {
   "id": 6,
@@ -83,8 +83,8 @@
   "brand": "Apple",
   "category": "laptops",
   "thumbnail": "assets/images/goods/6/thumbnail.jpg",
-  "background-1": "assets/images/goods/6/1.jpg",
-  "background-2": "assets/images/goods/6/2.jpg"
+  "background1": "assets/images/goods/6/1.jpg",
+  "background2": "assets/images/goods/6/2.jpg"
   },
   {
   "id": 7,
@@ -97,8 +97,8 @@
   "brand": "Samsung",
   "category": "laptops",
   "thumbnail": "assets/images/goods/7/thumbnail.jpg",
-  "background-1": "assets/images/goods/7/1.jpg",
-  "background-2": "assets/images/goods/7/2.jpg"
+  "background1": "assets/images/goods/7/1.jpg",
+  "background2": "assets/images/goods/7/2.jpg"
   },
   {
   "id": 8,
@@ -111,8 +111,8 @@
   "brand": "Microsoft Surface",
   "category": "laptops",
   "thumbnail": "assets/images/goods/8/thumbnail.jpg",
-  "background-1": "assets/images/goods/8/1.jpg",
-  "background-2": "assets/images/goods/8/2.jpg"
+  "background1": "assets/images/goods/8/1.jpg",
+  "background2": "assets/images/goods/8/2.jpg"
   },
   {
   "id": 9,
@@ -125,8 +125,8 @@
   "brand": "Infinix",
   "category": "laptops",
   "thumbnail": "assets/images/goods/9/thumbnail.jpg",
-  "background-1": "assets/images/goods/9/1.jpg",
-  "background-2": "assets/images/goods/9/2.jpg"
+  "background1": "assets/images/goods/9/1.jpg",
+  "background2": "assets/images/goods/9/2.jpg"
   },
   {
   "id": 10,
@@ -139,8 +139,8 @@
   "brand": "HP Pavilion",
   "category": "laptops",
   "thumbnail": "assets/images/goods/10/thumbnail.jpg",
-  "background-1": "assets/images/goods/10/1.jpg",
-  "background-2": "assets/images/goods/10/2.jpg"
+  "background1": "assets/images/goods/10/1.jpg",
+  "background2": "assets/images/goods/10/2.jpg"
   },
   {
   "id": 11,
@@ -153,8 +153,8 @@
   "brand": "Impression of Acqua Di Gio",
   "category": "fragrances",
   "thumbnail": "assets/images/goods/11/thumbnail.jpg",
-  "background-1": "assets/images/goods/11/1.jpg",
-  "background-2": "assets/images/goods/11/2.jpg"
+  "background1": "assets/images/goods/11/1.jpg",
+  "background2": "assets/images/goods/11/2.jpg"
   },
   {
   "id": 12,
@@ -167,8 +167,8 @@
   "brand": "Royal Mirage",
   "category": "fragrances",
   "thumbnail": "assets/images/goods/12/thumbnail.jpg",
-  "background-1": "assets/images/goods/12/1.jpg",
-  "background-2": "assets/images/goods/12/2.jpg"
+  "background1": "assets/images/goods/12/1.jpg",
+  "background2": "assets/images/goods/12/2.jpg"
   },
   {
   "id": 13,
@@ -181,8 +181,8 @@
   "brand": "Fog Scent Xpressio",
   "category": "fragrances",
   "thumbnail": "assets/images/goods/13/thumbnail.jpg",
-  "background-1": "assets/images/goods/13/1.jpg",
-  "background-2": "assets/images/goods/13/2.jpg"
+  "background1": "assets/images/goods/13/1.jpg",
+  "background2": "assets/images/goods/13/2.jpg"
   },
   {
   "id": 14,
@@ -195,8 +195,8 @@
   "brand": "Al Munakh",
   "category": "fragrances",
   "thumbnail": "assets/images/goods/14/thumbnail.jpg",
-  "background-1": "assets/images/goods/14/1.jpg",
-  "background-2": "assets/images/goods/14/2.jpg"
+  "background1": "assets/images/goods/14/1.jpg",
+  "background2": "assets/images/goods/14/2.jpg"
   },
   {
   "id": 15,
@@ -209,13 +209,13 @@
   "brand": "Lord Al Rehab",
   "category": "fragrances",
   "thumbnail": "assets/images/goods/15/thumbnail.jpg",
-  "background-1": "assets/images/goods/15/1.jpg",
-  "background-2": "assets/images/goods/15/2.jpg"
+  "background1": "assets/images/goods/15/1.jpg",
+  "background2": "assets/images/goods/15/2.jpg"
   },
   {
   "id": 16,
   "title": "Hyaluronic Acid Serum",
-  "description": "L'OrÃ©al Paris introduces Hyaluron Expert Replumping Serum formulated with 1.5% Hyaluronic Acid",
+  "description": "L'Oreal Paris introduces Hyaluron Expert Replumping Serum formulated with 1.5% Hyaluronic Acid",
   "price": 19,
   "discountPercentage": 13.31,
   "rating": 4.83,
@@ -223,8 +223,8 @@
   "brand": "L'Oreal Paris",
   "category": "skincare",
   "thumbnail": "assets/images/goods/16/thumbnail.jpg",
-  "background-1": "assets/images/goods/16/1.jpg",
-  "background-2": "assets/images/goods/16/2.jpg"
+  "background1": "assets/images/goods/16/1.jpg",
+  "background2": "assets/images/goods/16/2.jpg"
   },
   {
   "id": 17,
@@ -237,8 +237,8 @@
   "brand": "Hemani Tea",
   "category": "skincare",
   "thumbnail": "assets/images/goods/17/thumbnail.jpg",
-  "background-1": "assets/images/goods/17/1.jpg",
-  "background-2": "assets/images/goods/17/2.jpg"
+  "background1": "assets/images/goods/17/1.jpg",
+  "background2": "assets/images/goods/17/2.jpg"
   },
   {
   "id": 18,
@@ -251,8 +251,8 @@
   "brand": "Dermive",
   "category": "skincare",
   "thumbnail": "assets/images/goods/18/thumbnail.jpg",
-  "background-1": "assets/images/goods/18/1.jpg",
-  "background-2": "assets/images/goods/18/2.jpg"
+  "background1": "assets/images/goods/18/1.jpg",
+  "background2": "assets/images/goods/18/2.jpg"
   },
   {
   "id": 19,
@@ -265,8 +265,8 @@
   "brand": "ROREC White Rice",
   "category": "skincare",
   "thumbnail": "assets/images/goods/19/thumbnail.jpg",
-  "background-1": "assets/images/goods/19/1.jpg",
-  "background-2": "assets/images/goods/19/2.jpg"
+  "background1": "assets/images/goods/19/1.jpg",
+  "background2": "assets/images/goods/19/2.jpg"
   },
   {
   "id": 20,
@@ -279,8 +279,8 @@
   "brand": "Fair & Clear",
   "category": "skincare",
   "thumbnail": "assets/images/goods/20/thumbnail.jpg",
-  "background-1": "assets/images/goods/20/1.jpg",
-  "background-2": "assets/images/goods/20/2.jpg"
+  "background1": "assets/images/goods/20/1.jpg",
+  "background2": "assets/images/goods/20/2.jpg"
   },
   {
   "id": 21,
@@ -293,8 +293,8 @@
   "brand": "Saaf & Khaas",
   "category": "groceries",
   "thumbnail": "assets/images/goods/21/thumbnail.jpg",
-  "background-1": "assets/images/goods/21/1.jpg",
-  "background-2": "assets/images/goods/21/2.jpg"
+  "background1": "assets/images/goods/21/1.jpg",
+  "background2": "assets/images/goods/21/2.jpg"
   },
   {
   "id": 22,
@@ -307,8 +307,8 @@
   "brand": "Bake Parlor Big",
   "category": "groceries",
   "thumbnail": "assets/images/goods/22/thumbnail.jpg",
-  "background-1": "assets/images/goods/22/1.jpg",
-  "background-2": "assets/images/goods/22/2.jpg"
+  "background1": "assets/images/goods/22/1.jpg",
+  "background2": "assets/images/goods/22/2.jpg"
   },
   {
   "id": 23,
@@ -321,8 +321,8 @@
   "brand": "Baking Food Items",
   "category": "groceries",
   "thumbnail": "assets/images/goods/23/thumbnail.jpg",
-  "background-1": "assets/images/goods/23/1.jpg",
-  "background-2": "assets/images/goods/23/2.jpg"
+  "background1": "assets/images/goods/23/1.jpg",
+  "background2": "assets/images/goods/23/2.jpg"
   },
   {
   "id": 24,
@@ -335,8 +335,8 @@
   "brand": "Fauji",
   "category": "groceries",
   "thumbnail": "assets/images/goods/24/thumbnail.jpg",
-  "background-1": "assets/images/goods/24/1.jpg",
-  "background-2": "assets/images/goods/24/2.jpg"
+  "background1": "assets/images/goods/24/1.jpg",
+  "background2": "assets/images/goods/24/2.jpg"
   },
   {
   "id": 25,
@@ -349,8 +349,8 @@
   "brand": "Dry Rose",
   "category": "groceries",
   "thumbnail": "assets/images/goods/25/thumbnail.jpg",
-  "background-1": "assets/images/goods/25/1.jpg",
-  "background-2": "assets/images/goods/25/2.jpg"
+  "background1": "assets/images/goods/25/1.jpg",
+  "background2": "assets/images/goods/25/2.jpg"
   },
   {
   "id": 26,
@@ -363,8 +363,8 @@
   "brand": "Boho Decor",
   "category": "home-decoration",
   "thumbnail": "assets/images/goods/26/thumbnail.jpg",
-  "background-1": "assets/images/goods/26/1.jpg",
-  "background-2": "assets/images/goods/26/2.jpg"
+  "background1": "assets/images/goods/26/1.jpg",
+  "background2": "assets/images/goods/26/2.jpg"
   },
   {
   "id": 27,
@@ -377,8 +377,8 @@
   "brand": "Flying Wooden",
   "category": "home-decoration",
   "thumbnail": "assets/images/goods/27/thumbnail.jpg",
-  "background-1": "assets/images/goods/27/1.jpg",
-  "background-2": "assets/images/goods/27/2.jpg"
+  "background1": "assets/images/goods/27/1.jpg",
+  "background2": "assets/images/goods/27/2.jpg"
   },
   {
   "id": 28,
@@ -391,8 +391,8 @@
   "brand": "LED Lights",
   "category": "home-decoration",
   "thumbnail": "assets/images/goods/28/thumbnail.jpg",
-  "background-1": "assets/images/goods/28/1.jpg",
-  "background-2": "assets/images/goods/28/2.jpg"
+  "background1": "assets/images/goods/28/1.jpg",
+  "background2": "assets/images/goods/28/2.jpg"
   },
   {
   "id": 29,
@@ -405,8 +405,8 @@
   "brand": "Luxury palace",
   "category": "home-decoration",
   "thumbnail": "assets/images/goods/29/thumbnail.jpg",
-  "background-1": "assets/images/goods/29/1.jpg",
-  "background-2": "assets/images/goods/29/2.jpg"
+  "background1": "assets/images/goods/29/1.jpg",
+  "background2": "assets/images/goods/29/2.jpg"
   },
   {
   "id": 30,
@@ -419,8 +419,8 @@
   "brand": "Golden",
   "category": "home-decoration",
   "thumbnail": "assets/images/goods/30/thumbnail.jpg",
-  "background-1": "assets/images/goods/30/1.jpg",
-  "background-2": "assets/images/goods/30/2.jpg"
+  "background1": "assets/images/goods/30/1.jpg",
+  "background2": "assets/images/goods/30/2.jpg"
   }
   ],
   "total": 30
