@@ -13,11 +13,12 @@ class ProductDetails extends Page {
         super(id);
     }
 
-    async renderProductDetails(id: string) {
+    async renderProductDetails() {
         try {
             const response = await fetch('./json-data/goods.json');
             const dataGoods = await response.json();
-            const product = dataGoods.products[id];
+            const idProduct = window.location.hash.slice(1).split('/')[1];
+            const product = dataGoods.products[idProduct];
             // const product = dataGoods.products.filter(item => item.id = event?.target.id)
             const wrapper = document.createElement('div');
             wrapper.classList.add('product__wrapper');
@@ -106,7 +107,7 @@ class ProductDetails extends Page {
     }
 
     render() {
-        this.renderProductDetails('0');
+        this.renderProductDetails();
         // const wrapper = this.renderBreadcrumbs('0');
         // console.log(wrapper);
         // // this.container.append(wrapper);

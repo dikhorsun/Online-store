@@ -26,7 +26,7 @@ class App {
 
         if (idPage === PageIds.MainPage) {
             page = new MainPage(idPage);
-        } else if (idPage === PageIds.ProductDetails) {
+        } else if (idPage.split('/')[0] === PageIds.ProductDetails) {
             page = new ProductDetails(idPage);
         } else if (idPage === PageIds.Cart) {
             page = new Cart(idPage);
@@ -44,13 +44,40 @@ class App {
     private enableRouteChange() {
         window.addEventListener('hashchange', () => {
             if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
+                // if (
+                //     window.location.hash.slice(1) === `${PageIds.ProductDetails}` &&
+                //     window.location.hash.length === PageIds.ProductDetails.length
+                // ) {
+                //     const hash = `${PageIds.ProductDetails}`;
+                //     console.log('2');
+                //     App.renderNewPage(hash);
+                // }
                 const hash = window.location.hash.slice(1).split('?')[0];
+                console.log('1');
                 App.renderNewPage(hash);
             }
             if (window.location.hash.slice(1) === 'main-page' && window.location.hash.length === 10) {
                 const hash = 'main-page';
+                console.log('2');
                 App.renderNewPage(hash);
             }
+            console.log(window.location.hash);
+
+            // let hash: string = '';
+
+            // if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
+            //     hash = window.location.hash.slice(1).split('?')[0];
+            //     if (window.location.hash.slice(1).split('/')[0] === `${PageIds.ProductDetails}`) {
+            //         console.log('asd');
+            //         hash = window.location.hash.slice(1).split('/')[0];
+            //         console.log(hash);
+            //     }
+            // }
+            // if (window.location.hash.slice(1) === 'main-page' && window.location.hash.length === 10) {
+            //     hash = 'main-page';
+            // }
+            // console.log(hash);
+            // App.renderNewPage(hash);
         });
     }
 

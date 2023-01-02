@@ -99,7 +99,11 @@ class MainPage extends Page {
     generateCard(product: Product) {
         const card = document.createElement('div');
         card.classList.add('card-item');
-
+        card.id = product.id.toString();
+        // card.addEventListener('click', (event) => {
+        //     console.log(event.target);
+        //     return event.target;
+        // });
         const cardImage = createElement('div', 'card-item__image', card);
         cardImage.style.background = `url('${product.thumbnail}') center center / cover`;
 
@@ -110,6 +114,7 @@ class MainPage extends Page {
         createElement('button', 'button card-item__add-to-cart', card, 'Add to cart');
 
         MainPage.cardsContainer.append(card);
+
         return card;
     }
 
@@ -121,6 +126,15 @@ class MainPage extends Page {
             for (let i = 0; i < goodsArray.length; i += 1) {
                 this.generateCard(goodsArray[i]);
             }
+            MainPage.cardsContainer.addEventListener('click', (event) => {
+                console.log(event.target);
+                let card = (event.target as HTMLElement).closest('.card-item'); // (1)
+                console.log(card);
+                if (!card) return;
+                window.location.hash = `product-details/${card.id}`;
+                // return event.target;
+            });
+
             return goodsArray;
         } catch (error) {
             console.log(error);

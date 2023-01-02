@@ -11,3 +11,8 @@ export type Product = {
     thumbnail: string;
     title: string;
 };
+
+export type TDOMElementAttributes = {
+    key: string;
+    value: string;
+};
