@@ -29,8 +29,6 @@ class MainPage extends Page {
     static cardsContainer: HTMLElement = createElement('div', 'cards-container', MainPage.sectionGoods);
 
     async renderMainPage() {
-        // console.log(this);
-        // console.log(MainPage.asd);
         this.renderSectionTools();
         this.renderSectionGoods();
         await this.renderAllGods();
@@ -130,9 +128,6 @@ class MainPage extends Page {
     }
 
     render() {
-        //
-        console.log(this.container);
-
         this.container.append(MainPage.wrapperMain);
         this.renderMainPage();
         return this.container;
