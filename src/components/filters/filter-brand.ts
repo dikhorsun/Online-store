@@ -16,6 +16,7 @@ async function inputBrandListener(this: HTMLInputElement) {
         const labelTextContent: string = label.textContent || '';
         brandsCheckedArr.push(labelTextContent);
         MainPage.cardsContainer.innerHTML = '';
+
         const filteredJsonGoods = await filterGoodsByBrand();
         if (filteredJsonGoods) {
             for (let i = 0; i < filteredJsonGoods.length; i += 1) {

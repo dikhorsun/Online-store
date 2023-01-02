@@ -8,17 +8,25 @@ import { inputBrandListener } from '../filters/filter-brand';
 import { Product } from '../types/types';
 
 class MainPage extends Page {
-    static body: HTMLBodyElement | null = document.querySelector('.body');
-    static main: HTMLElement = createElement('main', 'main', MainPage.body);
-    static wrapperMain: HTMLElement = createElement('div', 'wrapper wrapper__main', MainPage.main);
+    constructor(id: string) {
+        super(id);
+    }
+    // findContainer() {
+    //   console.log(this.container)
+    //     return this.container;
+    // }
+    // findContainer()
+    // static body: HTMLBodyElement | null = document.querySelector('.body');
+    // // static asd: HTMLElement | null = document.getElementById('main');
+    // // static zxc: HTMLElement = MainPage.
+    // // // static main: HTMLElement = container;
+    // static main: HTMLElement = createElement('main', 'main', MainPage.body);
+    // static wrapperMain: HTMLElement = createElement('div', 'wrapper wrapper__main', MainPage.main);
+    static wrapperMain: HTMLElement = createElement('div', 'wrapper wrapper__main');
     static sectionTools: HTMLElement = createElement('section', 'tools', MainPage.wrapperMain);
     static sectionGoods: HTMLElement = createElement('section', 'goods', MainPage.wrapperMain);
     static regulationContainer: HTMLElement = createElement('div', 'regulation-container', MainPage.sectionGoods);
     static cardsContainer: HTMLElement = createElement('div', 'cards-container', MainPage.sectionGoods);
-
-    constructor(id: string) {
-        super(id);
-    }
 
     async renderMainPage() {
         this.renderSectionTools();
@@ -120,6 +128,7 @@ class MainPage extends Page {
     }
 
     render() {
+        this.container.append(MainPage.wrapperMain);
         this.renderMainPage();
         return this.container;
     }
