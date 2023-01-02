@@ -25,7 +25,6 @@ async function getLabelsCategory(): Promise<string[] | undefined> {
         for (let i = 0; i < goodsArray.length; i += 1) {
             labelsCategorySet.add(goodsArray[i].category);
         }
-        console.log(labelsCategorySet);
 
         const labelsCategoryArray = Array.from(labelsCategorySet);
         return labelsCategoryArray;

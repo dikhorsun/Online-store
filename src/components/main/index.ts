@@ -5,23 +5,13 @@ import { brandInputId } from '../../json-data/input-id';
 import { getLabelsBrand, getLabelsCategory } from '../../json-data/label-contents';
 import createInputLabelInContainer from '../helper/createInputLabelInContainer';
 import { inputBrandListener } from '../filters/filter-brand';
+import { inputCategoryListener } from '../filters/filter-category';
 import { Product } from '../types/types';
 
 class MainPage extends Page {
     constructor(id: string) {
         super(id);
     }
-    // findContainer() {
-    //   console.log(this.container)
-    //     return this.container;
-    // }
-    // findContainer()
-    // static body: HTMLBodyElement | null = document.querySelector('.body');
-    // // static asd: HTMLElement | null = document.getElementById('main');
-    // // static zxc: HTMLElement = MainPage.
-    // // // static main: HTMLElement = container;
-    // static main: HTMLElement = createElement('main', 'main', MainPage.body);
-    // static wrapperMain: HTMLElement = createElement('div', 'wrapper wrapper__main', MainPage.main);
     static wrapperMain: HTMLElement = createElement('div', 'wrapper wrapper__main');
     static sectionTools: HTMLElement = createElement('section', 'tools', MainPage.wrapperMain);
     static sectionGoods: HTMLElement = createElement('section', 'goods', MainPage.wrapperMain);
@@ -29,6 +19,8 @@ class MainPage extends Page {
     static cardsContainer: HTMLElement = createElement('div', 'cards-container', MainPage.sectionGoods);
 
     async renderMainPage() {
+        // console.log(this);
+        // console.log(MainPage.asd);
         this.renderSectionTools();
         this.renderSectionGoods();
         await this.renderAllGods();
@@ -62,22 +54,22 @@ class MainPage extends Page {
             }
         }
         // fieldset with category inputs
-        // const fieldsetCategory = createElement('fieldset', 'filter-category', sectionTools);
-        // createElement('legend', 'filter-category__legend', fieldsetCategory, 'Filter goods by category');
-        // const categoryLabelsArray = await getLabelsCategory();
-        // if (categoryLabelsArray) {
-        //     for (let i = 0; i < 6; i++) {
-        //         createInputLabelInContainer(
-        //             fieldsetCategory,
-        //             'filter-category__line',
-        //             'checkbox',
-        //             'filter-category__input',
-        //             categoryLabelsArray[i],
-        //             inputCategoryListener,
-        //             categoryLabelsArray[i]
-        //         );
-        //     }
-        // }
+        const fieldsetCategory = createElement('fieldset', 'filter-category', MainPage.sectionTools);
+        createElement('legend', 'filter-category__legend', fieldsetCategory, 'Filter goods by category');
+        const categoryLabelsArray = await getLabelsCategory();
+        if (categoryLabelsArray) {
+            for (let i = 0; i < 6; i++) {
+                createInputLabelInContainer(
+                    fieldsetCategory,
+                    'filter-category__line',
+                    'checkbox',
+                    'filter-category__input',
+                    categoryLabelsArray[i],
+                    inputCategoryListener,
+                    categoryLabelsArray[i]
+                );
+            }
+        }
         return MainPage.sectionTools;
     }
 
@@ -128,6 +120,7 @@ class MainPage extends Page {
     }
 
     render() {
+        //
         this.container.append(MainPage.wrapperMain);
         this.renderMainPage();
         return this.container;

@@ -1,44 +1,70 @@
 import { Product } from '../types/types';
 import createElement from '../helper/createElement';
 import MainPage from '../main/index';
-import { addQueryBrand, removeQueryBrand } from '../main/query-params/query';
+import { addQuery, removeQuery } from '../main/query-params/query';
+import { categoriesCheckedArr } from './filter-category';
 
-const brandsCheckedArr: string[] = [];
-const cardsContainer = document.querySelector('.cards-container') as HTMLDivElement;
+// const brandsCheckedArr: string[] = [];
+// const cardsContainer = document.querySelector('.cards-container') as HTMLDivElement;
+// const brandsInputIdArr: string[] = [];
+
+// async function inputBrandListener(this: HTMLInputElement) {
+//     const inputId = this.id;
+//     const label = document.querySelector(`label[for=${inputId}]`) as HTMLLabelElement;
+//     if (this.checked) {
+//         brandsInputIdArr.push(inputId);
+//         addQuery(brandsInputIdArr, 'brand');
+//         const labelTextContent: string = label.textContent || '';
+//         brandsCheckedArr.push(labelTextContent);
+//         MainPage.cardsContainer.innerHTML = '';
+
+//         const filteredJsonGoods = await filterGoodsByBrand();
+//         if (filteredJsonGoods) {
+//             for (let i = 0; i < filteredJsonGoods.length; i += 1) {
+//                 generateCard(filteredJsonGoods[i]);
+//             }
+//         }
+//     } else {
+//         const indexOfRemovedBrand = brandsCheckedArr.indexOf(`${label?.textContent}`);
+//         brandsInputIdArr.splice(indexOfRemovedBrand, 1);
+//         removeQuery(brandsInputIdArr, 'brand');
+//         brandsCheckedArr.splice(indexOfRemovedBrand, 1);
+//         MainPage.cardsContainer.innerHTML = '';
+//         if (brandsCheckedArr.length === 0) {
+//             MainPage.sectionTools.innerHTML = '';
+//             MainPage.regulationContainer.innerHTML = '';
+//         } else {
+//             const filteredJsonGoods = await filterGoodsByBrand();
+//             if (filteredJsonGoods) {
+//                 for (let i = 0; i < filteredJsonGoods.length; i += 1) {
+//                     generateCard(filteredJsonGoods[i]);
+//                 }
+//             }
+//         }
+//     }
+// }
+
 const brandsInputIdArr: string[] = [];
+const brandsCheckedArr: string[] = [];
 
-async function inputBrandListener(this: HTMLInputElement) {
+function inputBrandListener(this: HTMLInputElement) {
     const inputId = this.id;
     const label = document.querySelector(`label[for=${inputId}]`) as HTMLLabelElement;
     if (this.checked) {
         brandsInputIdArr.push(inputId);
-        addQueryBrand(brandsInputIdArr);
+        addQuery(brandsInputIdArr, 'brand');
         const labelTextContent: string = label.textContent || '';
         brandsCheckedArr.push(labelTextContent);
         MainPage.cardsContainer.innerHTML = '';
-
-        const filteredJsonGoods = await filterGoodsByBrand();
-        if (filteredJsonGoods) {
-            for (let i = 0; i < filteredJsonGoods.length; i += 1) {
-                generateCard(filteredJsonGoods[i]);
-            }
-        }
     } else {
         const indexOfRemovedBrand = brandsCheckedArr.indexOf(`${label?.textContent}`);
         brandsInputIdArr.splice(indexOfRemovedBrand, 1);
-        removeQueryBrand(brandsInputIdArr);
+        removeQuery(brandsInputIdArr, 'brand');
         brandsCheckedArr.splice(indexOfRemovedBrand, 1);
         MainPage.cardsContainer.innerHTML = '';
-        if (brandsCheckedArr.length === 0) {
+        if (brandsCheckedArr.length === 0 && categoriesCheckedArr.length === 0) {
             MainPage.sectionTools.innerHTML = '';
             MainPage.regulationContainer.innerHTML = '';
-        } else {
-            const filteredJsonGoods = await filterGoodsByBrand();
-            if (filteredJsonGoods) {
-                for (let i = 0; i < filteredJsonGoods.length; i += 1) {
-                    generateCard(filteredJsonGoods[i]);
-                }
-            }
         }
     }
 }
@@ -57,19 +83,19 @@ async function renderAllGods(): Promise<Product[] | undefined> {
     }
 }
 
-async function filterGoodsByBrand(): Promise<Product[] | undefined> {
-    try {
-        const response = await fetch('./json-data/goods.json');
-        const dataGoods = await response.json();
-        const goodsArray: Array<Product> = dataGoods.products;
-        const filterdByBrand: Array<Product> = goodsArray.filter((product: Product) =>
-            brandsCheckedArr.includes(product.brand)
-        );
-        return filterdByBrand;
-    } catch (error) {
-        console.log(error);
-    }
-}
+// async function filterGoodsByBrand(): Promise<Product[] | undefined> {
+//     try {
+//         const response = await fetch('./json-data/goods.json');
+//         const dataGoods = await response.json();
+//         const goodsArray: Array<Product> = dataGoods.products;
+//         const filterdByBrand: Array<Product> = goodsArray.filter((product: Product) =>
+//             brandsCheckedArr.includes(product.brand)
+//         );
+//         return filterdByBrand;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 function generateCard(product: Product) {
     const card = document.createElement('div');
@@ -88,4 +114,4 @@ function generateCard(product: Product) {
     return card;
 }
 
-export { brandsCheckedArr, cardsContainer, inputBrandListener, renderAllGods, filterGoodsByBrand, generateCard };
+export { brandsCheckedArr, inputBrandListener, renderAllGods, generateCard };

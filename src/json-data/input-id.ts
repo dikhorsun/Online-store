@@ -1,6 +1,6 @@
 const brandInputId: string[] = [
-    'samsung',
     'apple',
+    'samsung',
     'oppo',
     'huawei',
     'microsoft-surface',
