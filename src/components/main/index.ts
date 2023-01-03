@@ -5,7 +5,8 @@ import { brandInputId } from '../../json-data/input-id';
 import { getLabelsBrand, getLabelsCategory } from '../../json-data/label-contents';
 import createInputLabelInContainer from '../helper/createInputLabelInContainer';
 import { inputBrandListener } from '../filters/filter-brand';
-import { Product } from '../types/types';
+import { Product, CartBtnInner } from '../types/types';
+import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
 
 class MainPage extends Page {
     constructor(id: string) {
@@ -100,10 +101,7 @@ class MainPage extends Page {
         const card = document.createElement('div');
         card.classList.add('card-item');
         card.id = product.id.toString();
-        // card.addEventListener('click', (event) => {
-        //     console.log(event.target);
-        //     return event.target;
-        // });
+
         const cardImage = createElement('div', 'card-item__image', card);
         cardImage.style.background = `url('${product.thumbnail}') center center / cover`;
 
@@ -111,12 +109,16 @@ class MainPage extends Page {
         createElement('p', 'card-item__price', card, `Price: ${product.price}`);
         createElement('p', 'card-item__rating', card, `Rating: ${product.rating}`);
         createElement('p', 'card-item__stock', card, `Stock: ${product.stock}`);
-        createElement('button', 'button card-item__add-to-cart', card, 'Add to cart');
 
+        const productAdded: boolean = checkProductInCart(`${product.id}`);
+        const buttonText = productAdded ? CartBtnInner.remove : CartBtnInner.add;
+        const button = createElement(
+            'button',
+            `button card-item__add-to-cart${productAdded ? ' button-added' : ''}`,
+            card,
+            `${buttonText}`
+        );
         MainPage.cardsContainer.append(card);
-        // const button = card.querySelector('.button');
-        // console.log(button);
-
         return card;
     }
 
@@ -130,9 +132,18 @@ class MainPage extends Page {
             }
             MainPage.cardsContainer.addEventListener('click', (event) => {
                 let target = event.target as HTMLElement;
-                let card = target.closest('.card-item');
+                let card = target.closest('.card-item') as HTMLElement;
                 if (target.tagName === 'BUTTON') {
-                    console.log(target.tagName);
+                    const productsList: string[] = getStorageElem();
+                    const productAdded: boolean = productsList.includes(card.id);
+                    if (!productAdded) {
+                        target.classList.add('button-added');
+                        target.innerHTML = CartBtnInner.remove;
+                    } else {
+                        target.classList.remove('button-added');
+                        target.innerHTML = CartBtnInner.add;
+                    }
+                    updateCart(card.id);
                 } else if (!card) {
                     return;
                 } else {

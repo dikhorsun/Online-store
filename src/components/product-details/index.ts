@@ -1,8 +1,7 @@
 import Page from '../../templates/page';
-
-import createElement from '../helper/createElement';
-import { inputBrandListener } from '../filters/filter-brand';
-import { Product } from '../types/types';
+import { CartBtnInner } from '../types/types';
+import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
+import { createPopup } from '../popup/popup';
 
 class ProductDetails extends Page {
     static TextObject = {
@@ -22,7 +21,9 @@ class ProductDetails extends Page {
             // const product = dataGoods.products.filter(item => item.id = event?.target.id)
             const wrapper = document.createElement('div');
             wrapper.classList.add('product__wrapper');
-            // createElement('div', 'product__container', wrapper);
+
+            const productAdded: boolean = checkProductInCart(`${idProduct}`);
+            const buttonText = productAdded ? CartBtnInner.remove : CartBtnInner.add;
 
             wrapper.innerHTML = `     <div class="product__container">
             <div class="product__nav">
@@ -52,9 +53,11 @@ class ProductDetails extends Page {
                         <p><span>Price: </span>€${product.price}</p>
                     </div>
                     <div class="goods-buy">
-                        <div class="goods-buy-btn">
-                            <button>ADD TO CART</button>
-                            <button>BUY</button>
+                        <div class="goods-buy-btns">
+                            <button class="goods-buy-button${
+                                productAdded ? ' button-added' : ''
+                            }" >${buttonText}</button>
+                            <button id = 'buttonBuy' class="goods-buy-button">BUY NOW</button>
                         </div>
                     </div>
                 </div>
@@ -69,12 +72,29 @@ class ProductDetails extends Page {
                 console.log(mainPhoto);
                 (mainPhoto as HTMLImageElement).src = (event.target as HTMLImageElement).src;
             });
+            const buttonAdd = this.container.querySelector('.goods-buy-button');
+            buttonAdd?.addEventListener('click', () => {
+                const productsList: string[] = getStorageElem();
+                const productAdded: boolean = productsList.includes(idProduct);
+                if (!productAdded) {
+                    buttonAdd.classList.add('button-added');
+                    buttonAdd.innerHTML = CartBtnInner.remove;
+                } else {
+                    buttonAdd.classList.remove('button-added');
+                    buttonAdd.innerHTML = CartBtnInner.add;
+                }
+                updateCart(idProduct);
+            });
+            const buttonBuy = this.container.querySelector('#buttonBuy');
+            buttonBuy?.addEventListener('click', (event) => {
+                const target = event.target as HTMLElement;
+                updateCart(idProduct, target);
+                window.location.hash = `cart`;
+                console.log('123123123');
+                setTimeout(createPopup, 0);
+            });
+
             return wrapper;
-            // const goodsArray: Array<Product> = dataGoods.products;
-            // for (let i = 0; i < goodsArray.length; i += 1) {
-            //     this.generateCard(goodsArray[i]);
-            // }
-            // return goodsArray;
         } catch (error) {
             console.log(error);
         }
@@ -82,9 +102,6 @@ class ProductDetails extends Page {
 
     render() {
         this.renderProductDetails();
-        // const wrapper = this.renderBreadcrumbs('0');
-        // console.log(wrapper);
-        // // this.container.append(wrapper);
         return this.container;
     }
 }

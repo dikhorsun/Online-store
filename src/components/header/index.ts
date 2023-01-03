@@ -1,5 +1,6 @@
 import Component from '../../templates/components';
 import { PageIds } from '../app/app';
+import { getStorageCounter } from '../storage/localStorage';
 
 const Buttons = [
     {
@@ -24,7 +25,11 @@ class Header extends Component {
     renderPageButtons() {
         const headerWrapperTemp = document.querySelector('#headerWrapperTemp') as HTMLTemplateElement;
         const headerWrapperClone = headerWrapperTemp.content.cloneNode(true) as HTMLTemplateElement;
+
         this.container.prepend(headerWrapperClone);
+
+        const cartCounter = this.container.querySelector('.header-container__amount') as HTMLTemplateElement;
+        cartCounter.textContent = getStorageCounter();
     }
 
     render() {

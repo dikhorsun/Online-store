@@ -12,7 +12,17 @@ export type Product = {
     title: string;
 };
 
-export type TDOMElementAttributes = {
-    key: string;
-    value: string;
-};
+export enum CartBtnInner {
+    add = 'Add to cart',
+    remove = 'Remove from cart',
+}
+
+export enum LocalStorageKey {
+    counter = 'counter',
+    products = 'cart_products',
+}
+
+export enum AddRemoveCartOpt {
+    add,
+    remove,
+}

@@ -1,11 +1,8 @@
-import { TDOMElementAttributes } from '../types/types';
-
 function createElement(
     tag: string,
     classNames: string,
     parent?: HTMLElement | null,
-    textContent?: string,
-    attributes?: TDOMElementAttributes[]
+    textContent?: string
 ): HTMLElement {
     let element = null;
     try {
@@ -18,12 +15,6 @@ function createElement(
 
     if (textContent) {
         element.textContent = textContent;
-    }
-
-    if (attributes && Array.isArray(attributes)) {
-        for (let i = 0; i < attributes.length; i++) {
-            element.setAttribute(attributes[i].key, attributes[i].value);
-        }
     }
 
     if (parent) {
