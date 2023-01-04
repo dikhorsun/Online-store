@@ -19,8 +19,9 @@ class MainPage extends Page {
     static cardsContainer: HTMLElement = createElement('div', 'cards-container', MainPage.sectionGoods);
 
     async renderMainPage() {
-        // console.log(this);
-        // console.log(MainPage.asd);
+        MainPage.sectionTools.innerHTML = ''; // added
+        MainPage.regulationContainer.innerHTML = ''; // added
+        MainPage.cardsContainer.innerHTML = ''; // added
         this.renderSectionTools();
         this.renderSectionGoods();
         await this.renderAllGods();

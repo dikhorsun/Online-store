@@ -61,7 +61,7 @@ function inputBrandListener(this: HTMLInputElement) {
         brandsInputIdArr.splice(indexOfRemovedBrand, 1);
         removeQuery(brandsInputIdArr, 'brand');
         brandsCheckedArr.splice(indexOfRemovedBrand, 1);
-        MainPage.cardsContainer.innerHTML = '';
+
         if (brandsCheckedArr.length === 0 && categoriesCheckedArr.length === 0) {
             MainPage.sectionTools.innerHTML = '';
             MainPage.regulationContainer.innerHTML = '';
