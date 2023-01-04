@@ -2,9 +2,9 @@ import Page from '../../templates/page';
 import { createPopup } from '../popup/popup';
 
 class Cart extends Page {
-    static TextObject = {
-        MainTitle: 'cart',
-    };
+    // static TextObject = {
+    //     MainTitle: 'cart',
+    // };
 
     constructor(id: string) {
         super(id);

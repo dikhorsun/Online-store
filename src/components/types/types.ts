@@ -19,6 +19,7 @@ export enum CartBtnInner {
 
 export enum LocalStorageKey {
     counter = 'counter',
+    sumTotal = 'sumTotal',
     products = 'cart_products',
 }
 

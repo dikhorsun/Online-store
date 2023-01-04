@@ -87,7 +87,22 @@ class App {
 
     run() {
         App.container.append(this.header.render());
-        App.renderNewPage('main-page');
+
+        let pageRout = '';
+        if (!window.location.hash || window.location.hash.slice(1).split('?')[0] == 'main-page') {
+            pageRout = PageIds.MainPage;
+        } else if (window.location.hash.slice(1).split('/')[0] === PageIds.ProductDetails) {
+            pageRout = PageIds.ProductDetails;
+        } else if (window.location.hash.slice(1) === PageIds.Cart) {
+            pageRout = PageIds.Cart;
+        } else {
+            pageRout = window.location.hash.slice(1);
+        }
+        App.renderNewPage(pageRout);
+        // // const hash = window.location.hash.slice(1).split('/')[0];
+        // App.renderNewPage(hash);
+        // // App.renderNewPage('main-page');
+        // window.location.hash = !window.location.hash ? PageIds.MainPage : window.location.hash;
         this.enableRouteChange();
     }
 }
