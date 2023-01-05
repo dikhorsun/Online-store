@@ -44,14 +44,6 @@ class App {
     private enableRouteChange() {
         window.addEventListener('hashchange', () => {
             if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
-                // if (
-                //     window.location.hash.slice(1) === `${PageIds.ProductDetails}` &&
-                //     window.location.hash.length === PageIds.ProductDetails.length
-                // ) {
-                //     const hash = `${PageIds.ProductDetails}`;
-                //     console.log('2');
-                //     App.renderNewPage(hash);
-                // }
                 const hash = window.location.hash.slice(1).split('?')[0];
                 console.log('1');
                 App.renderNewPage(hash);
@@ -61,23 +53,6 @@ class App {
                 console.log('2');
                 App.renderNewPage(hash);
             }
-            console.log(window.location.hash);
-
-            // let hash: string = '';
-
-            // if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
-            //     hash = window.location.hash.slice(1).split('?')[0];
-            //     if (window.location.hash.slice(1).split('/')[0] === `${PageIds.ProductDetails}`) {
-            //         console.log('asd');
-            //         hash = window.location.hash.slice(1).split('/')[0];
-            //         console.log(hash);
-            //     }
-            // }
-            // if (window.location.hash.slice(1) === 'main-page' && window.location.hash.length === 10) {
-            //     hash = 'main-page';
-            // }
-            // console.log(hash);
-            // App.renderNewPage(hash);
         });
     }
 
@@ -99,10 +74,7 @@ class App {
             pageRout = window.location.hash.slice(1);
         }
         App.renderNewPage(pageRout);
-        // // const hash = window.location.hash.slice(1).split('/')[0];
-        // App.renderNewPage(hash);
-        // // App.renderNewPage('main-page');
-        // window.location.hash = !window.location.hash ? PageIds.MainPage : window.location.hash;
+
         this.enableRouteChange();
     }
 }

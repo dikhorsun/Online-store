@@ -18,7 +18,6 @@ class ProductDetails extends Page {
             const dataGoods = await response.json();
             const idProduct = window.location.hash.slice(1).split('/')[1];
             const product = dataGoods.products[idProduct];
-            // const product = dataGoods.products.filter(item => item.id = event?.target.id)
             const wrapper = document.createElement('div');
             wrapper.classList.add('product__wrapper');
 
@@ -69,7 +68,6 @@ class ProductDetails extends Page {
             (smallphotosContainer as Element).addEventListener('click', (event) => {
                 let smallphoto = (event.target as HTMLImageElement).closest('.goods-smallphotos');
                 if (!smallphoto) return;
-                console.log(mainPhoto);
                 (mainPhoto as HTMLImageElement).src = (event.target as HTMLImageElement).src;
             });
             const buttonAdd = this.container.querySelector('.goods-buy-button');
@@ -90,7 +88,6 @@ class ProductDetails extends Page {
                 const target = event.target as HTMLElement;
                 updateCart(idProduct, target);
                 window.location.hash = `cart`;
-                console.log('123123123');
                 setTimeout(createPopup, 0);
             });
 

@@ -1,5 +1,6 @@
 import { LocalStorageKey, AddRemoveCartOpt } from '../types/types';
 import { getRequest } from '../helper/getRequest';
+import { Product } from '../types/types';
 
 function getStorageElem(): string[] {
     const addedCartItem: string | null = localStorage.getItem(LocalStorageKey.products);
@@ -36,12 +37,11 @@ async function setStorageCounter(
     elem?: HTMLElement,
     value = 1
 ): Promise<void> {
-    const products = await getRequest();
-    console.log(idItem);
-    console.log(products);
-    const currentProduct = products.filter((obj) => obj.id.toString() === idItem);
+    const response = await fetch('./json-data/goods.json');
+    const dataGoods = await response.json();
+    const goodsArray: Array<Product> = dataGoods.products;
+    const currentProduct = goodsArray.filter((obj) => obj.id.toString() === idItem);
     const currentProductPrice = currentProduct[0].price;
-    console.log(currentProductPrice);
     const currCounterValue = Number(getStorageCounter());
     const currSumTotal = Number(getSumTotal());
     if (option == AddRemoveCartOpt.add) {
@@ -56,13 +56,12 @@ async function setStorageCounter(
     }
 }
 
-function updateCart(idItem: string, elem?: HTMLElement): void {
+async function updateCart(idItem: string, elem?: HTMLElement): Promise<void> {
     const addedCartItem: string[] = getStorageElem();
     setStorageElem(idItem, elem);
-
     addedCartItem.includes(idItem)
-        ? setStorageCounter(AddRemoveCartOpt.remove, idItem, elem)
-        : setStorageCounter(AddRemoveCartOpt.add, idItem, elem);
+        ? await setStorageCounter(AddRemoveCartOpt.remove, idItem, elem)
+        : await setStorageCounter(AddRemoveCartOpt.add, idItem, elem);
     const cartCounter = document.querySelector('.header-container__amount');
     const sumTotalDiv = document.querySelector('.header-container__cost');
     if (cartCounter) {
@@ -78,4 +77,12 @@ function checkProductInCart(id: string): boolean {
     return productsList.includes(id);
 }
 
-export { getStorageElem, setStorageElem, getStorageCounter, setStorageCounter, checkProductInCart, updateCart };
+export {
+    getStorageElem,
+    setStorageElem,
+    getStorageCounter,
+    setStorageCounter,
+    checkProductInCart,
+    updateCart,
+    getSumTotal,
+};
