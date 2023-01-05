@@ -124,8 +124,8 @@ class MainPage extends Page {
                 this.generateCard(goodsArray[i]);
             }
             MainPage.cardsContainer.addEventListener('click', (event) => {
-                let target = event.target as HTMLElement;
-                let card = target.closest('.card-item') as HTMLElement;
+                const target = event.target as HTMLElement;
+                const card = target.closest('.card-item') as HTMLElement;
                 if (target.tagName === 'BUTTON') {
                     const productsList: string[] = getStorageElem();
                     const productAdded: boolean = productsList.includes(card.id);

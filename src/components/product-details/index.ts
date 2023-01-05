@@ -66,7 +66,7 @@ class ProductDetails extends Page {
             const smallphotosContainer: Element | null = this.container.querySelector('.goods-smallphotos');
             const mainPhoto = this.container.querySelector('.goods-main-photo img');
             (smallphotosContainer as Element).addEventListener('click', (event) => {
-                let smallphoto = (event.target as HTMLImageElement).closest('.goods-smallphotos');
+                const smallphoto = (event.target as HTMLImageElement).closest('.goods-smallphotos');
                 if (!smallphoto) return;
                 (mainPhoto as HTMLImageElement).src = (event.target as HTMLImageElement).src;
             });

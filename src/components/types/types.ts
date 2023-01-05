@@ -10,7 +10,6 @@ export interface Product {
     stock: number;
     thumbnail: string;
     title: string;
-
 }
 
 export type Filter = 'brand' | 'category' | 'price' | 'stock';
@@ -25,8 +24,6 @@ export interface FilterValueObject {
     price?: string[];
     stock?: string[];
 }
-
-};
 
 export enum CartBtnInner {
     add = 'Add to cart',

@@ -1,5 +1,5 @@
 import { LocalStorageKey, AddRemoveCartOpt } from '../types/types';
-import { getRequest } from '../helper/getRequest';
+// import { getRequest } from '../helper/getRequest';
 import { Product } from '../types/types';
 
 function getStorageElem(): string[] {
