@@ -110,7 +110,7 @@ async function getMainByUrl() {
             }
         }
 
-        // filter goods
+        // filter and render goods
         const filteredGoods = await filterGoods(filterValueObject);
         if (filteredGoods && filteredGoods.length > 0) {
             for (let i = 0; i < filteredGoods.length; i += 1) {
@@ -119,6 +119,26 @@ async function getMainByUrl() {
         } else {
             showNotFound();
         }
+
+        // count of goods amount and controller
+        let goodsAmount = 0;
+        if (filteredGoods && filteredGoods.length > 0) {
+            goodsAmount = filteredGoods.length;
+        } else if (filteredGoods && filteredGoods.length === 0) {
+            goodsAmount = 0;
+        }
+        const searchContainer = createElement('div', 'search-container', MainPage.regulationContainer);
+        const inputSearch: HTMLInputElement = document.createElement('input');
+        inputSearch.classList.add('search-field');
+        inputSearch.type = 'search';
+        inputSearch.placeholder = 'Search goods';
+        searchContainer.append(inputSearch);
+        const goodsFound = createElement('div', 'goods-found', MainPage.regulationContainer);
+        createElement('span', 'goods-found__amount', goodsFound, `${goodsAmount}`);
+        createElement('span', 'goods-found__text', goodsFound, ' goods found');
+        const viewMode = createElement('div', 'regulation-container__view-mode', MainPage.regulationContainer);
+        createElement('div', 'view view-list', viewMode);
+        createElement('div', 'view view-block view_active', viewMode);
     }
 }
 
