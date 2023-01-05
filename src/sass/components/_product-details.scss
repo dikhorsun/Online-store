@@ -4,7 +4,7 @@
 
 
 .product__wrapper{
-  min-height: 85vh;
+  min-height: 100%;
   width: 100%;
   padding: 3%;
   display: flex;
@@ -27,10 +27,15 @@
   color: $text-color;
 }
 
+
+
 .product__nav a {
   font-size: 100%;
   color: $text-color;
-  cursor: pointer;
+  cursor: default;
+    &:first-child {
+    cursor: pointer;
+  }
 }
 
 a {
@@ -109,7 +114,7 @@ a {
   padding: 0 1rem;
 }
 
-.goods-buy-btn {
+.goods-buy-btns {
   width: 90%;
   font-size: 200%;
   color: $text-color;
@@ -117,11 +122,11 @@ a {
   color: $text-color;
 }
 
-.goods-buy-btn button {
+.goods-buy-button {
   font-size: 40%;
   display: block;
   padding: 5% 0;
-  background: #ffffff;
+  // background-color: #ffffff;
   color: $text-dark-color;
   border: 2px solid $border-color-light;
   border-radius: 2rem;
@@ -130,8 +135,10 @@ a {
   margin: 1rem auto;
 
   &:hover {
-    @include font ($style: normal, $weight: 400, $size: 50%, $height: 2.16rem);
+    @include font ($style: normal, $weight: 600, $size: 40%, $height: 2.16rem);
     background-color: $btn-hover-color;
+    border: none;
+    
   }
 }
 

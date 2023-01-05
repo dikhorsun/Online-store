@@ -11,3 +11,19 @@ export type Product = {
     thumbnail: string;
     title: string;
 };
+
+export enum CartBtnInner {
+    add = 'Add to cart',
+    remove = 'Remove from cart',
+}
+
+export enum LocalStorageKey {
+    counter = 'counter',
+    sumTotal = 'sumTotal',
+    products = 'cart_products',
+}
+
+export enum AddRemoveCartOpt {
+    add,
+    remove,
+}

@@ -26,7 +26,7 @@ class App {
 
         if (idPage === PageIds.MainPage) {
             page = new MainPage(idPage);
-        } else if (idPage === PageIds.ProductDetails) {
+        } else if (idPage.split('/')[0] === PageIds.ProductDetails) {
             page = new ProductDetails(idPage);
         } else if (idPage === PageIds.Cart) {
             page = new Cart(idPage);
@@ -45,10 +45,12 @@ class App {
         window.addEventListener('hashchange', () => {
             if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
                 const hash = window.location.hash.slice(1).split('?')[0];
+                console.log('1');
                 App.renderNewPage(hash);
             }
             if (window.location.hash.slice(1) === 'main-page' && window.location.hash.length === 10) {
                 const hash = 'main-page';
+                console.log('2');
                 App.renderNewPage(hash);
             }
         });
@@ -60,7 +62,19 @@ class App {
 
     run() {
         App.container.append(this.header.render());
-        App.renderNewPage('main-page');
+
+        let pageRout = '';
+        if (!window.location.hash || window.location.hash.slice(1).split('?')[0] == 'main-page') {
+            pageRout = PageIds.MainPage;
+        } else if (window.location.hash.slice(1).split('/')[0] === PageIds.ProductDetails) {
+            pageRout = PageIds.ProductDetails;
+        } else if (window.location.hash.slice(1) === PageIds.Cart) {
+            pageRout = PageIds.Cart;
+        } else {
+            pageRout = window.location.hash.slice(1);
+        }
+        App.renderNewPage(pageRout);
+
         this.enableRouteChange();
     }
 }
