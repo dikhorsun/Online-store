@@ -1,8 +1,7 @@
 import Page from '../../templates/page';
-
-import createElement from '../helper/createElement';
-import { inputBrandListener } from '../filters/filter-brand';
-import { Product } from '../types/types';
+import { CartBtnInner } from '../types/types';
+import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
+import { createPopup } from '../popup/popup';
 
 class ProductDetails extends Page {
     static TextObject = {
@@ -13,15 +12,17 @@ class ProductDetails extends Page {
         super(id);
     }
 
-    async renderProductDetails(id: string) {
+    async renderProductDetails() {
         try {
             const response = await fetch('./json-data/goods.json');
             const dataGoods = await response.json();
-            const product = dataGoods.products[id];
-            // const product = dataGoods.products.filter(item => item.id = event?.target.id)
+            const idProduct = window.location.hash.slice(1).split('/')[1];
+            const product = dataGoods.products[idProduct];
             const wrapper = document.createElement('div');
             wrapper.classList.add('product__wrapper');
-            // createElement('div', 'product__container', wrapper);
+
+            const productAdded: boolean = checkProductInCart(`${idProduct}`);
+            const buttonText = productAdded ? CartBtnInner.remove : CartBtnInner.add;
 
             wrapper.innerHTML = `     <div class="product__container">
             <div class="product__nav">
@@ -30,86 +31,74 @@ class ProductDetails extends Page {
                 <a>${product.title.toUpperCase()}</a>
             </div>
             <div class="goods-detail">
-                <!-- <div class="goods-title">
-                    <h1>perfume Oil</h1>
-                </div> -->
                 <div class="goods-data">
                     <div class="goods-photos">
                         <div class="goods-smallphotos">
-                            <img alt="photo" src="assets/images/goods/11/thumbnail.jpg" />
-                            <img alt="photo" src="assets/images/goods/11/1.jpg" />
-                            <img alt="photo" src="assets/images/goods/11/2.jpg" />
+                            <img alt="photo" src="${product.thumbnail}" />
+                            <img alt="photo" src="${product.background1}" />
+                            <img alt="photo" src="${product.background2}" />
                         </div>
                         <div class="goods-main-photo">
-                            <img alt="" src="assets/images/goods/11/thumbnail.jpg" />
+                            <img alt="main photo" src="${product.thumbnail}" />
                         </div>
                     </div>
                     <div class="goods-about">
-                        <p>
-                            <span>Description: </span>Mega Discount, Impression of Acqua Di Gio by GiorgioArmani
-                            concentrated attar perfume Oil
-                        </p>
-                        <p><span>Category: </span>smartphones</p>
-                        <p><span>Brand: </span>Apple</p>
-                        <p><span>Discount: </span>17.94%</p>
-                        <p><span>Rating: </span>4.44</p>
-                        <p><span>Stock: </span>34</p>
-                        <p><span>Price: </span>€13</p>
-
-                        <!-- <div class="goods-about-element">
-                            <h3>Description:</h3>
-                            <p>
-                                Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar
-                                perfume Oil
-                            </p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Discount Percentage:</h3>
-                            <p>8.4</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Rating:</h3>
-                            <p>4.26</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Stock:</h3>
-                            <p>65</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Brand:</h3>
-                            <p>Impression of Acqua Di Gio</p>
-                        </div>
-                        <div class="goods-about-element">
-                            <h3>Category:</h3>
-                            <p>fragrances</p>
-                        </div> -->
+                        <p> <span>${product.description}</p>
+                        <p><span>Category: </span>${product.category}</p>
+                        <p><span>Brand: </span>${product.brand}</p>
+                        <p><span>Discount: </span>${product.discountPercentage}%</p>
+                        <p><span>Rating: </span>${product.rating}</p>
+                        <p><span>Stock: </span>${product.stock}</p>
+                        <p><span>Price: </span>€${product.price}</p>
                     </div>
                     <div class="goods-buy">
-                        <div class="goods-buy-btn">
-                            <button>ADD TO CART</button>
-                            <button>BUY</button>
+                        <div class="goods-buy-btns">
+                            <button class="goods-buy-button${
+                                productAdded ? ' button-added' : ''
+                            }" >${buttonText}</button>
+                            <button id = 'buttonBuy' class="goods-buy-button">BUY NOW</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>`;
             this.container.append(wrapper);
+            const smallphotosContainer: Element | null = this.container.querySelector('.goods-smallphotos');
+            const mainPhoto = this.container.querySelector('.goods-main-photo img');
+            (smallphotosContainer as Element).addEventListener('click', (event) => {
+                let smallphoto = (event.target as HTMLImageElement).closest('.goods-smallphotos');
+                if (!smallphoto) return;
+                (mainPhoto as HTMLImageElement).src = (event.target as HTMLImageElement).src;
+            });
+            const buttonAdd = this.container.querySelector('.goods-buy-button');
+            buttonAdd?.addEventListener('click', () => {
+                const productsList: string[] = getStorageElem();
+                const productAdded: boolean = productsList.includes(idProduct);
+                if (!productAdded) {
+                    buttonAdd.classList.add('button-added');
+                    buttonAdd.innerHTML = CartBtnInner.remove;
+                } else {
+                    buttonAdd.classList.remove('button-added');
+                    buttonAdd.innerHTML = CartBtnInner.add;
+                }
+                updateCart(idProduct);
+            });
+            const buttonBuy = this.container.querySelector('#buttonBuy');
+            buttonBuy?.addEventListener('click', (event) => {
+                const target = event.target as HTMLElement;
+                updateCart(idProduct, target);
+                window.location.hash = `cart`;
+                setTimeout(createPopup, 0);
+            });
+
             return wrapper;
-            // const goodsArray: Array<Product> = dataGoods.products;
-            // for (let i = 0; i < goodsArray.length; i += 1) {
-            //     this.generateCard(goodsArray[i]);
-            // }
-            // return goodsArray;
         } catch (error) {
             console.log(error);
         }
     }
 
     render() {
-        this.renderProductDetails('0');
-        // const wrapper = this.renderBreadcrumbs('0');
-        // console.log(wrapper);
-        // // this.container.append(wrapper);
+        this.renderProductDetails();
         return this.container;
     }
 }

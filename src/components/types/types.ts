@@ -1,4 +1,4 @@
-interface Product {
+export interface Product {
     brand: string;
     category: string;
     description: string;
@@ -10,19 +10,36 @@ interface Product {
     stock: number;
     thumbnail: string;
     title: string;
+
 }
 
-type Filter = 'brand' | 'category' | 'price' | 'stock';
+export type Filter = 'brand' | 'category' | 'price' | 'stock';
 
-type keyFilter = keyof FilterValueObject;
+export type keyFilter = keyof FilterValueObject;
 
-type keyProduct = keyof Product;
+export type keyProduct = keyof Product;
 
-interface FilterValueObject {
+export interface FilterValueObject {
     brand?: string[];
     category?: string[];
     price?: string[];
     stock?: string[];
 }
 
-export { Product, Filter, FilterValueObject, keyFilter, keyProduct };
+};
+
+export enum CartBtnInner {
+    add = 'Add to cart',
+    remove = 'Remove from cart',
+}
+
+export enum LocalStorageKey {
+    counter = 'counter',
+    sumTotal = 'sumTotal',
+    products = 'cart_products',
+}
+
+export enum AddRemoveCartOpt {
+    add,
+    remove,
+}

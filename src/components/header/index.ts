@@ -1,5 +1,6 @@
 import Component from '../../templates/components';
 import { PageIds } from '../app/app';
+import { getStorageCounter, getSumTotal } from '../storage/localStorage';
 
 const Buttons = [
     {
@@ -21,14 +22,20 @@ class Header extends Component {
         super(tagName, className);
     }
 
-    renderPageButtons() {
+    renderHeader() {
         const headerWrapperTemp = document.querySelector('#headerWrapperTemp') as HTMLTemplateElement;
         const headerWrapperClone = headerWrapperTemp.content.cloneNode(true) as HTMLTemplateElement;
+
         this.container.prepend(headerWrapperClone);
+
+        const cartCounter = this.container.querySelector('.header-container__amount') as HTMLTemplateElement;
+        const totalSum = this.container.querySelector('.header-container__cost') as HTMLTemplateElement;
+        cartCounter.textContent = getStorageCounter();
+        totalSum.textContent = getSumTotal();
     }
 
     render() {
-        this.renderPageButtons();
+        this.renderHeader();
         return this.container;
     }
 }
