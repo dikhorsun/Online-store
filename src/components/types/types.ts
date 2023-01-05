@@ -1,4 +1,4 @@
-export type Product = {
+export interface Product {
     brand: string;
     category: string;
     description: string;
@@ -10,6 +10,22 @@ export type Product = {
     stock: number;
     thumbnail: string;
     title: string;
+
+}
+
+export type Filter = 'brand' | 'category' | 'price' | 'stock';
+
+export type keyFilter = keyof FilterValueObject;
+
+export type keyProduct = keyof Product;
+
+export interface FilterValueObject {
+    brand?: string[];
+    category?: string[];
+    price?: string[];
+    stock?: string[];
+}
+
 };
 
 export enum CartBtnInner {

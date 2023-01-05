@@ -22,3 +22,7 @@
   color: $text-color;
 }
 
+.filter-brand__input:checked ~ label,
+.filter-category__input:checked ~ label {
+  color: $input-checked;
+}

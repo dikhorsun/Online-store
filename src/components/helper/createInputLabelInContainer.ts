@@ -14,7 +14,7 @@ function createInputLabelInContainer(
         input.type = inputType;
         input.classList.add(inputClass);
         input.id = inputId;
-        input.addEventListener('change', inputListener); // await
+        input.addEventListener('change', inputListener);
     }
     containerForInput.append(input);
     const label: HTMLLabelElement = document.createElement('label');
