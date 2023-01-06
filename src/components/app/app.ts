@@ -23,15 +23,19 @@ class App {
             currentPageHTML.remove();
         }
         let page: Page | null = null;
-
-        if (idPage === PageIds.MainPage) {
-            page = new MainPage(idPage);
-        } else if (idPage.split('/')[0] === PageIds.ProductDetails) {
-            page = new ProductDetails(idPage);
-        } else if (idPage === PageIds.Cart) {
-            page = new Cart(idPage);
-        } else {
-            page = new ErrorPage(idPage, ErrorTypes.Error_404);
+        const idPageSplit = idPage.split('/')[0];
+        switch (idPageSplit) {
+            case PageIds.MainPage:
+                page = new MainPage(idPage);
+                break;
+            case PageIds.ProductDetails:
+                page = new ProductDetails(idPage);
+                break;
+            case PageIds.Cart:
+                page = new Cart(idPage);
+                break;
+            default:
+                page = new ErrorPage(idPage, ErrorTypes.Error_404);
         }
 
         if (page) {
@@ -45,12 +49,10 @@ class App {
         window.addEventListener('hashchange', () => {
             if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
                 const hash = window.location.hash.slice(1).split('?')[0];
-                console.log('1');
                 App.renderNewPage(hash);
             }
             if (window.location.hash.slice(1) === 'main-page' && window.location.hash.length === 10) {
                 const hash = 'main-page';
-                console.log('2');
                 App.renderNewPage(hash);
             }
         });

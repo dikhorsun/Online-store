@@ -3,7 +3,7 @@ import createElement from '../helper/createElement';
 import MainPage from '../main/index';
 import { addQuery, removeQuery } from '../main/query-params/query';
 import { categoriesCheckedArr } from './filter-category';
-import { getStorageElem, updateCart } from '../storage/localStorage';
+import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
 
 // const brandsCheckedArr: string[] = [];
 // const cardsContainer = document.querySelector('.cards-container') as HTMLDivElement;
@@ -78,6 +78,28 @@ async function renderAllGods(): Promise<Product[] | undefined> {
         for (let i = 0; i < goodsArray.length; i += 1) {
             generateCard(goodsArray[i]);
         }
+
+        MainPage.cardsContainer.addEventListener('click', (event) => {
+            const target = event.target as HTMLElement;
+            const card = target.closest('.card-item') as HTMLElement;
+            if (target.tagName === 'BUTTON') {
+                console.log(123123123);
+                const productsList: string[] = getStorageElem();
+                const productAdded: boolean = productsList.includes(card.id);
+                if (!productAdded) {
+                    target.classList.add('button-added');
+                    target.innerHTML = CartBtnInner.remove;
+                } else {
+                    target.classList.remove('button-added');
+                    target.innerHTML = CartBtnInner.add;
+                }
+                updateCart(card.id);
+            } else if (!card) {
+                return;
+            } else {
+                window.location.hash = `product-details/${card.id}`;
+            }
+        });
         return goodsArray;
     } catch (error) {
         console.log(error);
@@ -110,29 +132,18 @@ function generateCard(product: Product) {
     createElement('p', 'card-item__price', card, `Price: ${product.price}`);
     createElement('p', 'card-item__rating', card, `Rating: ${product.rating}`);
     createElement('p', 'card-item__stock', card, `Stock: ${product.stock}`);
-    createElement('button', 'button card-item__add-to-cart', card, 'Add to cart');
+    // createElement('button', 'button card-item__add-to-cart', card, 'Add to cart');
+    const productAdded: boolean = checkProductInCart(`${product.id}`);
+    const buttonText = productAdded ? CartBtnInner.remove : CartBtnInner.add;
+    const button = createElement(
+        'button',
+        `button card-item__add-to-cart${productAdded ? ' button-added' : ''}`,
+        card,
+        `${buttonText}`
+    );
 
     MainPage.cardsContainer.append(card);
-    MainPage.cardsContainer.addEventListener('click', (event) => {
-        const target = event.target as HTMLElement;
-        const card = target.closest('.card-item') as HTMLElement;
-        if (target.tagName === 'BUTTON') {
-            const productsList: string[] = getStorageElem();
-            const productAdded: boolean = productsList.includes(card.id);
-            if (!productAdded) {
-                target.classList.add('button-added');
-                target.innerHTML = CartBtnInner.remove;
-            } else {
-                target.classList.remove('button-added');
-                target.innerHTML = CartBtnInner.add;
-            }
-            updateCart(card.id);
-        } else if (!card) {
-            return;
-        } else {
-            window.location.hash = `product-details/${card.id}`;
-        }
-    });
+
     return card;
 }
 
