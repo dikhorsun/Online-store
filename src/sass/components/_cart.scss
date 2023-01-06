@@ -1,0 +1,143 @@
+@use '@src/sass/abstracts/constants' as *;
+@use '@src/sass/abstracts/mixins' as *;
+@use '@src/sass/base/typography' as *;
+
+
+.cart__wrapper{
+  min-height: 100%;
+  width: 100%;
+  padding: 3%;
+  display: flex;
+  justify-content: center;
+  color: $text-color;
+  align-items: center;
+
+
+  .products__container {
+    width: 80%;
+    // height: fit-content;
+  }
+  // .product__container {
+  //   width: 100%;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: space-around;
+  //   height: 5rem;
+  // }
+
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .goods-detail {
+    width: 100%;
+    border: 2px solid $border-color-light;
+    border-radius: 1rem;
+    background: $filter-price-shadow;
+    // overflow: hidden;
+  }
+  
+  .goods-data {
+    display: flex;
+    width: 100%;
+    padding: 1%;
+    align-items: center;
+    justify-content: space-around;
+    // height: 6rem;
+  }
+  .goods-number{
+    width: 4%;
+    text-align: center;
+    // border: 1px solid orange;
+    // border-radius: 5rem;
+    // background-color: #181a1c;
+  }
+  
+  // .goods-photos {
+  //   height: 100%;
+  //   width: auto;
+  //   // width: 40%;
+  //   display: flex;
+  //   padding: 2rem 0;
+  // }
+
+  .goods-main-photo {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    width: 20%;
+    max-width: 7rem;
+  }
+  
+  .goods-main-photo img {
+    max-height: 40vh;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    border: 1px solid $border-color-light;
+    border-radius: 2rem;
+  }
+  
+  .goods-about {
+    width: 65%;
+    font-size: 1.5rem;
+    padding: 0 2rem;
+  }
+  
+  .goods-about p {
+  
+    font-size: 1.8rem;
+    color: $text-color;
+  }
+  
+  .goods-about span {
+    font-size: 1.8rem;
+    color: #b8a4a4
+  }
+  
+  .goods-buy {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .goods-buy-btns {
+    width: 90%;
+    font-size: 200%;
+    color: $text-color;
+    @include font ($style: normal, $weight: 400, $size: 200%, $height: 2.16rem);
+    color: $text-color;
+  }
+  
+  .goods-buy-button {
+    font-size: 40%;
+    display: block;
+    padding: 5% 0;
+    // background-color: #ffffff;
+    color: $text-dark-color;
+    border: 2px solid $border-color-light;
+    border-radius: 2rem;
+    cursor: pointer;
+    width: 100%;
+    margin: 1rem auto;
+  
+    &:hover {
+      @include font ($style: normal, $weight: 600, $size: 40%, $height: 2.16rem);
+      background-color: $btn-hover-color;
+      border: none;
+      
+    }
+  }
+}
+
+
+
+
+
