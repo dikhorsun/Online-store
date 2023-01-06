@@ -3,10 +3,11 @@ import MainPage from '../../main/index';
 import createElement from '../../helper/createElement';
 import createInputLabelInContainer from '../../helper/createInputLabelInContainer';
 import { getLabelsBrand, getLabelsCategory } from '../../../json-data/label-contents';
-import { renderSelect, renderBrand, renderCategory } from '../../helper/renderTools';
+import { renderSelect, renderBrand, renderCategory, renderFilterPrice } from '../../helper/renderTools';
 import { brandInputId } from '../../../json-data/input-id';
 import { inputBrandListener, generateCard } from '../../filters/filter-brand';
-import { inputCategoryListener } from '../../filters/filter-category';
+import { inputCategoryListener } from '@src/components/filters/filter-category';
+import { filterByPrice } from '../../filters/filter-price';
 
 // form object of followng structure
 // {
@@ -29,7 +30,7 @@ async function getMainByUrl() {
             const splitedFilter = item.split('=');
             const filter: string = splitedFilter[0];
             const values: string = splitedFilter[1];
-            if (filter === 'brand' || filter === 'category' || filter === 'price' || filter === 'stock') {
+            if (filter === 'brand' || filter === 'category') {
                 const valuesArray = values.split(',');
                 const labelsArray: string[] = [];
                 valuesArray.forEach((value) => {
@@ -38,11 +39,13 @@ async function getMainByUrl() {
                         const textLabel: string | null = label.textContent;
                         if (textLabel) {
                             labelsArray.push(textLabel);
-                            console.log(labelsArray);
                         }
                     }
                 });
                 filterValueObject[filter] = labelsArray;
+            } else if (filter === 'price' || filter === 'stock') {
+                const valuesArray = values.split(',');
+                filterValueObject[filter] = valuesArray;
             } else {
                 showNotFound();
             }
@@ -107,6 +110,17 @@ async function getMainByUrl() {
                         }
                     }
                 }
+            }
+        }
+
+        // render of filter price
+        if (!Object.keys(filterValueObject).includes('price')) {
+            renderFilterPrice(['0', '100']);
+        } else {
+            const valuesPrice: string[] | undefined = filterValueObject.price;
+            if (valuesPrice) {
+                renderFilterPrice([`${valuesPrice[0]}`, `${valuesPrice[1]}`]);
+                filterByPrice();
             }
         }
 

@@ -8,6 +8,8 @@ import { inputBrandListener } from '../filters/filter-brand';
 import { Product, CartBtnInner } from '../types/types';
 import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
 import { inputCategoryListener } from '../filters/filter-category';
+import { renderFilterPrice } from '../helper/renderTools';
+import { filterByPrice } from '../filters/filter-price';
 
 class MainPage extends Page {
     constructor(id: string) {
@@ -72,6 +74,9 @@ class MainPage extends Page {
                 );
             }
         }
+        // filter price
+        renderFilterPrice(['0', '100']);
+        filterByPrice();
         return MainPage.sectionTools;
     }
 

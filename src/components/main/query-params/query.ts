@@ -5,20 +5,30 @@ function addQuery(inputIdArr: string[], filter: string): void {
     // currentURL without ?
     if (!currentURL.includes('?')) {
         if (inputIdArr.length > 0) {
-            inputIdArr.forEach((inputId) => {
-                currentURL = `main-page?${filter}=${inputId}`;
+            if (filter === 'price') {
+                currentURL = `main-page?${filter}=${inputIdArr[0]},${inputIdArr[1]}`;
                 location.hash = currentURL;
-            });
+            } else {
+                inputIdArr.forEach((inputId) => {
+                    currentURL = `main-page?${filter}=${inputId}`;
+                    location.hash = currentURL;
+                });
+            }
         }
         // currentURL with some ?
     } else {
         // if no ?filter
         if (!currentURL.includes(filter)) {
             if (inputIdArr.length > 0) {
-                inputIdArr.forEach((inputId) => {
+                if (filter === 'price') {
                     const currentHash = currentURL.split('#')[1];
-                    location.hash = `${currentHash}?${filter}=${inputId}`;
-                });
+                    location.hash = `${currentHash}?${filter}=${inputIdArr[0]},${inputIdArr[1]}`;
+                } else {
+                    inputIdArr.forEach((inputId) => {
+                        const currentHash = currentURL.split('#')[1];
+                        location.hash = `${currentHash}?${filter}=${inputId}`;
+                    });
+                }
             }
             // filter q-p exists
         } else {
@@ -27,8 +37,13 @@ function addQuery(inputIdArr: string[], filter: string): void {
             if (filterQP) {
                 const indexOfFilterElem: number = splitedURL.indexOf(filterQP);
                 if (filterQP && inputIdArr.length > 0) {
-                    filterQP = `${filterQP},${inputIdArr[inputIdArr.length - 1]}`;
-                    replaceAndFormNewHash(splitedURL, filterQP, indexOfFilterElem);
+                    if (filter === 'price') {
+                        filterQP = `${filter}=${inputIdArr[0]},${inputIdArr[1]}`;
+                        replaceAndFormNewHash(splitedURL, filterQP, indexOfFilterElem);
+                    } else {
+                        filterQP = `${filterQP},${inputIdArr[inputIdArr.length - 1]}`;
+                        replaceAndFormNewHash(splitedURL, filterQP, indexOfFilterElem);
+                    }
                 }
             }
         }
