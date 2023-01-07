@@ -9,10 +9,14 @@ import { Product, CartBtnInner } from '../types/types';
 import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
 import { inputCategoryListener } from '../filters/filter-category';
 import { renderFilterPrice, renderFilterStock } from '../helper/renderTools';
+import { getMainByUrl } from './renderByUrl/renderMain';
 
 class MainPage extends Page {
-    constructor(id: string) {
+    static url: string;
+
+    constructor(id: string, url?: string) {
         super(id);
+        if (url) MainPage.url = url;
     }
     static wrapperMain: HTMLElement = createElement('div', 'wrapper wrapper__main');
     static sectionTools: HTMLElement = createElement('section', 'tools', MainPage.wrapperMain);
@@ -20,10 +24,19 @@ class MainPage extends Page {
     static regulationContainer: HTMLElement = createElement('div', 'regulation-container', MainPage.sectionGoods);
     static cardsContainer: HTMLElement = createElement('div', 'cards-container', MainPage.sectionGoods);
 
+    isQueryInUrl(url: string) {
+        const splitedUrl = url.split('#');
+        if (splitedUrl[1].includes('?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     async renderMainPage() {
-        MainPage.sectionTools.innerHTML = ''; // added
-        MainPage.regulationContainer.innerHTML = ''; // added
-        MainPage.cardsContainer.innerHTML = ''; // added
+        MainPage.sectionTools.innerHTML = '';
+        MainPage.regulationContainer.innerHTML = '';
+        MainPage.cardsContainer.innerHTML = '';
         this.renderSectionTools();
         this.renderSectionGoods();
         await this.renderAllGods();
@@ -156,9 +169,23 @@ class MainPage extends Page {
     }
 
     render() {
-        //
-        this.container.append(MainPage.wrapperMain);
-        this.renderMainPage();
+        if (MainPage.url) {
+            const isQuery = this.isQueryInUrl(MainPage.url);
+            if (isQuery) {
+                getMainByUrl(MainPage.url);
+                this.container.append(MainPage.wrapperMain);
+            }
+        } else if (localStorage.getItem('urlMain')) {
+            const url = localStorage.getItem('urlMain');
+            if (url) {
+                getMainByUrl(url);
+                this.container.append(MainPage.wrapperMain);
+            }
+        } else {
+            this.renderMainPage();
+            this.container.append(MainPage.wrapperMain);
+        }
+
         return this.container;
     }
 }

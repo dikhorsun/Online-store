@@ -3,6 +3,7 @@ import Header from '../header/index';
 import Cart from '../cart/index';
 import ProductDetails from '../product-details/index';
 import MainPage from '../main/index';
+// import { getMainByUrl } from '../main/renderByUrl/renderMain';
 
 import ErrorPage, { ErrorTypes } from '../error/index';
 
@@ -17,14 +18,16 @@ class App {
     private static defaultPageId = 'current-page';
     private header: Header;
 
-    static renderNewPage(idPage: string) {
+    static renderNewPage(idPage: string, currentUrl?: string) {
         const currentPageHTML = document.querySelector(`#${App.defaultPageId}`);
         if (currentPageHTML) {
             currentPageHTML.remove();
         }
         let page: Page | null = null;
 
-        if (idPage === PageIds.MainPage) {
+        if (idPage === PageIds.MainPage && currentUrl) {
+            page = new MainPage(idPage, currentUrl);
+        } else if (idPage === PageIds.MainPage) {
             page = new MainPage(idPage);
         } else if (idPage.split('/')[0] === PageIds.ProductDetails) {
             page = new ProductDetails(idPage);
@@ -43,15 +46,14 @@ class App {
 
     private enableRouteChange() {
         window.addEventListener('hashchange', () => {
-            if (window.location.hash.slice(1).split('?')[0] !== 'main-page') {
+            const currentUrl = window.location.href;
+            const currentHash = window.location.hash;
+            if (currentHash.slice(1).split('?')[0] !== 'main-page') {
                 const hash = window.location.hash.slice(1).split('?')[0];
-                console.log('1');
                 App.renderNewPage(hash);
-            }
-            if (window.location.hash.slice(1) === 'main-page' && window.location.hash.length === 10) {
+            } else {
                 const hash = 'main-page';
-                console.log('2');
-                App.renderNewPage(hash);
+                App.renderNewPage(hash, currentUrl);
             }
         });
     }

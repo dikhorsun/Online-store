@@ -1,4 +1,4 @@
-import { FilterValueObject, Product, keyFilter, keyProduct } from '../../types/types';
+import { FilterValueObject, Product, keyFilter, keyProduct, IdLabel } from '../../types/types';
 import MainPage from '../../main/index';
 import createElement from '../../helper/createElement';
 import createInputLabelInContainer from '../../helper/createInputLabelInContainer';
@@ -13,6 +13,8 @@ import {
 import { brandInputId } from '../../../json-data/input-id';
 import { inputBrandListener, generateCard } from '../../filters/filter-brand';
 import { inputCategoryListener } from '@src/components/filters/filter-category';
+import { brandIdLabel } from '@src/json-data/brandIdLabel';
+import { keepUrlOfMainPage } from '../../storage/localStorage';
 
 // form object of followng structure
 // {
@@ -25,8 +27,8 @@ function showNotFound() {
     MainPage.cardsContainer.innerHTML = '<div class="not-found">Goods are not found</div>';
 }
 
-async function getMainByUrl() {
-    const currentURL = window.location.href;
+async function getMainByUrl(currentURL: string) {
+    keepUrlOfMainPage(currentURL);
     const splitedURL: string[] = currentURL.split('?');
     const filtersPart: string[] = splitedURL.slice(1);
     const filterValueObject: FilterValueObject = {};
@@ -39,13 +41,8 @@ async function getMainByUrl() {
                 const valuesArray = values.split(',');
                 const labelsArray: string[] = [];
                 valuesArray.forEach((value) => {
-                    const label = document.querySelector(`label[for=${value}]`) as HTMLLabelElement;
-                    if (label) {
-                        const textLabel: string | null = label.textContent;
-                        if (textLabel) {
-                            labelsArray.push(textLabel);
-                        }
-                    }
+                    const label = brandIdLabel[value as IdLabel];
+                    labelsArray.push(label);
                 });
                 filterValueObject[filter] = labelsArray;
             } else if (filter === 'price' || filter === 'stock') {
@@ -203,8 +200,4 @@ async function filterGoods(filteredObject: FilterValueObject): Promise<Product[]
     }
 }
 
-function addListenerForUrl() {
-    window.addEventListener('hashchange', getMainByUrl);
-}
-
-export { addListenerForUrl };
+export { getMainByUrl };

@@ -1,8 +1,8 @@
 import '@src/sass/main.scss';
 import App from '@src/components/app/app';
 
-import { addListenerForUrl } from './components/main/renderByUrl/renderMain';
-addListenerForUrl();
+// import { addListenerForUrl } from './components/main/renderByUrl/renderMain';
+// addListenerForUrl();
 // import '@src/components/filter-brand';
 // import '@src/components/filter-price';
 // import '@src/components/filter-stock';
