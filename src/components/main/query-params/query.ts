@@ -5,7 +5,8 @@ function addQuery(inputIdArr: string[], filter: string): void {
     // currentURL without ?
     if (!currentURL.includes('?')) {
         if (inputIdArr.length > 0) {
-            if (filter === 'price') {
+            if (filter === 'price' || filter === 'stock') {
+                inputIdArr = inputIdArr.sort((a, b) => Number(a) - Number(b));
                 currentURL = `main-page?${filter}=${inputIdArr[0]},${inputIdArr[1]}`;
                 location.hash = currentURL;
             } else {
@@ -20,8 +21,9 @@ function addQuery(inputIdArr: string[], filter: string): void {
         // if no ?filter
         if (!currentURL.includes(filter)) {
             if (inputIdArr.length > 0) {
-                if (filter === 'price') {
+                if (filter === 'price' || filter === 'stock') {
                     const currentHash = currentURL.split('#')[1];
+                    inputIdArr = inputIdArr.sort((a, b) => Number(a) - Number(b));
                     location.hash = `${currentHash}?${filter}=${inputIdArr[0]},${inputIdArr[1]}`;
                 } else {
                     inputIdArr.forEach((inputId) => {
@@ -37,7 +39,8 @@ function addQuery(inputIdArr: string[], filter: string): void {
             if (filterQP) {
                 const indexOfFilterElem: number = splitedURL.indexOf(filterQP);
                 if (filterQP && inputIdArr.length > 0) {
-                    if (filter === 'price') {
+                    if (filter === 'price' || filter === 'stock') {
+                        inputIdArr = inputIdArr.sort((a, b) => Number(a) - Number(b));
                         filterQP = `${filter}=${inputIdArr[0]},${inputIdArr[1]}`;
                         replaceAndFormNewHash(splitedURL, filterQP, indexOfFilterElem);
                     } else {

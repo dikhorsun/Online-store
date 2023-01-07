@@ -3,11 +3,16 @@ import MainPage from '../../main/index';
 import createElement from '../../helper/createElement';
 import createInputLabelInContainer from '../../helper/createInputLabelInContainer';
 import { getLabelsBrand, getLabelsCategory } from '../../../json-data/label-contents';
-import { renderSelect, renderBrand, renderCategory, renderFilterPrice } from '../../helper/renderTools';
+import {
+    renderSelect,
+    renderBrand,
+    renderCategory,
+    renderFilterPrice,
+    renderFilterStock,
+} from '../../helper/renderTools';
 import { brandInputId } from '../../../json-data/input-id';
 import { inputBrandListener, generateCard } from '../../filters/filter-brand';
 import { inputCategoryListener } from '@src/components/filters/filter-category';
-import { filterByPrice } from '../../filters/filter-price';
 
 // form object of followng structure
 // {
@@ -120,7 +125,16 @@ async function getMainByUrl() {
             const valuesPrice: string[] | undefined = filterValueObject.price;
             if (valuesPrice) {
                 renderFilterPrice([`${valuesPrice[0]}`, `${valuesPrice[1]}`]);
-                filterByPrice();
+            }
+        }
+
+        // render of filter stock
+        if (!Object.keys(filterValueObject).includes('stock')) {
+            renderFilterStock(['0', '100']);
+        } else {
+            const valuesStock: string[] | undefined = filterValueObject.stock;
+            if (valuesStock) {
+                renderFilterStock([`${valuesStock[0]}`, `${valuesStock[1]}`]);
             }
         }
 
@@ -166,11 +180,16 @@ async function filterGoods(filteredObject: FilterValueObject): Promise<Product[]
             let flag = true;
 
             for (const key in filteredObject) {
-                const valuesArr = filteredObject[key as keyFilter];
-                // console.log(valuesArr);
-                const valuesArr2 = product[key as keyProduct];
-                if (valuesArr && !valuesArr.includes(valuesArr2 as keyFilter)) {
-                    flag = false;
+                const valuesArrIncome = filteredObject[key as keyFilter];
+                const valueProduct = product[key as keyProduct];
+                if (key === 'price' || key === 'stock') {
+                    if (valuesArrIncome && (valueProduct < valuesArrIncome[0] || valueProduct > valuesArrIncome[1])) {
+                        flag = false;
+                    }
+                } else if (key === 'brand' || key === 'category') {
+                    if (valuesArrIncome && !valuesArrIncome.includes(valueProduct as keyFilter)) {
+                        flag = false;
+                    }
                 }
             }
 
