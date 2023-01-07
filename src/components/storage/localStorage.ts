@@ -64,11 +64,20 @@ async function updateCart(idItem: string, elem?: HTMLElement): Promise<void> {
         : await setStorageCounter(AddRemoveCartOpt.add, idItem, elem);
     const cartCounter = document.querySelector('.header-container__amount');
     const sumTotalDiv = document.querySelector('.header-container__cost');
+    const totalNumber = document.querySelector('.cart__general-number') as HTMLElement;
+    const totaPrice = document.querySelector('.cart__general-price-new') as HTMLElement;
+
     if (cartCounter) {
         cartCounter.textContent = getStorageCounter();
+        if (totalNumber) {
+            totalNumber.innerHTML = `<span>Total products:</span> ${getStorageCounter()}`;
+        }
     }
     if (sumTotalDiv) {
         sumTotalDiv.textContent = `${getSumTotal()}`;
+        if (totaPrice) {
+            totaPrice.innerHTML = `<span>Total payable:</span> ${getSumTotal()}$`;
+        }
     }
 }
 

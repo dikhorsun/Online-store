@@ -1,5 +1,5 @@
 import Page from '../../templates/page';
-import { CartBtnInner } from '../types/types';
+import { CartBtnInner, Product } from '../types/types';
 import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
 import { createPopup } from '../popup/popup';
 
@@ -17,7 +17,7 @@ class ProductDetails extends Page {
             const response = await fetch('./json-data/goods.json');
             const dataGoods = await response.json();
             const idProduct = window.location.hash.slice(1).split('/')[1];
-            const product = dataGoods.products[idProduct];
+            const product = dataGoods.products.filter((obj: Product) => obj.id.toString() === idProduct)[0];
             const wrapper = document.createElement('div');
             wrapper.classList.add('product__wrapper');
 
@@ -49,7 +49,7 @@ class ProductDetails extends Page {
                         <p><span>Discount: </span>${product.discountPercentage}%</p>
                         <p><span>Rating: </span>${product.rating}</p>
                         <p><span>Stock: </span>${product.stock}</p>
-                        <p><span>Price: </span>€${product.price}</p>
+                        <p><span>Price: </span>${product.price}$</p>
                     </div>
                     <div class="goods-buy">
                         <div class="goods-buy-btns">

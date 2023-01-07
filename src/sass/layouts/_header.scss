@@ -18,10 +18,15 @@
   }
 }
 
-.header-container__cost {
+.header-container__cost-container {
   @include font ($style: normal, $weight: 500, $size: 2.4rem, $height: 2.88rem);
   color: $text-color;
 }
+
+// .header-container__cost {
+//   @include font ($style: normal, $weight: 500, $size: 2.4rem, $height: 2.88rem);
+//   color: $text-color;
+// }
 
 .header-container__cart {
   position: relative;
