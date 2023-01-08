@@ -178,6 +178,14 @@ function checkProductInCart(id: string): boolean {
     return productsList.includes(id);
 }
 
+function keepUrlOfMainPage(url: string) {
+    if (localStorage.getItem('urlMain') !== null) {
+        localStorage['urlMain'] = url;
+    } else {
+        localStorage.setItem('urlMain', url);
+    }
+}
+
 export {
     getStorageElem,
     setStorageElem,
@@ -185,5 +193,6 @@ export {
     checkProductInCart,
     updateCart,
     getSumTotal,
+    keepUrlOfMainPage,
     getStorageElemCount,
 };

@@ -44,6 +44,7 @@ class Header extends Component {
       </div>
   </div>
       `;
+
         const logoLink = this.container.querySelector('.logo__link');
 
         // const headerWrapperTemp = document.querySelector('#headerWrapperTemp') as HTMLTemplateElement;
@@ -51,11 +52,49 @@ class Header extends Component {
 
         // this.container.prepend(headerWrapperClone);
 
+        // const logo = this.container.querySelector('.logo') as HTMLDivElement | null;
+        // if (logo) {
+        //     logo.addEventListener('click', () => {
+        //         console.log('clicked');
+        //         if (localStorage.getItem('urlMain') !== null) {
+        //             const url = localStorage.getItem('urlMain');
+        //             if (url) {
+        //                 console.log(url);
+        //                 const hash = url.split('#')[1];
+        //                 console.log(hash);
+        //                 location.hash = hash;
+        //             }
+        //         } else {
+        //             console.log('go to main');
+        //             location.hash = 'main-page';
+        //         }
+        //     });
+        // }
+
+        // const headerWrapperTemp = document.querySelector('#headerWrapperTemp') as HTMLTemplateElement;
+        // const headerWrapperClone = headerWrapperTemp.content.cloneNode(true) as HTMLTemplateElement;
+
+        // this.container.prepend(headerWrapperClone);
         const cartCounter = this.container.querySelector('.header-container__amount') as HTMLTemplateElement;
         const totalSum = this.container.querySelector('.header-container__cost') as HTMLTemplateElement;
         cartCounter.textContent = getStorageCounter();
         totalSum.textContent = getSumTotal();
     }
+
+    // addListenerToLogo() {
+    //     const logoHeader = document.querySelector('.logo');
+    //     logoHeader?.addEventListener('click', () => {
+    //         console.log('logoHeader');
+    //         if (localStorage.getItem('urlMain') !== null) {
+    //             const url = localStorage.getItem('urlMain');
+    //             if (url) {
+    //                 window.location.hash = url?.split('#')[1];
+    //             }
+    //         } else {
+    //             window.location.hash = 'main-page';
+    //         }
+    //     });
+    // }
 
     render() {
         this.renderHeader();

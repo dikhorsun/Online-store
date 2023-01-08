@@ -9,6 +9,12 @@
   padding: 50px 20px 0;
 }
 
+.not-found {
+  text-align: center;
+  @include font ($style: normal, $weight: 500, $size: 2.6rem, $height: 3.12rem);
+  color: $text-color;
+}
+
 .card-item {
   display: flex;
   flex-direction: column;
