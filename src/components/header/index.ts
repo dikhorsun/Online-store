@@ -29,7 +29,7 @@ class Header extends Component {
       <div class="header-container">
       <div class="logo">
           <h1 class="logo__text">Online-store</h1>
-          <a href="" class="logo__link"
+          <a href="#main-page" class="logo__link"
               ><img src="./assets/images/logo.png" alt="red wings" class="logo__image"
           /></a>
       </div>
@@ -45,22 +45,24 @@ class Header extends Component {
   </div>
       `;
 
-        const logo = this.container.querySelector('.logo') as HTMLDivElement | null;
-        if (logo) {
-            console.log('hi');
-            logo.addEventListener('click', () => {
-                if (localStorage.getItem('urlMain') !== null) {
-                    const url = localStorage.getItem('urlMain');
-                    if (url) {
-                        const hash = url.split('#')[1];
-                        console.log(hash);
-                        location.hash = hash;
-                    }
-                } else {
-                    location.hash = 'main-page';
-                }
-            });
-        }
+        // const logo = this.container.querySelector('.logo') as HTMLDivElement | null;
+        // if (logo) {
+        //     logo.addEventListener('click', () => {
+        //         console.log('clicked');
+        //         if (localStorage.getItem('urlMain') !== null) {
+        //             const url = localStorage.getItem('urlMain');
+        //             if (url) {
+        //                 console.log(url);
+        //                 const hash = url.split('#')[1];
+        //                 console.log(hash);
+        //                 location.hash = hash;
+        //             }
+        //         } else {
+        //             console.log('go to main');
+        //             location.hash = 'main-page';
+        //         }
+        //     });
+        // }
 
         // const headerWrapperTemp = document.querySelector('#headerWrapperTemp') as HTMLTemplateElement;
         // const headerWrapperClone = headerWrapperTemp.content.cloneNode(true) as HTMLTemplateElement;

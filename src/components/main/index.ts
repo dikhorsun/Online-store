@@ -27,8 +27,10 @@ class MainPage extends Page {
     isQueryInUrl(url: string) {
         const splitedUrl = url.split('#');
         if (splitedUrl[1].includes('?')) {
+            console.log('with ?');
             return true;
         } else {
+            console.log('without ?');
             return false;
         }
     }
@@ -169,13 +171,10 @@ class MainPage extends Page {
     }
 
     render() {
-        if (MainPage.url) {
-            const isQuery = this.isQueryInUrl(MainPage.url);
-            if (isQuery) {
-                getMainByUrl(MainPage.url);
-                this.container.append(MainPage.wrapperMain);
-            }
-        } else if (localStorage.getItem('urlMain')) {
+        if (MainPage.url && this.isQueryInUrl(MainPage.url)) {
+            getMainByUrl(MainPage.url);
+            this.container.append(MainPage.wrapperMain);
+        } else if (!MainPage.url && localStorage.getItem('urlMain')) {
             const url = localStorage.getItem('urlMain');
             if (url) {
                 getMainByUrl(url);
