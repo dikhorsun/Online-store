@@ -1,6 +1,5 @@
 import Page from '../../templates/page';
 import createElement from '../helper/createElement';
-import createOptions from '../helper/createOption';
 import { brandInputId } from '../../json-data/input-id';
 import { getLabelsBrand, getLabelsCategory } from '../../json-data/label-contents';
 import createInputLabelInContainer from '../helper/createInputLabelInContainer';
@@ -29,7 +28,6 @@ class MainPage extends Page {
         if (splitedUrl[1].includes('?')) {
             return true;
         } else {
-            console.log('without ?');
             return false;
         }
     }
