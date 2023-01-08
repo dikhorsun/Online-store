@@ -25,6 +25,14 @@ export interface FilterValueObject {
     stock?: string[];
 }
 
+export type keyCartStorageObj = keyof CartStorageObj;
+
+export interface CartStorageObj {
+    id?: number | undefined;
+    count?: number;
+    price?: number;
+}
+
 export enum CartBtnInner {
     add = 'Add to cart',
     remove = 'Remove from cart',
@@ -34,6 +42,7 @@ export enum LocalStorageKey {
     counter = 'counter',
     sumTotal = 'sumTotal',
     products = 'cart_products',
+    dataObj = 'data_obj',
 }
 
 export enum AddRemoveCartOpt {
