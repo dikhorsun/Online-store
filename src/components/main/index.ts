@@ -8,10 +8,15 @@ import { inputBrandListener } from '../filters/filter-brand';
 import { Product, CartBtnInner } from '../types/types';
 import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
 import { inputCategoryListener } from '../filters/filter-category';
+import { renderFilterPrice, renderFilterStock, renderSelect } from '../helper/renderTools';
+import { getMainByUrl } from './renderByUrl/renderMain';
 
 class MainPage extends Page {
-    constructor(id: string) {
+    static url: string;
+
+    constructor(id: string, url?: string) {
         super(id);
+        if (url) MainPage.url = url;
     }
     static wrapperMain: HTMLElement = createElement('div', 'wrapper wrapper__main');
     static sectionTools: HTMLElement = createElement('section', 'tools', MainPage.wrapperMain);
@@ -19,10 +24,20 @@ class MainPage extends Page {
     static regulationContainer: HTMLElement = createElement('div', 'regulation-container', MainPage.sectionGoods);
     static cardsContainer: HTMLElement = createElement('div', 'cards-container', MainPage.sectionGoods);
 
+    isQueryInUrl(url: string) {
+        const splitedUrl = url.split('#');
+        if (splitedUrl[1].includes('?')) {
+            return true;
+        } else {
+            console.log('without ?');
+            return false;
+        }
+    }
+
     async renderMainPage() {
-        MainPage.sectionTools.innerHTML = ''; // added
-        MainPage.regulationContainer.innerHTML = ''; // added
-        MainPage.cardsContainer.innerHTML = ''; // added
+        MainPage.sectionTools.innerHTML = '';
+        MainPage.regulationContainer.innerHTML = '';
+        MainPage.cardsContainer.innerHTML = '';
         this.renderSectionTools();
         this.renderSectionGoods();
         await this.renderAllGods();
@@ -30,14 +45,7 @@ class MainPage extends Page {
 
     async renderSectionTools() {
         // sort
-        const selectSort = createElement('select', 'tools__sort', MainPage.sectionTools);
-        selectSort.id = 'sort-goods';
-        const firstOption = createOptions('', 'Sort goods...', selectSort);
-        firstOption.setAttribute('selected', 'selected');
-        createOptions('priceA', 'By price: low to high', selectSort);
-        createOptions('priceD', 'By price: high to low', selectSort);
-        createOptions('ratingA', 'By rating: low to high', selectSort);
-        createOptions('ratingD', 'By rating: high to low', selectSort);
+        renderSelect();
         // fieldset with brand inputs
         const fieldsetBrand = createElement('fieldset', 'filter-brand', MainPage.sectionTools);
         createElement('legend', 'filter-brand__legend', fieldsetBrand, 'Filter goods by brand');
@@ -72,6 +80,10 @@ class MainPage extends Page {
                 );
             }
         }
+        // filter price
+        renderFilterPrice(['0', '100']);
+        // filter stock
+        renderFilterStock(['0', '100']);
         return MainPage.sectionTools;
     }
 
@@ -123,37 +135,48 @@ class MainPage extends Page {
             for (let i = 0; i < goodsArray.length; i += 1) {
                 this.generateCard(goodsArray[i]);
             }
-            MainPage.cardsContainer.addEventListener('click', (event) => {
-                const target = event.target as HTMLElement;
-                const card = target.closest('.card-item') as HTMLElement;
-                if (target.tagName === 'BUTTON') {
-                    const productsList: string[] = getStorageElem();
-                    const productAdded: boolean = productsList.includes(card.id);
-                    if (!productAdded) {
-                        target.classList.add('button-added');
-                        target.innerHTML = CartBtnInner.remove;
-                    } else {
-                        target.classList.remove('button-added');
-                        target.innerHTML = CartBtnInner.add;
-                    }
-                    updateCart(card.id);
-                } else if (!card) {
-                    return;
-                } else {
-                    window.location.hash = `product-details/${card.id}`;
-                }
-            });
+            MainPage.cardsContainer.addEventListener('click', this.cartListener);
 
             return goodsArray;
         } catch (error) {
             console.log(error);
         }
     }
-
+    cartListener(event: MouseEvent): void {
+        const target = event.target as HTMLElement;
+        const card = target.closest('.card-item') as HTMLElement;
+        if (target.tagName === 'BUTTON') {
+            const productsList: string[] = getStorageElem();
+            const productAdded: boolean = productsList.includes(card.id);
+            if (!productAdded) {
+                target.classList.add('button-added');
+                target.innerHTML = CartBtnInner.remove;
+            } else {
+                target.classList.remove('button-added');
+                target.innerHTML = CartBtnInner.add;
+            }
+            updateCart(card.id, target);
+        } else if (!card) {
+            return;
+        } else {
+            window.location.hash = `product-details/${card.id}`;
+        }
+    }
     render() {
-        //
-        this.container.append(MainPage.wrapperMain);
-        this.renderMainPage();
+        if (MainPage.url && this.isQueryInUrl(MainPage.url)) {
+            getMainByUrl(MainPage.url);
+            this.container.append(MainPage.wrapperMain);
+        } else if (!MainPage.url && localStorage.getItem('urlMain')) {
+            const url = localStorage.getItem('urlMain');
+            if (url) {
+                getMainByUrl(url);
+                this.container.append(MainPage.wrapperMain);
+            }
+        } else {
+            this.renderMainPage();
+            this.container.append(MainPage.wrapperMain);
+        }
+
         return this.container;
     }
 }
