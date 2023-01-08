@@ -57,11 +57,12 @@ async function setStorageObj(option: AddRemoveCartOpt, idItem: string, elem?: HT
 
     localStorage.setItem(LocalStorageKey.dataObj, JSON.stringify(addedCartItem));
     if (
-        elem?.className === 'button card-item__add-to-cart' ||
-        elem?.className === 'button card-item__add-to-cart button-added' ||
-        elem?.className === 'btn-add goods-buy-button' ||
-        elem?.className === 'btn-add goods-buy-button button-added' ||
-        'goods-buy-button'
+        (elem?.className === 'button card-item__add-to-cart' ||
+            elem?.className === 'button card-item__add-to-cart button-added' ||
+            elem?.className === 'btn-add goods-buy-button' ||
+            elem?.className === 'btn-add goods-buy-button button-added' ||
+            'goods-buy-button') &&
+        elem !== undefined
     ) {
         if (option == AddRemoveCartOpt.add) {
             localStorage.setItem(LocalStorageKey.counter, `${currCounterValue + value}`);

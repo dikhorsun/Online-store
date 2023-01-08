@@ -8,8 +8,9 @@ import {
     checkProductInCart,
     getStorageElemCount,
 } from '../storage/localStorage';
-import { CartBtnInner, Product } from '../types/types';
+import { Product } from '../types/types';
 import createElement from '../helper/createElement';
+import { promoCods, ObjectPromo, keyPromo } from '../../json-data/input-id';
 
 class Cart extends Page {
     constructor(id: string) {
@@ -25,8 +26,9 @@ class Cart extends Page {
         </div>
         <div class="cart__general">
             <div class="cart__general-price cart__general-number"></div>
-            <div class="cart__general-price cart__general-price-new"></div>
-
+            <div class="cart__general-price price"></div>
+            <div class="cart__general-discounts">
+            </div>
             <div class="cart__general-promo">
                 <input type="search" placeholder="Promo ex: 'js', 'css'" />
             </div>
@@ -36,12 +38,49 @@ class Cart extends Page {
         </div>`;
 
         const totalNumber = this.container.querySelector('.cart__general-number') as HTMLElement;
-        const totaPrice = this.container.querySelector('.cart__general-price-new') as HTMLElement;
+        const totaPrice = this.container.querySelector('.price') as HTMLElement;
         const btnBuy = this.container.querySelector('.btn_confirm') as HTMLElement;
+        const promoInput = this.container.querySelector('.cart__general-promo input') as HTMLElement;
         totalNumber.innerHTML = `<span>Total products:</span> ${getStorageCounter()}`;
         totaPrice.innerHTML = `<span>Total payable:</span> ${getSumTotal()}$`;
 
         btnBuy.addEventListener('click', createPopup);
+        promoInput.addEventListener('input', this.createPromo);
+    }
+
+    createPromo(event: Event) {
+        const target = event.target as HTMLInputElement;
+        const totalContainer = target.closest('.cart__general') as HTMLElement;
+        const usedPromos = totalContainer.querySelector('.cart__general-used-promos') as HTMLElement;
+        for (const key in promoCods) {
+            if (target.value === key) {
+                const valuePromo = promoCods[key as keyPromo];
+                console.log(target.value);
+                console.log(key);
+                console.log(valuePromo);
+                const usedProm = createElement('div', 'used-promo', usedPromos, `"${key}"-cod (${valuePromo}%)     `);
+                const usedPromBtn = createElement('span', '', usedProm, `add`);
+                usedPromBtn.addEventListener('click', addPromo);
+            }
+        }
+        function addPromo(event: Event) {
+            const target = event.target as HTMLElement;
+            target.remove();
+            const totaPrice = totalContainer.querySelector('.price') as HTMLElement;
+            const totaPriceText = totaPrice.textContent as string;
+            console.log(totaPriceText);
+            const addedPromos = totalContainer.querySelector('.cart__general-discounts') as HTMLElement;
+            const usedPromText = (totalContainer.querySelector('.used-promo') as HTMLElement).textContent;
+            const addedProm = createElement('div', 'cart__general-disc', addedPromos, `${usedPromText} added `);
+            const addedPromBtn = createElement('span', '', addedProm, `del`);
+            const priceNew = document.createElement('div');
+            priceNew.className = 'cart__general-price cart__general-price-new';
+            priceNew.innerHTML = `<span>Total payable:</span> ${Number(getSumTotal()) * (1 - 10 / 100)}$`;
+            totaPrice.classList.add('cart__general-price-old');
+
+            totaPrice.after(priceNew);
+            // addedPromBtn.addEventListener('click', delPromo);
+        }
     }
 
     createProductCard(product: Product, i: number) {
