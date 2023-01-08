@@ -1,0 +1,233 @@
+@use '@src/sass/abstracts/constants' as *;
+@use '@src/sass/abstracts/mixins' as *;
+@use '@src/sass/base/typography' as *;
+
+
+.cart__wrapper{
+  min-height: 100%;
+  width: 100%;
+  padding: 2%;
+  display: flex;
+  justify-content: space-around;
+  color: $text-color;
+  align-items: flex-start;
+
+  .products__container {
+    width: 65%;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  
+  .goods-detail {
+    width: 100%;
+    border: 2px solid $border-color-light;
+    border-radius: 1rem;
+    background: $filter-price-shadow;
+    cursor: pointer;
+  }
+  
+  .goods-data {
+    display: flex;
+    width: 100%;
+    padding: 1%;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .goods-number{
+    width: 4%;
+    text-align: center;
+  }
+
+  .goods-main-photo {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    width: 20%;
+    max-width: 7rem;
+  }
+  
+  .goods-main-photo img {
+    max-height: 40vh;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    border: 1px solid $border-color-light;
+    border-radius: 2rem;
+  }
+  
+  .goods-about {
+    width: 65%;
+    font-size: 1.5rem;
+    padding: 0 2rem;
+  }
+  
+  .goods-data p {
+    font-size: 1.8rem;
+    color: $text-color;
+    margin: 0.1rem;
+  }
+  .about-blocks{
+    display: flex;
+    justify-content: start;
+    border-bottom: 2px solid $border-color-light;
+  }
+  .about-block{
+    margin-right: 10%;
+    margin-bottom: 1%;
+  }
+  .goods-data span {
+    font-size: 1.8rem;
+    color: #b8a4a4
+  }
+
+  .goods-data .stock, .goods-data .btn-control-num {
+    color: $text-color
+  }
+  .goods-data .description{
+    margin-top: 0.5rem;
+  }
+  
+  .goods-buy {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .goods-buy-btn{
+    width: 50%;
+  }
+
+  .goods-buy-btn .about-block{
+    margin-top: 10%;
+    width: 100%;
+  }
+  .goods-buy-btn .about-block p{
+    font-size: 1.8rem;
+    margin: 1%;
+  }
+  
+  .btn-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 150%;
+}
+
+.btn-control button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 130%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+
+.cart__general {
+  width: 25%;
+  border: 2px solid $border-color-light;
+  border-radius: 1rem;
+  background: $filter-price-shadow;
+}
+
+.cart__general-price {
+  width: 80%;
+  font-size: 150%;
+  color: $text-color;
+  text-align: center;
+  margin: 5% auto;
+}
+
+span {
+  font-size: 2.2rem;
+    color: #b8a4a4
+}
+
+.cart__general-price-old {
+  text-decoration: line-through;
+}
+
+.cart__general-used-promos {
+  width: 80%;
+  margin: 5% auto;
+}
+
+.used-promo {
+  text-align: center;
+  padding: 1%;
+}
+
+.cart__general-used-promos span {
+  color: #b8a4a4;
+  font-size: 100%;
+  background: $filter-price-shadow;
+  border: 1px solid $border-color-light;
+  border-radius: 20%;
+  padding: 1%;
+  cursor: pointer;
+}
+
+.cart__general-promo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart__general-promo input {
+  width: 60%;
+  border: 1px solid $border-color-light;
+  border-radius: 20px;
+  color: $text-color;
+  text-align: center;
+  padding: 0.5rem;
+  background: $filter-price-shadow;
+}
+
+.btn_confirm {
+  width: 40%;
+  padding: 2%;
+  cursor: pointer;
+  display: block;
+  margin: 5% auto;
+  border-radius: 20px;
+  border: 1px solid $text-dark-color;
+  @include font ($style: normal, $weight: 600, $size: 1.8rem, $height: 2.16rem);
+  color: $text-dark-color;
+
+  &:hover {
+    @include font ($style: normal, $weight: 600, $size: 1.8rem, $height: 2.16rem);
+    background-color: $btn-hover-color;
+  }
+}
+
+.popup {
+  .btn_confirm{
+    &:hover {
+      @include font ($style: normal, $weight: 600, $size: 1.2rem, $height: 2.16rem);
+      background-color: #eef3fb;
+    }
+  }
+}
+}
+
+.cart-empty{
+  min-height: 100%;
+  color: #ffffff;
+  font-size: 200%;
+  padding: 5vh 5vw;
+}
+
+
+
+
+

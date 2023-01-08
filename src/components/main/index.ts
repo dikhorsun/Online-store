@@ -135,33 +135,33 @@ class MainPage extends Page {
             for (let i = 0; i < goodsArray.length; i += 1) {
                 this.generateCard(goodsArray[i]);
             }
-            MainPage.cardsContainer.addEventListener('click', (event) => {
-                const target = event.target as HTMLElement;
-                const card = target.closest('.card-item') as HTMLElement;
-                if (target.tagName === 'BUTTON') {
-                    const productsList: string[] = getStorageElem();
-                    const productAdded: boolean = productsList.includes(card.id);
-                    if (!productAdded) {
-                        target.classList.add('button-added');
-                        target.innerHTML = CartBtnInner.remove;
-                    } else {
-                        target.classList.remove('button-added');
-                        target.innerHTML = CartBtnInner.add;
-                    }
-                    updateCart(card.id);
-                } else if (!card) {
-                    return;
-                } else {
-                    window.location.hash = `product-details/${card.id}`;
-                }
-            });
+            MainPage.cardsContainer.addEventListener('click', this.cartListener);
 
             return goodsArray;
         } catch (error) {
             console.log(error);
         }
     }
-
+    cartListener(event: MouseEvent): void {
+        const target = event.target as HTMLElement;
+        const card = target.closest('.card-item') as HTMLElement;
+        if (target.tagName === 'BUTTON') {
+            const productsList: string[] = getStorageElem();
+            const productAdded: boolean = productsList.includes(card.id);
+            if (!productAdded) {
+                target.classList.add('button-added');
+                target.innerHTML = CartBtnInner.remove;
+            } else {
+                target.classList.remove('button-added');
+                target.innerHTML = CartBtnInner.add;
+            }
+            updateCart(card.id, target);
+        } else if (!card) {
+            return;
+        } else {
+            window.location.hash = `product-details/${card.id}`;
+        }
+    }
     render() {
         if (MainPage.url && this.isQueryInUrl(MainPage.url)) {
             getMainByUrl(MainPage.url);

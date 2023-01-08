@@ -45,6 +45,13 @@ class Header extends Component {
   </div>
       `;
 
+        const logoLink = this.container.querySelector('.logo__link');
+
+        // const headerWrapperTemp = document.querySelector('#headerWrapperTemp') as HTMLTemplateElement;
+        // const headerWrapperClone = headerWrapperTemp.content.cloneNode(true) as HTMLTemplateElement;
+
+        // this.container.prepend(headerWrapperClone);
+
         // const logo = this.container.querySelector('.logo') as HTMLDivElement | null;
         // if (logo) {
         //     logo.addEventListener('click', () => {

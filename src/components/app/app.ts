@@ -35,6 +35,7 @@ class App {
             page = new Cart(idPage);
         } else {
             page = new ErrorPage(idPage, ErrorTypes.Error_404);
+        
         }
 
         if (page) {
@@ -54,6 +55,7 @@ class App {
             } else {
                 const hash = 'main-page';
                 App.renderNewPage(hash, currentUrl);
+
             }
         });
     }
