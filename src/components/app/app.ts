@@ -27,10 +27,8 @@ class App {
 
         if (idPage === PageIds.MainPage && currentUrl) {
             page = new MainPage(idPage, currentUrl);
-            console.log('with url');
         } else if (idPage === PageIds.MainPage) {
             page = new MainPage(idPage);
-            console.log('without url');
         } else if (idPage.split('/')[0] === PageIds.ProductDetails) {
             page = new ProductDetails(idPage);
         } else if (idPage === PageIds.Cart) {

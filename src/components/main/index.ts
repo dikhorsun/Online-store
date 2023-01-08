@@ -8,7 +8,7 @@ import { inputBrandListener } from '../filters/filter-brand';
 import { Product, CartBtnInner } from '../types/types';
 import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
 import { inputCategoryListener } from '../filters/filter-category';
-import { renderFilterPrice, renderFilterStock } from '../helper/renderTools';
+import { renderFilterPrice, renderFilterStock, renderSelect } from '../helper/renderTools';
 import { getMainByUrl } from './renderByUrl/renderMain';
 
 class MainPage extends Page {
@@ -27,7 +27,6 @@ class MainPage extends Page {
     isQueryInUrl(url: string) {
         const splitedUrl = url.split('#');
         if (splitedUrl[1].includes('?')) {
-            console.log('with ?');
             return true;
         } else {
             console.log('without ?');
@@ -46,14 +45,7 @@ class MainPage extends Page {
 
     async renderSectionTools() {
         // sort
-        const selectSort = createElement('select', 'tools__sort', MainPage.sectionTools);
-        selectSort.id = 'sort-goods';
-        const firstOption = createOptions('', 'Sort goods...', selectSort);
-        firstOption.setAttribute('selected', 'selected');
-        createOptions('priceA', 'By price: low to high', selectSort);
-        createOptions('priceD', 'By price: high to low', selectSort);
-        createOptions('ratingA', 'By rating: low to high', selectSort);
-        createOptions('ratingD', 'By rating: high to low', selectSort);
+        renderSelect();
         // fieldset with brand inputs
         const fieldsetBrand = createElement('fieldset', 'filter-brand', MainPage.sectionTools);
         createElement('legend', 'filter-brand__legend', fieldsetBrand, 'Filter goods by brand');
