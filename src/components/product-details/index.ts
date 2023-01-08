@@ -53,7 +53,7 @@ class ProductDetails extends Page {
                     </div>
                     <div class="goods-buy">
                         <div class="goods-buy-btns">
-                            <button class="goods-buy-button${
+                            <button class="btn-add goods-buy-button${
                                 productAdded ? ' button-added' : ''
                             }" >${buttonText}</button>
                             <button id = 'buttonBuy' class="goods-buy-button">BUY NOW</button>
@@ -71,7 +71,8 @@ class ProductDetails extends Page {
                 (mainPhoto as HTMLImageElement).src = (event.target as HTMLImageElement).src;
             });
             const buttonAdd = this.container.querySelector('.goods-buy-button');
-            buttonAdd?.addEventListener('click', () => {
+            buttonAdd?.addEventListener('click', (event) => {
+                const target = event.target as HTMLElement;
                 const productsList: string[] = getStorageElem();
                 const productAdded: boolean = productsList.includes(idProduct);
                 if (!productAdded) {
@@ -81,7 +82,7 @@ class ProductDetails extends Page {
                     buttonAdd.classList.remove('button-added');
                     buttonAdd.innerHTML = CartBtnInner.add;
                 }
-                updateCart(idProduct);
+                updateCart(idProduct, target);
             });
             const buttonBuy = this.container.querySelector('#buttonBuy');
             buttonBuy?.addEventListener('click', (event) => {

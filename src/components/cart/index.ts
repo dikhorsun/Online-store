@@ -6,6 +6,7 @@ import {
     updateCart,
     getStorageElem,
     checkProductInCart,
+    getStorageElemCount,
 } from '../storage/localStorage';
 import { CartBtnInner, Product } from '../types/types';
 import createElement from '../helper/createElement';
@@ -72,12 +73,12 @@ class Cart extends Page {
             <div class="goods-buy">
                 <div class="goods-buy-btn">
                     <div class="btn-control">
-                        <button>-</button>
-                        <span class="btn-control-num">1</span>
-                        <button>+</button>
+                        <button class="btn-minus">-</button>
+                        <span class="btn-control-num">${getStorageElemCount(product.id.toString())}</span>
+                        <button class="btn-plus">+</button>
                     </div>
                     <div class="about-block">
-                        <p><span>Stock: </span>${product.stock}</p>
+                        <p><span>Stock: </span><span class="stock">${product.stock}</span></p>
                         <p><span>Price: </span>${product.price}$</p>
                     </div>
                 </div>
@@ -113,10 +114,16 @@ class Cart extends Page {
         const main = target.closest('.main') as HTMLElement;
         const productsContainer = target.closest('.products__container') as HTMLElement;
         const btnControlNum = card.querySelector('.btn-control-num') as HTMLElement;
+        const stocklNum = card.querySelector('.stock') as HTMLElement;
+        const btnPlus = card.querySelector('.btn-plus') as HTMLElement;
+        console.log(stocklNum.textContent);
 
         if (target.tagName === 'BUTTON') {
             if (target.textContent === '-') {
+                btnPlus.removeAttribute('disabled');
+                // btnPlus.setAttribute('disabled', 'false');
                 btnControlNum.textContent = `${Number(btnControlNum.textContent) - 1}`;
+                updateCart(card.id, target);
                 if (btnControlNum.textContent === '0') {
                     updateCart(card.id);
                     main.remove();
@@ -124,8 +131,6 @@ class Cart extends Page {
                     const pageHTML = page.render();
                     pageHTML.id = 'current-page';
                     document.body.append(pageHTML);
-                    console.log(getStorageCounter());
-
                     if (getStorageCounter() === '1') {
                         const main = document.querySelector('.main') as HTMLElement;
                         main.innerHTML = `<div class="cart-empty">Cart is empty</div>`;
@@ -134,6 +139,15 @@ class Cart extends Page {
             }
             if (target.textContent === '+') {
                 btnControlNum.textContent = `${Number(btnControlNum.textContent) + 1}`;
+                updateCart(card.id, target);
+                if (btnControlNum.textContent === stocklNum.textContent) {
+                    console.log('1312313123');
+                    console.log(event);
+                    console.log(target);
+                    target.setAttribute('disabled', 'true');
+                    // event.preventDefault();
+                    // event.stopPropagation();
+                }
             }
         } else if (!card) {
             return;
@@ -143,6 +157,7 @@ class Cart extends Page {
     }
 
     render() {
+        console.log(this);
         if (getStorageCounter() === '0') {
             const cartEmptyDiv = createElement('div', 'cart-empty', this.container, 'Cart is empty');
         } else {

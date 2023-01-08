@@ -84,6 +84,10 @@
     font-size: 1.8rem;
     color: #b8a4a4
   }
+
+  .goods-data .stock, .goods-data .btn-control-num {
+    color: $text-color
+  }
   .goods-data .description{
     margin-top: 0.5rem;
   }

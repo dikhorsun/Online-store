@@ -143,7 +143,7 @@ class MainPage extends Page {
                 target.classList.remove('button-added');
                 target.innerHTML = CartBtnInner.add;
             }
-            updateCart(card.id);
+            updateCart(card.id, target);
         } else if (!card) {
             return;
         } else {

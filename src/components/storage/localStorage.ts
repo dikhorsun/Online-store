@@ -1,6 +1,94 @@
-import { LocalStorageKey, AddRemoveCartOpt } from '../types/types';
-// import { getRequest } from '../helper/getRequest';
+import { LocalStorageKey, AddRemoveCartOpt, CartStorageObj, keyCartStorageObj } from '../types/types';
 import { Product } from '../types/types';
+
+function getStorageObj(): object[] {
+    const addedCartItem: string | null = localStorage.getItem(LocalStorageKey.dataObj);
+    const defautStorageArr: object[] = [
+        {
+            id: 0,
+            count: 0,
+            price: 0,
+        },
+    ];
+    return addedCartItem ? JSON.parse(addedCartItem) : defautStorageArr;
+}
+
+function getStorageElemCount(idItem: string): number | undefined {
+    const addedCartItem: CartStorageObj[] = getStorageObj();
+    const defautStorageElemCount = 1;
+    const currentObjArr: CartStorageObj[] = addedCartItem.filter(
+        (obj: CartStorageObj) => obj.id && obj.id.toString() === idItem
+    );
+    return currentObjArr.length != 0 ? currentObjArr[0].count : defautStorageElemCount;
+}
+
+async function setStorageObj(option: AddRemoveCartOpt, idItem: string, elem?: HTMLElement, value = 1): Promise<void> {
+    const response = await fetch('./json-data/goods.json');
+    const dataGoods = await response.json();
+    const goodsArray: Array<Product> = dataGoods.products;
+    const currentProduct = goodsArray.filter((obj) => obj.id.toString() === idItem);
+    const currentProductId = currentProduct[0].id;
+    const currentProductPrice = currentProduct[0].price;
+    const currentObjICP: CartStorageObj = {
+        id: currentProductId,
+        count: getStorageElemCount(idItem),
+        price: currentProductPrice,
+    };
+    const currCounterValue = Number(getStorageCounter());
+    const currSumTotal = Number(getSumTotal());
+
+    const addedCartItem: CartStorageObj[] = getStorageObj();
+
+    const currentObjArr: CartStorageObj[] = addedCartItem.filter(
+        (obj: CartStorageObj) => obj.id && obj.id.toString() === idItem
+    );
+
+    if (currentObjArr[0]) {
+        if (elem?.className === 'btn-plus') {
+            (currentObjArr[0].count as number) += 1;
+        } else if (elem?.className === 'btn-minus') {
+            (currentObjArr[0].count as number) -= 1;
+        } else if (elem?.className !== 'goods-buy-button') {
+            addedCartItem.splice(addedCartItem.indexOf(currentObjArr[0]), 1);
+        }
+    } else {
+        addedCartItem.push(currentObjICP);
+    }
+
+    localStorage.setItem(LocalStorageKey.dataObj, JSON.stringify(addedCartItem));
+    if (
+        elem?.className === 'button card-item__add-to-cart' ||
+        elem?.className === 'button card-item__add-to-cart button-added' ||
+        elem?.className === 'btn-add goods-buy-button' ||
+        elem?.className === 'btn-add goods-buy-button button-added' ||
+        'goods-buy-button'
+    ) {
+        if (option == AddRemoveCartOpt.add) {
+            localStorage.setItem(LocalStorageKey.counter, `${currCounterValue + value}`);
+            localStorage.setItem(LocalStorageKey.sumTotal, `${currSumTotal + currentProductPrice}`);
+        }
+        if (option == AddRemoveCartOpt.remove) {
+            if (elem?.className !== 'goods-buy-button') {
+                localStorage.setItem(
+                    LocalStorageKey.counter,
+                    `${currCounterValue - (currentObjArr[0].count as number) * value}`
+                );
+                localStorage.setItem(
+                    LocalStorageKey.sumTotal,
+                    `${currSumTotal - (currentObjArr[0].count as number) * currentProductPrice}`
+                );
+            }
+        }
+    }
+    if (elem?.className === 'btn-plus') {
+        localStorage.setItem(LocalStorageKey.counter, `${currCounterValue + value}`);
+        localStorage.setItem(LocalStorageKey.sumTotal, `${currSumTotal + currentProductPrice}`);
+    }
+    if (elem?.className === 'btn-minus') {
+        localStorage.setItem(LocalStorageKey.counter, `${currCounterValue - value}`);
+        localStorage.setItem(LocalStorageKey.sumTotal, `${currSumTotal - currentProductPrice}`);
+    }
+}
 
 function getStorageElem(): string[] {
     const addedCartItem: string | null = localStorage.getItem(LocalStorageKey.products);
@@ -12,7 +100,11 @@ function setStorageElem(idItem: string, elem?: HTMLElement): void {
     const addedCartItem: string[] = getStorageElem();
 
     if (addedCartItem.includes(idItem)) {
-        if (!elem) {
+        if (
+            elem?.className !== 'goods-buy-button' &&
+            elem?.className !== 'btn-plus' &&
+            elem?.className !== 'btn-minus'
+        ) {
             addedCartItem.splice(addedCartItem.indexOf(idItem), 1);
         }
     } else {
@@ -31,37 +123,37 @@ function getSumTotal(): string {
     return storedSumTotal ? storedSumTotal : '0';
 }
 
-async function setStorageCounter(
-    option: AddRemoveCartOpt,
-    idItem: string,
-    elem?: HTMLElement,
-    value = 1
-): Promise<void> {
-    const response = await fetch('./json-data/goods.json');
-    const dataGoods = await response.json();
-    const goodsArray: Array<Product> = dataGoods.products;
-    const currentProduct = goodsArray.filter((obj) => obj.id.toString() === idItem);
-    const currentProductPrice = currentProduct[0].price;
-    const currCounterValue = Number(getStorageCounter());
-    const currSumTotal = Number(getSumTotal());
-    if (option == AddRemoveCartOpt.add) {
-        localStorage.setItem(LocalStorageKey.counter, `${currCounterValue + value}`);
-        localStorage.setItem(LocalStorageKey.sumTotal, `${currSumTotal + currentProductPrice}`);
-    }
-    if (option == AddRemoveCartOpt.remove) {
-        if (!elem) {
-            localStorage.setItem(LocalStorageKey.counter, `${currCounterValue - value}`);
-            localStorage.setItem(LocalStorageKey.sumTotal, `${currSumTotal - currentProductPrice}`);
-        }
-    }
-}
+// async function setStorageCounter(
+//     option: AddRemoveCartOpt,
+//     idItem: string,
+//     elem?: HTMLElement,
+//     value = 1
+// ): Promise<void> {
+//     const response = await fetch('./json-data/goods.json');
+//     const dataGoods = await response.json();
+//     const goodsArray: Array<Product> = dataGoods.products;
+//     const currentProduct = goodsArray.filter((obj) => obj.id.toString() === idItem);
+//     const currentProductPrice = currentProduct[0].price;
+//     const currCounterValue = Number(getStorageCounter());
+//     const currSumTotal = Number(getSumTotal());
+//     if (option == AddRemoveCartOpt.add) {
+//         localStorage.setItem(LocalStorageKey.counter, `${currCounterValue + value}`);
+//         localStorage.setItem(LocalStorageKey.sumTotal, `${currSumTotal + currentProductPrice}`);
+//     }
+//     if (option == AddRemoveCartOpt.remove) {
+//         if (!elem) {
+//             localStorage.setItem(LocalStorageKey.counter, `${currCounterValue - value}`);
+//             localStorage.setItem(LocalStorageKey.sumTotal, `${currSumTotal - currentProductPrice}`);
+//         }
+//     }
+// }
 
 async function updateCart(idItem: string, elem?: HTMLElement): Promise<void> {
     const addedCartItem: string[] = getStorageElem();
     setStorageElem(idItem, elem);
     addedCartItem.includes(idItem)
-        ? await setStorageCounter(AddRemoveCartOpt.remove, idItem, elem)
-        : await setStorageCounter(AddRemoveCartOpt.add, idItem, elem);
+        ? await setStorageObj(AddRemoveCartOpt.remove, idItem, elem)
+        : await setStorageObj(AddRemoveCartOpt.add, idItem, elem);
     const cartCounter = document.querySelector('.header-container__amount');
     const sumTotalDiv = document.querySelector('.header-container__cost');
     const totalNumber = document.querySelector('.cart__general-number') as HTMLElement;
@@ -90,8 +182,8 @@ export {
     getStorageElem,
     setStorageElem,
     getStorageCounter,
-    setStorageCounter,
     checkProductInCart,
     updateCart,
     getSumTotal,
+    getStorageElemCount,
 };
