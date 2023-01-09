@@ -18,6 +18,7 @@ import { brandIdLabel } from '@src/json-data/brandIdLabel';
 import { keepUrlOfMainPage } from '../../storage/localStorage';
 import { addQuery, removeQuery } from '../query-params/query';
 import sortProducts from '../../helper/sortProducts';
+import changeBtnStyleForSecond from '@src/components/helper/changeBtnStyleForSecond';
 
 // form object of followng structure
 // {
@@ -186,6 +187,30 @@ async function getMainByUrl(currentURL: string) {
                 renderFilterStock([`${valuesStock[0]}`, `${valuesStock[1]}`]);
             }
         }
+
+        // btn clear filters
+        const btnResetFilters = createElement('button', 'button clear-filters', MainPage.sectionTools, 'Reset filters');
+        btnResetFilters.addEventListener('click', () => {
+            location.hash = 'main-page';
+        });
+
+        // btn copy to clipboard
+        const btnCopyToClipboard: HTMLButtonElement = document.createElement('button');
+        btnCopyToClipboard.classList.add('button');
+        btnCopyToClipboard.classList.add('copy-settings');
+        btnCopyToClipboard.textContent = 'Copy settings';
+        MainPage.sectionTools.append(btnCopyToClipboard);
+        btnCopyToClipboard.addEventListener('click', () => {
+            const currentURL = window.location.href;
+            navigator.clipboard
+                .writeText(currentURL)
+                .then(() => {
+                    changeBtnStyleForSecond(btnCopyToClipboard);
+                })
+                .catch((error) => {
+                    console.log("Error: can't change btn style", error);
+                });
+        });
 
         // filter, sort and render goods
         const filteredGoods = await filterGoods(filterValueObject);
