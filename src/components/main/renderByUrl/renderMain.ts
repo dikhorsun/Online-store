@@ -19,6 +19,7 @@ import { keepUrlOfMainPage } from '../../storage/localStorage';
 import { addQuery, removeQuery } from '../query-params/query';
 import sortProducts from '../../helper/sortProducts';
 import changeBtnStyleForSecond from '@src/components/helper/changeBtnStyleForSecond';
+import removeAllChilds from '@src/components/helper/removeChild';
 
 // form object of followng structure
 // {
@@ -27,7 +28,8 @@ import changeBtnStyleForSecond from '@src/components/helper/changeBtnStyleForSec
 // }
 
 function showNotFound() {
-    MainPage.cardsContainer.innerHTML = '';
+    removeAllChilds(MainPage.cardsContainer);
+    // MainPage.cardsContainer.innerHTML = '';
     MainPage.cardsContainer.innerHTML = '<div class="not-found">Goods are not found</div>';
 }
 
@@ -58,9 +60,12 @@ async function getMainByUrl(currentURL: string) {
                 showNotFound();
             }
         });
-        MainPage.sectionTools.innerHTML = '';
-        MainPage.regulationContainer.innerHTML = '';
-        MainPage.cardsContainer.innerHTML = '';
+        removeAllChilds(MainPage.sectionTools);
+        removeAllChilds(MainPage.regulationContainer);
+        removeAllChilds(MainPage.cardsContainer);
+        // MainPage.sectionTools.innerHTML = '';
+        // MainPage.regulationContainer.innerHTML = '';
+        // MainPage.cardsContainer.innerHTML = '';
 
         //render of select
         if (!Object.keys(filterValueObject).includes('sort')) {

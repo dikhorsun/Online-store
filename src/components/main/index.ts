@@ -10,6 +10,7 @@ import { inputCategoryListener } from '../filters/filter-category';
 import { renderFilterPrice, renderFilterStock, renderSelect } from '../helper/renderTools';
 import { getMainByUrl } from './renderByUrl/renderMain';
 import changeBtnStyleForSecond from '../helper/changeBtnStyleForSecond';
+import removeAllChilds from '../helper/removeChild';
 
 class MainPage extends Page {
     static url: string;
@@ -34,9 +35,12 @@ class MainPage extends Page {
     }
 
     async renderMainPage() {
-        MainPage.sectionTools.innerHTML = '';
-        MainPage.regulationContainer.innerHTML = '';
-        MainPage.cardsContainer.innerHTML = '';
+        removeAllChilds(MainPage.sectionTools);
+        removeAllChilds(MainPage.regulationContainer);
+        removeAllChilds(MainPage.cardsContainer);
+        // MainPage.sectionTools.innerHTML = '';
+        // MainPage.regulationContainer.innerHTML = '';
+        // MainPage.cardsContainer.innerHTML = '';
         this.renderSectionTools();
         this.renderSectionGoods();
         await this.renderAllGods();
@@ -138,7 +142,7 @@ class MainPage extends Page {
 
         const productAdded: boolean = checkProductInCart(`${product.id}`);
         const buttonText = productAdded ? CartBtnInner.remove : CartBtnInner.add;
-        const button = createElement(
+        createElement(
             'button',
             `button card-item__add-to-cart${productAdded ? ' button-added' : ''}`,
             card,
