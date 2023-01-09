@@ -43,6 +43,9 @@ function addQuery(inputIdArr: string[], filter: string): void {
                         inputIdArr = inputIdArr.sort((a, b) => Number(a) - Number(b));
                         filterQP = `${filter}=${inputIdArr[0]},${inputIdArr[1]}`;
                         replaceAndFormNewHash(splitedURL, filterQP, indexOfFilterElem);
+                    } else if (filter === 'sort') {
+                        filterQP = `${filter}=${inputIdArr[0]}`;
+                        replaceAndFormNewHash(splitedURL, filterQP, indexOfFilterElem);
                     } else {
                         filterQP = `${filterQP},${inputIdArr[inputIdArr.length - 1]}`;
                         replaceAndFormNewHash(splitedURL, filterQP, indexOfFilterElem);
