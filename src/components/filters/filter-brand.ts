@@ -4,6 +4,7 @@ import MainPage from '../main/index';
 import { addQuery, removeQuery } from '../main/query-params/query';
 import { categoriesCheckedArr } from './filter-category';
 import { getStorageElem, updateCart, checkProductInCart } from '../storage/localStorage';
+import removeAllChilds from '../helper/removeChild';
 
 // const brandsCheckedArr: string[] = [];
 // const cardsContainer = document.querySelector('.cards-container') as HTMLDivElement;
@@ -56,7 +57,8 @@ function inputBrandListener(this: HTMLInputElement) {
         addQuery(brandsInputIdArr, 'brand');
         const labelTextContent: string = label.textContent || '';
         brandsCheckedArr.push(labelTextContent);
-        MainPage.cardsContainer.innerHTML = '';
+        removeAllChilds(MainPage.cardsContainer);
+        // MainPage.cardsContainer.innerHTML = '';
     } else {
         const indexOfRemovedBrand = brandsCheckedArr.indexOf(`${label?.textContent}`);
         brandsInputIdArr.splice(indexOfRemovedBrand, 1);
@@ -64,8 +66,10 @@ function inputBrandListener(this: HTMLInputElement) {
         brandsCheckedArr.splice(indexOfRemovedBrand, 1);
 
         if (brandsCheckedArr.length === 0 && categoriesCheckedArr.length === 0) {
-            MainPage.sectionTools.innerHTML = '';
-            MainPage.regulationContainer.innerHTML = '';
+            removeAllChilds(MainPage.sectionTools);
+            // MainPage.sectionTools.innerHTML = '';
+            removeAllChilds(MainPage.regulationContainer);
+            // MainPage.regulationContainer.innerHTML = '';
         }
     }
 }
@@ -134,7 +138,7 @@ function generateCard(product: Product) {
     // createElement('button', 'button card-item__add-to-cart', card, 'Add to cart');
     const productAdded: boolean = checkProductInCart(`${product.id}`);
     const buttonText = productAdded ? CartBtnInner.remove : CartBtnInner.add;
-    const button = createElement(
+    createElement(
         'button',
         `button card-item__add-to-cart${productAdded ? ' button-added' : ''}`,
         card,
