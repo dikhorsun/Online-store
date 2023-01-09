@@ -150,7 +150,6 @@ async function updateCart(idItem: string, elem?: HTMLElement): Promise<void> {
     const cartCounter = document.querySelector('.header-container__amount');
     const sumTotalDiv = document.querySelector('.header-container__cost');
     const totalNumber = document.querySelector('.cart__general-number') as HTMLElement;
-    // const totaPrice = document.querySelector('.cart__general-price-new') as HTMLElement;
     const totaPrice = document.querySelector('.price') as HTMLElement;
 
     if (cartCounter) {

@@ -28,7 +28,6 @@ class MainPage extends Page {
         if (splitedUrl[1].includes('?')) {
             return true;
         } else {
-            console.log('without ?');
             return false;
         }
     }
