@@ -1,6 +1,5 @@
 import Page from '../../templates/page';
 import createElement from '../helper/createElement';
-import createOptions from '../helper/createOption';
 import { brandInputId } from '../../json-data/input-id';
 import { getLabelsBrand, getLabelsCategory } from '../../json-data/label-contents';
 import createInputLabelInContainer from '../helper/createInputLabelInContainer';
