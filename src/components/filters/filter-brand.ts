@@ -83,7 +83,6 @@ async function renderAllGods(): Promise<Product[] | undefined> {
             const target = event.target as HTMLElement;
             const card = target.closest('.card-item') as HTMLElement;
             if (target.tagName === 'BUTTON') {
-                console.log(123123123);
                 const productsList: string[] = getStorageElem();
                 const productAdded: boolean = productsList.includes(card.id);
                 if (!productAdded) {
