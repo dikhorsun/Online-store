@@ -44,6 +44,7 @@ export enum LocalStorageKey {
     sumTotal = 'sumTotal',
     products = 'cart_products',
     dataObj = 'data_obj',
+    promoId = 'promoId',
 }
 
 export enum AddRemoveCartOpt {

@@ -5,11 +5,14 @@ import {
     getSumTotal,
     updateCart,
     getStorageElem,
-    checkProductInCart,
     getStorageElemCount,
+    getStoragePromo,
+    setStoragePromo,
+    checkPromoInCart,
 } from '../storage/localStorage';
-import { CartBtnInner, Product } from '../types/types';
+import { Product } from '../types/types';
 import createElement from '../helper/createElement';
+import { promoCods, keyPromo } from '../../json-data/input-id';
 
 class Cart extends Page {
     constructor(id: string) {
@@ -25,10 +28,12 @@ class Cart extends Page {
         </div>
         <div class="cart__general">
             <div class="cart__general-price cart__general-number"></div>
+            <div class="cart__general-price price"></div>
             <div class="cart__general-price cart__general-price-new"></div>
-
+            <div class="cart__general-discounts">
+            </div>
             <div class="cart__general-promo">
-                <input type="search" placeholder="Promo ex: 'js', 'css'" />
+                <input type="search" placeholder="Promo ex: 'html', 'css'" />
             </div>
             <div class="cart__general-used-promos">
             </div>
@@ -36,12 +41,88 @@ class Cart extends Page {
         </div>`;
 
         const totalNumber = this.container.querySelector('.cart__general-number') as HTMLElement;
-        const totaPrice = this.container.querySelector('.cart__general-price-new') as HTMLElement;
+        const totaPrice = this.container.querySelector('.price') as HTMLElement;
         const btnBuy = this.container.querySelector('.btn_confirm') as HTMLElement;
+        const promoInput = this.container.querySelector('.cart__general-promo input') as HTMLElement;
         totalNumber.innerHTML = `<span>Total products:</span> ${getStorageCounter()}`;
         totaPrice.innerHTML = `<span>Total payable:</span> ${getSumTotal()}$`;
 
         btnBuy.addEventListener('click', createPopup);
+        promoInput.addEventListener('input', this.createPromo);
+    }
+
+    createPromo(event: Event) {
+        const target = event.target as HTMLInputElement;
+        const totalContainer = target.closest('.cart__general') as HTMLElement;
+        const totaPrice = totalContainer.querySelector('.price') as HTMLElement;
+        const usedPromos = totalContainer.querySelector('.cart__general-used-promos') as HTMLElement;
+        const totaPriceNew = totalContainer.querySelector('.cart__general-price-new') as HTMLElement;
+
+        for (const key in promoCods) {
+            if (target.value === key) {
+                const valuePromo = promoCods[key as keyPromo];
+                const promoAdded: boolean = checkPromoInCart(`${key}`);
+                if (!promoAdded) {
+                    const usedProm = createElement(
+                        'div',
+                        'used-promo',
+                        usedPromos,
+                        `"${key}"-cod (${valuePromo}%)     `
+                    );
+                    usedProm.id = key;
+                    const usedPromBtn = createElement('span', '', usedProm, `add`);
+                    usedPromBtn.addEventListener('click', addPromo);
+                }
+            }
+        }
+        function addPromo(event: Event) {
+            const target = event.target as HTMLElement;
+            const usedPromTargetId = (target.closest('.used-promo') as HTMLElement).id;
+            setStoragePromo(usedPromTargetId);
+            target.remove();
+            const addedPromArr = totalContainer.querySelectorAll('.cart__general-disc');
+            const totaPriceText = totaPrice.textContent as string;
+            const addedPromos = totalContainer.querySelector('.cart__general-discounts') as HTMLElement;
+            const usedPromArr = totalContainer.querySelectorAll('.used-promo');
+            const usedProm = usedPromArr[usedPromArr.length - 1] as HTMLElement;
+            const usedPromText = usedProm.textContent;
+            const addedProm = createElement('div', 'cart__general-disc', addedPromos, `${usedPromText} added `);
+            const addedPromBtn = createElement('span', '', addedProm, `del`);
+
+            totaPriceNew.innerHTML = `<span>Total payable:</span> ${(
+                Number(totaPriceText.slice(15, -1)) *
+                (1 - 0.1 * (addedPromArr.length + 1))
+            ).toFixed(2)}$`;
+
+            totaPrice.classList.add('cart__general-price-old');
+
+            addedPromBtn.addEventListener('click', delPromo);
+            function delPromo(event: Event) {
+                const target = event.target as HTMLElement;
+                const cartGeneralDisc = target.closest('.cart__general-disc') as HTMLElement;
+                const addedPromArr = totalContainer.querySelectorAll('.used-promo');
+                const promoId = cartGeneralDisc.textContent?.split('"')[1] as string;
+                for (let i = 0; i < addedPromArr.length; i++) {
+                    if (addedPromArr[i].id === promoId) {
+                        addedPromArr[i].remove();
+                        setStoragePromo(addedPromArr[i].id);
+                    }
+
+                    cartGeneralDisc.remove();
+                }
+
+                if (getStoragePromo().length === 0) {
+                    totaPriceNew.innerHTML = '';
+                    totaPrice.classList.remove('cart__general-price-old');
+                }
+                if (getStoragePromo().length === 1) {
+                    totaPriceNew.innerHTML = `<span>Total payable:</span> ${(
+                        Number(totaPriceText.slice(15, -1)) *
+                        (1 - 0.1)
+                    ).toFixed(2)}$`;
+                }
+            }
+        }
     }
 
     createProductCard(product: Product, i: number) {
@@ -112,16 +193,15 @@ class Cart extends Page {
         const target = event.target as HTMLElement;
         const card = target.closest('.goods-detail') as HTMLElement;
         const main = target.closest('.main') as HTMLElement;
-        const productsContainer = target.closest('.products__container') as HTMLElement;
         const btnControlNum = card.querySelector('.btn-control-num') as HTMLElement;
         const stocklNum = card.querySelector('.stock') as HTMLElement;
         const btnPlus = card.querySelector('.btn-plus') as HTMLElement;
-        console.log(stocklNum.textContent);
 
         if (target.tagName === 'BUTTON') {
+            const totaPriceNew = document.querySelector('.cart__general-price-new') as HTMLElement;
+
             if (target.textContent === '-') {
                 btnPlus.removeAttribute('disabled');
-                // btnPlus.setAttribute('disabled', 'false');
                 btnControlNum.textContent = `${Number(btnControlNum.textContent) - 1}`;
                 updateCart(card.id, target);
                 if (btnControlNum.textContent === '0') {
@@ -141,12 +221,7 @@ class Cart extends Page {
                 btnControlNum.textContent = `${Number(btnControlNum.textContent) + 1}`;
                 updateCart(card.id, target);
                 if (btnControlNum.textContent === stocklNum.textContent) {
-                    console.log('1312313123');
-                    console.log(event);
-                    console.log(target);
                     target.setAttribute('disabled', 'true');
-                    // event.preventDefault();
-                    // event.stopPropagation();
                 }
             }
         } else if (!card) {
@@ -157,9 +232,8 @@ class Cart extends Page {
     }
 
     render() {
-        console.log(this);
         if (getStorageCounter() === '0') {
-            const cartEmptyDiv = createElement('div', 'cart-empty', this.container, 'Cart is empty');
+            createElement('div', 'cart-empty', this.container, 'Cart is empty');
         } else {
             this.createTotalCart();
             this.renderAllGods();
