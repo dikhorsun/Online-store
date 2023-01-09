@@ -28,4 +28,15 @@ const brandInputId: string[] = [
     'golden',
 ];
 
-export { brandInputId };
+const promoCods: ObjectPromo = {
+    css: 10,
+    html: 10,
+};
+export type keyPromo = keyof ObjectPromo;
+
+export interface ObjectPromo {
+    css?: number;
+    html?: number;
+}
+
+export { brandInputId, promoCods };

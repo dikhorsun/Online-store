@@ -1,6 +1,7 @@
 import { FilterValueObject, Product, keyFilter, keyProduct, IdLabel } from '../../types/types';
 import MainPage from '../../main/index';
 import createElement from '../../helper/createElement';
+import createOptions from '@src/components/helper/createOption';
 import createInputLabelInContainer from '../../helper/createInputLabelInContainer';
 import { getLabelsBrand, getLabelsCategory } from '../../../json-data/label-contents';
 import {
@@ -15,6 +16,10 @@ import { inputBrandListener, generateCard } from '../../filters/filter-brand';
 import { inputCategoryListener } from '@src/components/filters/filter-category';
 import { brandIdLabel } from '@src/json-data/brandIdLabel';
 import { keepUrlOfMainPage } from '../../storage/localStorage';
+import { addQuery, removeQuery } from '../query-params/query';
+import sortProducts from '../../helper/sortProducts';
+import changeBtnStyleForSecond from '@src/components/helper/changeBtnStyleForSecond';
+import removeAllChilds from '@src/components/helper/removeChild';
 
 // form object of followng structure
 // {
@@ -23,7 +28,8 @@ import { keepUrlOfMainPage } from '../../storage/localStorage';
 // }
 
 function showNotFound() {
-    MainPage.cardsContainer.innerHTML = '';
+    removeAllChilds(MainPage.cardsContainer);
+    // MainPage.cardsContainer.innerHTML = '';
     MainPage.cardsContainer.innerHTML = '<div class="not-found">Goods are not found</div>';
 }
 
@@ -48,15 +54,67 @@ async function getMainByUrl(currentURL: string) {
             } else if (filter === 'price' || filter === 'stock') {
                 const valuesArray = values.split(',');
                 filterValueObject[filter] = valuesArray;
+            } else if (filter === 'sort') {
+                filterValueObject[filter] = [values];
             } else {
                 showNotFound();
             }
         });
-        MainPage.sectionTools.innerHTML = '';
-        MainPage.regulationContainer.innerHTML = '';
-        MainPage.cardsContainer.innerHTML = '';
-        renderSelect();
+        removeAllChilds(MainPage.sectionTools);
+        removeAllChilds(MainPage.regulationContainer);
+        removeAllChilds(MainPage.cardsContainer);
+        // MainPage.sectionTools.innerHTML = '';
+        // MainPage.regulationContainer.innerHTML = '';
+        // MainPage.cardsContainer.innerHTML = '';
 
+        //render of select
+        if (!Object.keys(filterValueObject).includes('sort')) {
+            renderSelect();
+        } else {
+            // const optionsArray: string[] = ['Choose', 'Nosort', 'priceA', 'priceD', 'ratingA', 'ratingD'];
+            const sortValue = filterValueObject.sort?.toString();
+            const selectSort = document.createElement('select');
+            selectSort.classList.add('tools__sort');
+            selectSort.id = 'sort-goods';
+            const chooseOption = createOptions('Choose', 'Sort goods...', selectSort);
+            if (chooseOption.value === sortValue) {
+                chooseOption.setAttribute('selected', 'selected');
+            }
+            const noSortOption = createOptions('Nosort', 'Without sort', selectSort);
+            if (noSortOption.value === sortValue) {
+                noSortOption.setAttribute('selected', 'selected');
+            }
+            const priceAOption = createOptions('priceA', 'By price: low to high', selectSort);
+            if (priceAOption.value === sortValue) {
+                priceAOption.setAttribute('selected', 'selected');
+            }
+            const priceDOption = createOptions('priceD', 'By price: high to low', selectSort);
+            if (priceDOption.value === sortValue) {
+                priceDOption.setAttribute('selected', 'selected');
+            }
+            const ratingAOption = createOptions('ratingA', 'By rating: low to high', selectSort);
+            if (ratingAOption.value === sortValue) {
+                ratingAOption.setAttribute('selected', 'selected');
+            }
+            const ratingDOption = createOptions('ratingD', 'By rating: high to low', selectSort);
+            if (ratingDOption.value === sortValue) {
+                ratingDOption.setAttribute('selected', 'selected');
+            }
+
+            selectSort.addEventListener('change', function () {
+                if (
+                    this.value === 'priceA' ||
+                    this.value === 'priceD' ||
+                    this.value === 'ratingA' ||
+                    this.value === 'ratingD'
+                ) {
+                    addQuery([this.value], 'sort');
+                } else {
+                    removeQuery([], 'sort');
+                }
+            });
+            MainPage.sectionTools.append(selectSort);
+        }
         // render of section brand
         if (!Object.keys(filterValueObject).includes('brand')) {
             renderBrand();
@@ -135,11 +193,43 @@ async function getMainByUrl(currentURL: string) {
             }
         }
 
-        // filter and render goods
+        // btn clear filters
+        const btnResetFilters = createElement('button', 'button clear-filters', MainPage.sectionTools, 'Reset filters');
+        btnResetFilters.addEventListener('click', () => {
+            location.hash = 'main-page';
+        });
+
+        // btn copy to clipboard
+        const btnCopyToClipboard: HTMLButtonElement = document.createElement('button');
+        btnCopyToClipboard.classList.add('button');
+        btnCopyToClipboard.classList.add('copy-settings');
+        btnCopyToClipboard.textContent = 'Copy settings';
+        MainPage.sectionTools.append(btnCopyToClipboard);
+        btnCopyToClipboard.addEventListener('click', () => {
+            const currentURL = window.location.href;
+            navigator.clipboard
+                .writeText(currentURL)
+                .then(() => {
+                    changeBtnStyleForSecond(btnCopyToClipboard);
+                })
+                .catch((error) => {
+                    console.log("Error: can't change btn style", error);
+                });
+        });
+
+        // filter, sort and render goods
         const filteredGoods = await filterGoods(filterValueObject);
         if (filteredGoods && filteredGoods.length > 0) {
-            for (let i = 0; i < filteredGoods.length; i += 1) {
-                generateCard(filteredGoods[i]);
+            if (filterValueObject['sort'] && Object.keys(filterValueObject).includes('sort')) {
+                const param = filterValueObject['sort'][0];
+                const sortedFilteredGoods: Array<Product> = sortProducts(filteredGoods, param);
+                for (let i = 0; i < sortedFilteredGoods.length; i += 1) {
+                    generateCard(sortedFilteredGoods[i]);
+                }
+            } else {
+                for (let i = 0; i < filteredGoods.length; i += 1) {
+                    generateCard(filteredGoods[i]);
+                }
             }
         } else {
             showNotFound();

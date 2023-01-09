@@ -227,6 +227,36 @@ span {
   padding: 5vh 5vw;
 }
 
+.cart__general-discounts {
+  width: 75%;
+  margin: 3% auto;
+  border: 1px solid $border-color-light;
+  border-radius: 20px;
+}
+// .cart__general-discounts p {
+//   margin: 2% auto;
+//   padding: 0;
+//   width: 85%;
+//   color: #b8a4a4;
+//   text-align: center;
+//   font-size: 150%;
+//   border-bottom: 1px solid $border-color-light;
+// }
+.cart__general-disc {
+  color: $text-color;
+  text-align: center;
+  padding: 2%;
+}
+.cart__general-disc span {
+  color: #b8a4a4;
+  font-size: 100%;
+  background: $filter-price-shadow;
+  border: 1px solid $border-color-light;
+  border-radius: 20%;
+  padding: 1%;
+  cursor: pointer;
+}
+
 
 
 

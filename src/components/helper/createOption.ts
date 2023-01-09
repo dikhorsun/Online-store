@@ -1,4 +1,4 @@
-function createOptions(value = '', textContent: string, parent: HTMLElement): HTMLElement {
+function createOptions(value = '', textContent: string, parent: HTMLElement): HTMLOptionElement {
     const option = document.createElement('option');
     option.value = value;
     option.textContent = textContent;

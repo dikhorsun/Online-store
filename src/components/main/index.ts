@@ -1,6 +1,5 @@
 import Page from '../../templates/page';
 import createElement from '../helper/createElement';
-import createOptions from '../helper/createOption';
 import { brandInputId } from '../../json-data/input-id';
 import { getLabelsBrand, getLabelsCategory } from '../../json-data/label-contents';
 import createInputLabelInContainer from '../helper/createInputLabelInContainer';
@@ -10,6 +9,8 @@ import { getStorageElem, updateCart, checkProductInCart } from '../storage/local
 import { inputCategoryListener } from '../filters/filter-category';
 import { renderFilterPrice, renderFilterStock, renderSelect } from '../helper/renderTools';
 import { getMainByUrl } from './renderByUrl/renderMain';
+import changeBtnStyleForSecond from '../helper/changeBtnStyleForSecond';
+import removeAllChilds from '../helper/removeChild';
 
 class MainPage extends Page {
     static url: string;
@@ -29,15 +30,17 @@ class MainPage extends Page {
         if (splitedUrl[1].includes('?')) {
             return true;
         } else {
-            console.log('without ?');
             return false;
         }
     }
 
     async renderMainPage() {
-        MainPage.sectionTools.innerHTML = '';
-        MainPage.regulationContainer.innerHTML = '';
-        MainPage.cardsContainer.innerHTML = '';
+        removeAllChilds(MainPage.sectionTools);
+        removeAllChilds(MainPage.regulationContainer);
+        removeAllChilds(MainPage.cardsContainer);
+        // MainPage.sectionTools.innerHTML = '';
+        // MainPage.regulationContainer.innerHTML = '';
+        // MainPage.cardsContainer.innerHTML = '';
         this.renderSectionTools();
         this.renderSectionGoods();
         await this.renderAllGods();
@@ -84,6 +87,28 @@ class MainPage extends Page {
         renderFilterPrice(['0', '100']);
         // filter stock
         renderFilterStock(['0', '100']);
+        // btn clear filters
+        const btnResetFilters = createElement('button', 'button clear-filters', MainPage.sectionTools, 'Reset filters');
+        btnResetFilters.addEventListener('click', () => {
+            location.hash = 'main-page';
+        });
+        // btn copy to clipboard
+        const btnCopyToClipboard: HTMLButtonElement = document.createElement('button');
+        btnCopyToClipboard.classList.add('button');
+        btnCopyToClipboard.classList.add('copy-settings');
+        btnCopyToClipboard.textContent = 'Copy settings';
+        MainPage.sectionTools.append(btnCopyToClipboard);
+        btnCopyToClipboard.addEventListener('click', () => {
+            const currentURL = window.location.href;
+            navigator.clipboard
+                .writeText(currentURL)
+                .then(() => {
+                    changeBtnStyleForSecond(btnCopyToClipboard);
+                })
+                .catch((error) => {
+                    console.log("Error: can't change btn style", error);
+                });
+        });
         return MainPage.sectionTools;
     }
 
@@ -117,7 +142,7 @@ class MainPage extends Page {
 
         const productAdded: boolean = checkProductInCart(`${product.id}`);
         const buttonText = productAdded ? CartBtnInner.remove : CartBtnInner.add;
-        const button = createElement(
+        createElement(
             'button',
             `button card-item__add-to-cart${productAdded ? ' button-added' : ''}`,
             card,
@@ -164,11 +189,13 @@ class MainPage extends Page {
     }
     render() {
         if (MainPage.url && this.isQueryInUrl(MainPage.url)) {
+            // location.href = MainPage.url;
             getMainByUrl(MainPage.url);
             this.container.append(MainPage.wrapperMain);
         } else if (!MainPage.url && localStorage.getItem('urlMain')) {
             const url = localStorage.getItem('urlMain');
             if (url) {
+                location.href = url;
                 getMainByUrl(url);
                 this.container.append(MainPage.wrapperMain);
             }

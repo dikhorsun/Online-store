@@ -182,7 +182,6 @@ function createPopup() {
             popupContent.textContent = 'Order is processed. You will be taken to the main page in 3 seconds.';
             setTimeout(() => {
                 const url = window.location.href;
-                console.log(url);
                 window.location.href = url.replace('#cart', '#main-page');
             }, 3000);
             body.classList.remove('scroll-none');

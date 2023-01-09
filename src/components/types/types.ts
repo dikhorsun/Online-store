@@ -23,6 +23,7 @@ export interface FilterValueObject {
     category?: string[];
     price?: string[];
     stock?: string[];
+    sort?: string[];
 }
 
 export type keyCartStorageObj = keyof CartStorageObj;
@@ -43,6 +44,7 @@ export enum LocalStorageKey {
     sumTotal = 'sumTotal',
     products = 'cart_products',
     dataObj = 'data_obj',
+    promoId = 'promoId',
 }
 
 export enum AddRemoveCartOpt {
@@ -87,3 +89,10 @@ export type BrandIdLabel = {
 };
 
 export type IdLabel = keyof BrandIdLabel;
+
+export enum SortValues {
+    'priceA',
+    'priceD',
+    'ratingA',
+    'ratingD',
+}

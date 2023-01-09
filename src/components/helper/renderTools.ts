@@ -9,16 +9,32 @@ import { inputCategoryListener } from '../filters/filter-category';
 import createInputRange from '../helper/createInput';
 import { filterPriceListener } from '../filters/filter-price';
 import { filterStockListener } from '../filters/filter-stock';
+import { addQuery, removeQuery } from '../main/query-params/query';
 
 function renderSelect() {
-    const selectSort = createElement('select', 'tools__sort', MainPage.sectionTools);
+    const selectSort = document.createElement('select');
+    selectSort.classList.add('tools__sort');
     selectSort.id = 'sort-goods';
-    const firstOption = createOptions('', 'Sort goods...', selectSort);
-    firstOption.setAttribute('selected', 'selected');
+
+    createOptions('Choose', 'Sort goods...', selectSort);
+    createOptions('Nosort', 'Without sort', selectSort);
     createOptions('priceA', 'By price: low to high', selectSort);
     createOptions('priceD', 'By price: high to low', selectSort);
     createOptions('ratingA', 'By rating: low to high', selectSort);
     createOptions('ratingD', 'By rating: high to low', selectSort);
+    selectSort.addEventListener('change', function () {
+        if (
+            this.value === 'priceA' ||
+            this.value === 'priceD' ||
+            this.value === 'ratingA' ||
+            this.value === 'ratingD'
+        ) {
+            addQuery([this.value], 'sort');
+        } else if (this.value === 'Nosort' || this.value === 'Choose') {
+            removeQuery([], 'sort');
+        }
+    });
+    MainPage.sectionTools.append(selectSort);
 }
 
 async function renderBrand() {
